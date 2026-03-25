@@ -15,7 +15,7 @@ function Navbar() {
         {/* LOGO */}
         <div className="site-logo">
           <NavLink to="/" className="logo-wrapper">
-            <img src="/images/logo.webp" alt="Auriga Football Club" width="150" height="50" fetchpriority="high" />
+            <img src="/images/logo.webp" alt="Auriga Football Club" className="navbar-logo" fetchpriority="high" />
           </NavLink>
         </div>
 
