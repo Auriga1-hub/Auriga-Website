@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import "../css/contact.css";
+import emailjs from "@emailjs/browser";
+import { EMAILJS_CONFIG } from "../utils/emailConfig";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 
@@ -49,25 +51,32 @@ function Contact() {
       return;
     }
 
-    const body = new FormData();
-    body.append("name", formData.name);
-    body.append("phone", formData.phone);
-    body.append("email", formData.email);
-    body.append("message", formData.message);
-    body.append("cf-turnstile-response", turnstileResponse);
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+      subject: "General Website Inquiry",
+      "g-recaptcha-response": turnstileResponse,
+    };
 
     try {
-      const res = await fetch("/mail/contact.php", { method: "POST", body });
-      const data = await res.json();
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID_CONTACT,
+        templateParams,
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
 
-      if (data.success) {
+      if (result.status === 200) {
         setSubmitted(true);
       } else {
-        setError(data.message || "Something went wrong. Please try again.");
+        setError("Something went wrong. Please try again.");
         window.turnstile?.reset(widgetIdRef.current);
       }
-    } catch {
-      setError("Network error. Please check your connection and try again.");
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setError("Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(widgetIdRef.current);
     } finally {
       setLoading(false);

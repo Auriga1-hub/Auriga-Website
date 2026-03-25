@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import "../css/trial.css";
+import emailjs from "@emailjs/browser";
+import { EMAILJS_CONFIG } from "../utils/emailConfig";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 
@@ -46,32 +46,40 @@ function TrialEtobicoke() {
     }
 
     const form = e.target;
-    const body = new FormData();
-    body.append("location", "Etobicoke");
-    body.append("parent_name", form.parent_name.value);
-    body.append("phone", form.phone.value);
-    body.append("email", form.email.value);
-    body.append("player_name", form.player_name.value);
-    body.append("dob", form.dob.value);
-    body.append("years_played", form.years_played.value);
-    body.append("preferred_date", form.preferred_date.value);
-    body.append("preferred_time", form.preferred_time.value);
-    body.append("heard_about", form.heard_about.value);
-    body.append("message", form.message.value);
-    body.append("cf-turnstile-response", turnstileResponse);
+    
+    const templateParams = {
+      location: "Etobicoke",
+      parent_name: form.parent_name.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      player_name: form.player_name.value,
+      dob: form.dob.value,
+      years_played: form.years_played.value,
+      preferred_date: form.preferred_date.value,
+      preferred_time: form.preferred_time.value,
+      heard_about: form.heard_about.value,
+      message: form.message.value,
+      subject: "Free Trial Registration - Etobicoke",
+      "g-recaptcha-response": turnstileResponse,
+    };
 
     try {
-      const res = await fetch("/mail/free_trial.php", { method: "POST", body });
-      const data = await res.json();
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID_TRIAL,
+        templateParams,
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
 
-      if (data.success) {
+      if (result.status === 200) {
         setSubmitted(true);
       } else {
-        setError(data.message || "Something went wrong. Please try again.");
+        setError("Something went wrong. Please try again.");
         window.turnstile?.reset(widgetIdRef.current);
       }
-    } catch {
-      setError("Network error. Please check your connection and try again.");
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setError("Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(widgetIdRef.current);
     } finally {
       setLoading(false);

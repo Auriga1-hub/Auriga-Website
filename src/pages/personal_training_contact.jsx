@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import "../css/contact.css";
+import emailjs from "@emailjs/browser";
+import { EMAILJS_CONFIG } from "../utils/emailConfig";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 
@@ -50,26 +50,33 @@ function PersonalTrainingContact() {
       return;
     }
 
-    const body = new FormData();
-    body.append("name", ptFormData.ptName);
-    body.append("phone", ptFormData.ptPhone);
-    body.append("email", ptFormData.ptEmail);
-    // Explicitly prefix the message to identify it as a personal training inquiry on the backend
-    body.append("message", `[Personal Training Inquiry]\nChild's Age: ${ptFormData.ptAge}\n\n${ptFormData.ptMessage}`);
-    body.append("cf-turnstile-response", turnstileResponse);
+    const templateParams = {
+      from_name: ptFormData.ptName,
+      from_email: ptFormData.ptEmail,
+      phone: ptFormData.ptPhone,
+      child_age: ptFormData.ptAge,
+      message: ptFormData.ptMessage,
+      subject: "Personal Training Inquiry",
+      "g-recaptcha-response": turnstileResponse, // Turnstile response can sometimes be passed as recaptcha response in EmailJS
+    };
 
     try {
-      const res = await fetch("/mail/contact.php", { method: "POST", body });
-      const data = await res.json();
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID_CONTACT,
+        templateParams,
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
 
-      if (data.success) {
+      if (result.status === 200) {
         setPtSubmitted(true);
       } else {
-        setPtError(data.message || "Something went wrong. Please try again.");
+        setPtError("Something went wrong. Please try again.");
         window.turnstile?.reset(ptWidgetIdRef.current);
       }
-    } catch {
-      setPtError("Network error. Please check your connection and try again.");
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setPtError("Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(ptWidgetIdRef.current);
     } finally {
       setPtLoading(false);
