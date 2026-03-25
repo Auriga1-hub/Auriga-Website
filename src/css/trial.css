@@ -1,0 +1,460 @@
+/* =================================
+HERO
+================================= */
+
+.trial-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  background-image: url("/images/bg4.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+.trial-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 18, 38, 0.94) 0%,
+    rgba(6, 18, 38, 0.80) 55%,
+    rgba(6, 18, 38, 0.35) 100%
+  );
+  z-index: 1;
+}
+
+.trial-hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.trial-hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #10b981;
+  margin-bottom: 16px;
+}
+
+.trial-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 62px !important;
+  font-weight: 900 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -1.5px;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  white-space: nowrap;
+}
+
+.trial-hero-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+/* =================================
+FORM SECTION
+================================= */
+
+.trial-section {
+  background: linear-gradient(180deg, #071a2d, #0b1f33);
+  padding: 50px 0;
+  min-height: 60vh;
+}
+
+.trial-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+
+/* =================================
+FORM HEADER
+================================= */
+
+.trial-form-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.trial-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #10b981;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.trial-form-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 34px !important;
+  font-weight: 800 !important;
+  color: white;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.trial-form-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  margin: 14px auto 0;
+  border-radius: 2px;
+}
+
+.trial-notice {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+
+/* =================================
+OUTER CARD WRAPPER
+================================= */
+
+.trial-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 60px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.trial-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.trial-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow:
+    0 35px 80px rgba(0, 0, 0, 0.5),
+    0 0 35px rgba(16, 185, 129, 0.12);
+}
+
+.trial-card:hover::before {
+  opacity: 1;
+}
+
+
+/* =================================
+FIELDSET GROUPS
+================================= */
+
+.trial-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.trial-fieldset {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trial-fieldset::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.trial-fieldset:hover {
+  transform: translateY(-4px);
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(16, 185, 129, 0.08);
+}
+
+.trial-fieldset:hover::before,
+.trial-fieldset:focus-within::before {
+  opacity: 1;
+}
+
+.trial-fieldset:focus-within {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.08);
+}
+
+.trial-fieldset-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #10b981;
+  margin-bottom: 4px;
+}
+
+
+/* =================================
+FORM ROWS & GROUPS
+================================= */
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.req {
+  color: #10b981;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  width: 100%;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #475569;
+}
+
+/* date/select need color fix */
+.form-group select option {
+  background: #0f1f35;
+  color: #e2e8f0;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.06);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* date input calendar icon color */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
+}
+
+
+/* =================================
+SUBMIT BUTTON
+================================= */
+
+.trial-submit {
+  display: block;
+  width: 100%;
+  padding: 17px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  margin-top: 8px;
+}
+
+.trial-submit:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(16, 185, 129, 0.3);
+}
+
+.trial-submit:active {
+  transform: translateY(-1px);
+}
+
+
+/* =================================
+SUCCESS STATE
+================================= */
+
+.trial-success {
+  text-align: center;
+  padding: 80px 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.08);
+}
+
+.trial-success-icon {
+  width: 72px;
+  height: 72px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 2px solid rgba(16, 185, 129, 0.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #10b981;
+  margin: 0 auto 24px;
+}
+
+.trial-success h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  color: white;
+  margin-bottom: 14px;
+}
+
+.trial-success p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  color: #94a3b8;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+
+/* =================================
+   FORM ERROR
+   ================================= */
+
+.form-error {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.trial-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+
+/* =================================
+   RESPONSIVE
+   ================================= */
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .trial-hero-title {
+    font-size: 38px !important;
+    white-space: normal;
+  }
+
+  .trial-hero-container,
+  .trial-container {
+    padding: 0 24px;
+  }
+
+  .trial-card {
+    padding: 32px 24px;
+  }
+
+  .trial-fieldset {
+    padding: 24px 20px;
+  }
+
+  .trial-form-title {
+    font-size: 26px !important;
+  }
+
+  .trial-hero-text,
+  .trial-notice,
+  .trial-success p {
+    text-align: center;
+  }
+
+  .trial-form-title::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

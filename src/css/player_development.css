@@ -1,0 +1,398 @@
+/* =================================
+HERO
+================================= */
+
+.player-dev-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  background-image: url("/images/bg4.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+.player-dev-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 18, 38, 0.94) 0%,
+    rgba(6, 18, 38, 0.80) 55%,
+    rgba(6, 18, 38, 0.35) 100%
+  );
+  z-index: 1;
+}
+
+.player-dev-hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.player-dev-hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #10b981;
+  margin-bottom: 16px;
+}
+
+.player-dev-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 62px !important;
+  font-weight: 900 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -1.5px;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 18px;
+  white-space: nowrap;
+}
+
+.player-dev-hero-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  max-width: 540px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+/* =================================
+MAIN SECTION
+================================= */
+
+.player-dev-section {
+  background: linear-gradient(180deg, #071a2d, #0b1f33);
+  padding: 60px 0;
+}
+
+.player-dev-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* =================================
+INTRO
+================================= */
+
+.player-dev-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 50px;
+}
+
+.player-dev-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #10b981;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.player-dev-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 40px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  color: white;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.player-dev-title::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+.player-dev-intro p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+
+/* =================================
+LARGE IMAGE
+================================= */
+
+.player-dev-large-image {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.player-dev-large-image img {
+  width: 100%;
+  height: auto; 
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.player-dev-large-image:hover img {
+  transform: scale(1.01);
+}
+
+
+/* =================================
+STEPS GRID
+================================= */
+
+.player-dev-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 60px;
+}
+
+.player-dev-step-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.player-dev-step-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.player-dev-step-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 30px 70px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(16, 185, 129, 0.15);
+}
+
+.player-dev-step-card:hover::before {
+  opacity: 1;
+}
+
+.step-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: rgba(16, 185, 129, 0.15);
+  line-height: 1;
+  margin-bottom: 16px;
+  transition: color 0.3s ease;
+}
+
+.player-dev-step-card:hover .step-number {
+  color: rgba(16, 185, 129, 0.4);
+}
+
+.player-dev-step-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.player-dev-step-card p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  color: #8faabf;
+  line-height: 1.7;
+  margin: 0;
+  flex: 1;
+}
+
+
+/* =================================
+HIGHLIGHT BOX
+================================= */
+
+.player-dev-highlight {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.player-dev-highlight p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  color: #a7f3d0;
+  line-height: 1.8;
+  margin: 0;
+}
+
+
+/* =================================
+CTA SECTION
+================================= */
+
+.player-dev-cta {
+  background: linear-gradient(180deg, #0b1f33, #06162b);
+  padding: 60px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.player-dev-cta-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.cta-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.cta-text {
+  font-family: 'Nunito', sans-serif;
+  color: #8faabf;
+  font-size: 17px;
+  margin-bottom: 36px;
+}
+
+.player-dev-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.player-dev-btn-primary {
+  display: inline-block;
+  padding: 16px 36px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  border-radius: 40px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.player-dev-btn-primary:hover {
+  transform: translateY(-3px);
+  color: white;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+.player-dev-btn-outline {
+  display: inline-block;
+  padding: 14px 34px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 40px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.player-dev-btn-outline:hover {
+  color: #10b981;
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  transform: translateY(-2px);
+}
+
+
+/* =================================
+RESPONSIVE
+================================= */
+
+@media (max-width: 992px) {
+  .player-dev-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .player-dev-hero-title {
+    font-size: 46px !important;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  .player-dev-hero-title {
+    font-size: 38px !important;
+  }
+  
+  .player-dev-hero-container,
+  .player-dev-container,
+  .player-dev-cta-container {
+    padding: 0 24px;
+  }
+
+  .player-dev-title {
+    font-size: 30px !important;
+  }
+
+  .player-dev-intro,
+  .player-dev-highlight,
+  .cta-text {
+    text-align: center;
+  }
+
+  .player-dev-title::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .player-dev-step-card {
+    align-items: center;
+    text-align: center;
+  }
+}

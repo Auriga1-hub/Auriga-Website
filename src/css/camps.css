@@ -1,0 +1,458 @@
+/* =================================
+HERO
+================================= */
+
+.camps-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  background-image: url("/images/bg4.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+.camps-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 18, 38, 0.94) 0%,
+    rgba(6, 18, 38, 0.80) 55%,
+    rgba(6, 18, 38, 0.35) 100%
+  );
+  z-index: 1;
+}
+
+.camps-hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.camps-hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #10b981;
+  margin-bottom: 16px;
+}
+
+.camps-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 62px !important;
+  font-weight: 900 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -1.5px;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+.camps-hero-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  max-width: 540px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.camps-hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.camps-hero-meta span {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 7px 16px;
+  border-radius: 20px;
+}
+
+
+/* =================================
+SHARED UTILITIES
+================================= */
+
+.camps-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.camps-section-heading {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.camps-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #10b981;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.camps-section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 34px !important;
+  font-weight: 800 !important;
+  color: white;
+  display: inline-block;
+  position: relative;
+}
+
+.camps-section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  margin: 14px auto 0;
+  border-radius: 2px;
+}
+
+.camps-card-accent {
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+
+/* =================================
+SECTION BOX (hoverable card wrapper)
+================================= */
+
+.camps-section-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 60px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* gradient top bar */
+.camps-section-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.camps-section-box:hover {
+  transform: translateY(-6px);
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(16, 185, 129, 0.12);
+}
+
+.camps-section-box:hover::before {
+  opacity: 1;
+}
+
+
+/* =================================
+INTRO SECTION
+================================= */
+
+.camps-intro-section {
+  background: linear-gradient(180deg, #071a2d, #0b1f33);
+  padding: 40px 0;
+}
+
+.camps-intro-text {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.camps-intro-text p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  color: #94a3b8;
+  line-height: 1.85;
+  margin-bottom: 18px;
+}
+
+.camps-intro-text p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =================================
+ACTIVITIES SECTION
+================================= */
+
+.camps-activities-section {
+  background: linear-gradient(180deg, #0b1f33, #081828);
+  padding: 40px 0;
+}
+
+.camps-activities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.camps-activity-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 32px 28px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.camps-activity-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+.camps-activity-icon {
+  font-size: 26px;
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
+.camps-activity-card p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  color: #8faabf;
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+/* =================================
+SCHEDULE SECTION
+================================= */
+
+.camps-schedule-section {
+  background: linear-gradient(180deg, #081828, #071a2d);
+  padding: 40px 0;
+}
+
+.camps-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.camps-schedule-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 28px 32px;
+  transition: all 0.3s ease;
+}
+
+.camps-schedule-card:hover {
+  border-color: rgba(16, 185, 129, 0.25);
+  transform: translateX(4px);
+}
+
+.camps-schedule-time {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #10b981;
+  margin-bottom: 12px;
+}
+
+.camps-schedule-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  width: calc((100% - 20px) / 2);
+  margin-inline: auto;
+}
+
+.camps-schedule-card p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+/* =================================
+CTA
+================================= */
+
+.camps-cta-section {
+  background: linear-gradient(180deg, #071a2d, #06162b);
+  padding: 40px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.camps-cta {
+  text-align: center;
+  padding: 70px 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.camps-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.camps-cta:hover {
+  transform: translateY(-6px);
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(16, 185, 129, 0.12);
+}
+
+.camps-cta:hover::before {
+  opacity: 1;
+}
+
+.camps-cta h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: white;
+  margin-bottom: 14px;
+}
+
+.camps-cta p {
+  font-family: 'Nunito', sans-serif;
+  color: #8faabf;
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+.camps-cta-btn {
+  display: inline-block;
+  padding: 16px 44px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  border-radius: 40px;
+  text-decoration: none;
+  transition: all 0.35s ease;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.camps-cta-btn:hover {
+  color: white;
+  transform: translateY(-3px);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(16, 185, 129, 0.3);
+}
+
+
+/* =================================
+RESPONSIVE
+================================= */
+
+@media (max-width: 992px) {
+  .camps-activities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .camps-hero-title {
+    font-size: 44px !important;
+    white-space: normal;
+  }
+
+  .camps-intro-text,
+  .camps-cta p {
+    text-align: center;
+  }
+
+  .camps-section-title::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .camps-card-accent {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .camps-activities-grid,
+  .camps-schedule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .camps-schedule-card:last-child:nth-child(odd) {
+    width: 100%;
+  }
+
+  .camps-hero-title {
+    font-size: 36px !important;
+  }
+
+  .camps-hero-container,
+  .camps-container {
+    padding: 0 24px;
+  }
+
+  .camps-hero-meta {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .camps-hero-meta span {
+    width: fit-content;
+  }
+
+  .camps-section-box {
+    padding: 36px 24px;
+  }
+}

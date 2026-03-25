@@ -1,0 +1,261 @@
+/* =================================
+FOOTER SECTION
+================================= */
+
+.footer-section {
+  background: linear-gradient(180deg, #071a2d, #020d18);
+  padding-top: 70px;
+  color: #cbd5f5;
+  position: relative;
+}
+
+/* top glow divider */
+.footer-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #3b82f6, #10b981, transparent);
+}
+
+
+/* =================================
+LAYOUT
+================================= */
+
+.footer-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+}
+
+
+/* =================================
+LEFT — BRAND
+================================= */
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 24px;
+}
+
+.footer-brand-logo {
+  height: 80px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  transition: height 0.3s ease;
+}
+
+.footer-brand span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.4px;
+}
+
+.footer-desc {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #94a3b8;
+  max-width: 320px;
+}
+
+
+/* =================================
+HEADINGS
+================================= */
+
+.footer-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #10b981;
+  margin-bottom: 18px;
+}
+
+
+/* =================================
+NAV LINKS
+================================= */
+
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* top-level link */
+.footer-nav ul li a {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-block;
+}
+
+.footer-nav ul li a:hover {
+  color: #10b981;
+  padding-left: 4px;
+}
+
+/* parent label (Programs, Resources) */
+.footer-nav-parent {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  margin-top: 10px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+/* sub-items */
+.footer-nav-child {
+  padding-left: 12px;
+  position: relative;
+}
+
+.footer-nav-child::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-size: 12px;
+}
+
+.footer-nav-child a {
+  font-size: 13px !important;
+  color: #64748b !important;
+}
+
+.footer-nav-child a:hover {
+  color: #10b981 !important;
+}
+
+
+/* =================================
+CONTACT
+================================= */
+
+.footer-contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-contact ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.footer-icon {
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 22px;
+  text-align: center;
+  display: inline-block;
+}
+
+.footer-contact ul li a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-contact ul li a:hover {
+  color: #10b981;
+}
+
+
+/* =================================
+BOTTOM BAR
+================================= */
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 20px 40px;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  color: #475569;
+}
+
+
+/* =================================
+RESPONSIVE
+================================= */
+
+@media (max-width: 900px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-left {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    padding: 0 24px 50px;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .footer-brand,
+  .footer-contact ul li {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-heading::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-nav-child {
+    padding-left: 0 !important;
+  }
+
+  .footer-nav-child::before {
+    position: static !important;
+    margin-right: 6px !important;
+  }
+
+  .footer-bottom {
+    padding: 18px 24px;
+  }
+}
