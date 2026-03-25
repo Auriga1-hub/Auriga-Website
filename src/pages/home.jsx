@@ -216,23 +216,21 @@ function Home() {
       {/* PLAYER DEVELOPMENT PATHWAY */}
       <section className="player-dev-section" style={{ padding: "30px 0" }}>
         <div className="player-dev-container">
-          <Link to="/player-development" style={{ textDecoration: 'none', display: 'block' }}>
-            <div className="player-dev-step-card" style={{ maxWidth: "1000px", margin: "0 auto", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center" }}>
-              
-              <div className="player-dev-intro" style={{ margin: "0 auto", maxWidth: "800px" }}>
-                <span className="player-dev-label">Our Pathway</span>
-                <h2 className="player-dev-title" style={{ fontSize: "36px" }}>A Clear Pathway for Every Player</h2>
-                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "18px", color: "#cbd5e1", lineHeight: "1.8", marginTop: "24px", marginBottom: "32px" }}>
-                  Players progress through Auriga Football Club based on their development, moving from fundamentals to advanced training and into competitive team environments. This structured pathway ensures that every player receives the right level of challenge and opportunity to grow.
-                </p>
-              </div>
-
-              <div className="player-dev-large-image" style={{ margin: "0", width: "100%", maxWidth: "800px" }}>
-                <img src="/images/player_development.webp" alt="Player Development Pathway" loading="lazy" width="800" height="450" style={{ width: "100%", display: "block", borderRadius: "20px" }} />
-              </div>
-              
+          <div className="player-dev-step-card" style={{ maxWidth: "1000px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            
+            <div className="player-dev-intro" style={{ margin: "0 auto", maxWidth: "800px" }}>
+              <span className="player-dev-label">Our Pathway</span>
+              <h2 className="player-dev-title" style={{ fontSize: "36px" }}>A Clear Pathway for Every Player</h2>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "18px", color: "#cbd5e1", lineHeight: "1.8", marginTop: "24px", marginBottom: "32px" }}>
+                Players progress through Auriga Football Club based on their development, moving from fundamentals to advanced training and into competitive team environments. This structured pathway ensures that every player receives the right level of challenge and opportunity to grow.
+              </p>
             </div>
-          </Link>
+
+            <div className="player-dev-large-image" style={{ margin: "0", width: "100%", maxWidth: "800px" }}>
+              <img src="/images/player_development.webp" alt="Player Development Pathway" loading="lazy" width="800" height="450" style={{ width: "100%", display: "block", borderRadius: "20px" }} />
+            </div>
+            
+          </div>
         </div>
       </section>
 
