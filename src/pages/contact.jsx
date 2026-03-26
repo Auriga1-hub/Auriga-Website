@@ -15,26 +15,41 @@ function Contact() {
   const widgetIdRef = useRef(null);
 
   useEffect(() => {
+    let isMounted = true;
+    let interval;
+
     const renderWidget = () => {
       if (turnstileRef.current && window.turnstile && widgetIdRef.current === null) {
-        widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-          sitekey: TURNSTILE_SITE_KEY,
-          theme: "dark",
-        });
+        try {
+          widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+            sitekey: TURNSTILE_SITE_KEY,
+            theme: "dark",
+          });
+        } catch (e) {
+          console.error("Turnstile render error", e);
+        }
       }
     };
 
     if (window.turnstile) {
       renderWidget();
     } else {
-      const interval = setInterval(() => {
-        if (window.turnstile) {
+      interval = setInterval(() => {
+        if (window.turnstile && isMounted) {
           renderWidget();
           clearInterval(interval);
         }
       }, 200);
-      return () => clearInterval(interval);
     }
+
+    return () => {
+      isMounted = false;
+      if (interval) clearInterval(interval);
+      if (widgetIdRef.current !== null && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
   }, [submitted]);
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });

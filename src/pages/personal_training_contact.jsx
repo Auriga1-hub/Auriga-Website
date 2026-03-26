@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 
@@ -14,26 +15,41 @@ function PersonalTrainingContact() {
   const ptWidgetIdRef = useRef(null);
 
   useEffect(() => {
+    let isMounted = true;
+    let interval;
+
     const renderWidget = () => {
       if (ptTurnstileRef.current && window.turnstile && ptWidgetIdRef.current === null) {
-        ptWidgetIdRef.current = window.turnstile.render(ptTurnstileRef.current, {
-          sitekey: TURNSTILE_SITE_KEY,
-          theme: "dark",
-        });
+        try {
+          ptWidgetIdRef.current = window.turnstile.render(ptTurnstileRef.current, {
+            sitekey: TURNSTILE_SITE_KEY,
+            theme: "dark",
+          });
+        } catch (e) {
+          console.error("Turnstile render error", e);
+        }
       }
     };
 
     if (window.turnstile) {
       renderWidget();
     } else {
-      const interval = setInterval(() => {
-        if (window.turnstile) {
+      interval = setInterval(() => {
+        if (window.turnstile && isMounted) {
           renderWidget();
           clearInterval(interval);
         }
       }, 200);
-      return () => clearInterval(interval);
     }
+
+    return () => {
+      isMounted = false;
+      if (interval) clearInterval(interval);
+      if (ptWidgetIdRef.current !== null && window.turnstile) {
+        window.turnstile.remove(ptWidgetIdRef.current);
+        ptWidgetIdRef.current = null;
+      }
+    };
   }, [ptSubmitted]);
 
   const handlePtChange = (e) => setPtFormData({ ...ptFormData, [e.target.name]: e.target.value });
