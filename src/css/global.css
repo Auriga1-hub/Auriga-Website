@@ -25,6 +25,8 @@ body {
   font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0b1f35;
+  color: #f8fafc;
 }
 
 @media (max-width: 768px) {
