@@ -10,7 +10,7 @@ function Footer() {
         {/* LEFT — brand + description */}
         <div className="footer-left">
           <Link to="/" className="footer-brand">
-            <img src="/images/logo.webp" alt="Auriga FC" className="footer-brand-logo" loading="lazy" />
+            <img src="/images/logo.webp" alt="Auriga FC" className="footer-brand-logo" loading="lazy" decoding="async" />
           </Link>
 
           <p className="footer-desc">

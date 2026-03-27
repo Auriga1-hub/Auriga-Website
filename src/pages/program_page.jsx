@@ -55,7 +55,7 @@ function ProgramPage() {
               </div>
             </div>
             <div className="split-image">
-              <img src="/images/bg4.webp" alt="Training session" loading="lazy" width="600" height="450" />
+              <img src="/images/bg4.webp" alt="Training session" loading="lazy" decoding="async" width="600" height="450" />
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@ function ProgramPage() {
         <div className="program-container">
           <div className="split-layout reverse">
             <div className="split-image">
-              <img src="/images/bg_2.webp" alt="Program pricing" loading="lazy" width="600" height="450" />
+              <img src="/images/bg_2.webp" alt="Program pricing" loading="lazy" decoding="async" width="600" height="450" />
             </div>
             <div className="split-content">
               <div className="price-card">

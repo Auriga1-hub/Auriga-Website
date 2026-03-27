@@ -32,7 +32,7 @@ function PlayerDevelopment() {
 
           {/* LARGE IMAGE */}
           <div className="player-dev-large-image">
-             <img src="/images/player_development.webp" alt="Player Development Pathway" loading="lazy" width="800" height="450" />
+             <img src="/images/player_development.webp" alt="Player Development Pathway" loading="lazy" decoding="async" width="800" height="450" />
           </div>
 
           {/* 3 STEPS GRID */}
