@@ -192,7 +192,7 @@ function Home() {
               <div className="program-card" key={index}>
 
                 <div className="program-card-image">
-                  <img src={program.image} alt={program.title} loading="lazy" width="400" height="250" />
+                  <img src={program.image} alt={program.title} width="400" height="250" />
                 </div>
 
                 <div className="program-content">

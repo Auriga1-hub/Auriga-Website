@@ -251,6 +251,8 @@ PROGRAM CARD
   object-fit: cover;
   transition: transform 0.4s ease;
   display: block;
+  background-color: #0f2a3c;
+  color: transparent;
 }
 
 .program-card:hover .program-card-image img {
