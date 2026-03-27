@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import "../css/contact.css";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
+import { syncToGoogleSheets } from "../utils/googleSheetsSync";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 
@@ -76,6 +77,9 @@ function Contact() {
     };
 
     try {
+      // Sync to Google Sheets
+      await syncToGoogleSheets(templateParams);
+
       const result = await emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID_CONTACT,
