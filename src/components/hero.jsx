@@ -29,7 +29,7 @@ function Hero() {
                 View Programs
               </Link>
 
-              <Link to="/programs/location_select" className="hero-btn hero-btn--outline">
+              <Link to="/programs/location_select?program=trial" className="hero-btn hero-btn--outline">
                 Book Free Trial
               </Link>
 

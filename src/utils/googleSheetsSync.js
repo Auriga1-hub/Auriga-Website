@@ -12,17 +12,28 @@ export const syncToGoogleSheets = async (data) => {
   }
 
   try {
-    // We use a fetch POST with no-cors or standard mode depending on Apps Script deployment
+    // Add a timestamp for tracking
+    const enrichedData = {
+      ...data,
+      timestamp: new Date().toISOString(),
+    };
+
+    // Use URLSearchParams for application/x-www-form-urlencoded format
+    // This is the most reliable way to send data to GAS in no-cors mode
+    const formData = new URLSearchParams();
+    for (const key in enrichedData) {
+      formData.append(key, enrichedData[key]);
+    }
+
     await fetch(EMAILJS_CONFIG.GOOGLE_SHEETS_URL, {
       method: "POST",
-      mode: "no-cors", // Required for Google Apps Script Web Apps when triggered from direct browser fetch
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      mode: "no-cors",
+      body: formData,
     });
-    console.log("Google Sheets Sync: Data sent successfully (no-cors mode).");
+    
+    console.log("Google Sheets Sync: Data sent successfully.");
   } catch (error) {
     console.error("Google Sheets Sync Error:", error);
   }
 };
+
