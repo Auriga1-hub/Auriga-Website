@@ -14,9 +14,13 @@ function StructuredData({ data }) {
 
     const script = document.createElement("script");
     script.type = "application/ld+json";
-    script.textContent = JSON.stringify(
-      Array.isArray(data) ? data : data
-    );
+    
+    // If it's an array, wrap it in a @graph for cleaner Google detection
+    const output = Array.isArray(data) 
+      ? { "@context": "https://schema.org", "@graph": data }
+      : data;
+
+    script.textContent = JSON.stringify(output);
     script.setAttribute("data-seo", "structured-data");
     document.head.appendChild(script);
 
@@ -29,17 +33,32 @@ function StructuredData({ data }) {
 }
 
 /* ═══════════════════════════════════════════
-   Pre-built schema helpers
+   Core IDs & Constants
+   ═══════════════════════════════════════════ */
+const DOMAIN = "https://aurigafootballclub.com";
+const LOGO_URL = `${DOMAIN}/images/logo.webp`;
+const ORG_ID = `${DOMAIN}/#organization`;
+const WEBSITE_ID = `${DOMAIN}/#website`;
+
+/* ═══════════════════════════════════════════
+   Pre-built schema models
    ═══════════════════════════════════════════ */
 
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "SportsOrganization",
+  "@id": ORG_ID,
   "name": "Auriga Football Club",
   "alternateName": "Auriga FC",
-  "url": "https://aurigafootballclub.com",
-  "logo": "https://aurigafootballclub.com/images/logo.webp",
-  "image": "https://aurigafootballclub.com/images/logo.webp",
+  "url": DOMAIN,
+  "logo": {
+    "@type": "ImageObject",
+    "@id": `${DOMAIN}/#logo`,
+    "url": LOGO_URL,
+    "contentUrl": LOGO_URL,
+    "caption": "Auriga Football Club Logo"
+  },
+  "image": LOGO_URL,
   "description": "Auriga Football Club offers professional youth soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke. Programs include fundamentals, development academy, competitive teams, personal training, and seasonal camps.",
   "sport": "Soccer",
   "foundingLocation": {
@@ -77,9 +96,10 @@ export const organizationSchema = {
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": `${DOMAIN}/#localbusiness`,
   "name": "Auriga Football Club",
-  "image": "https://aurigafootballclub.com/images/logo.webp",
-  "url": "https://aurigafootballclub.com",
+  "image": LOGO_URL,
+  "url": DOMAIN,
   "telephone": "+1-647-978-6798",
   "email": "info@aurigafootball.com",
   "address": {
@@ -95,6 +115,7 @@ export const localBusinessSchema = {
     "latitude": 43.5890,
     "longitude": -79.6441
   },
+  "parentOrganization": { "@id": ORG_ID },
   "priceRange": "$$",
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
@@ -107,16 +128,18 @@ export const localBusinessSchema = {
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": WEBSITE_ID,
   "name": "Auriga Football Club",
-  "url": "https://aurigafootballclub.com",
+  "url": DOMAIN,
   "description": "Professional youth soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Auriga Football Club",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://aurigafootballclub.com/images/logo.webp"
-    }
+  "publisher": { "@id": ORG_ID },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${DOMAIN}/?s={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
   }
 };
 
@@ -141,11 +164,7 @@ export function buildCourseSchema({ name, description, provider = "Auriga Footba
     "@type": "Course",
     "name": name,
     "description": description,
-    "provider": {
-      "@type": "Organization",
-      "name": provider,
-      "url": "https://aurigafootballclub.com"
-    },
+    "provider": { "@id": ORG_ID },
     "location": {
       "@type": "Place",
       "name": locationName,
@@ -163,11 +182,12 @@ export function buildBreadcrumbSchema(items) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${DOMAIN}${window.location.pathname}#breadcrumb`,
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": `https://aurigafootballclub.com${item.path}`
+      "item": `${DOMAIN}${item.path}`
     }))
   };
 }
@@ -191,11 +211,7 @@ export function buildEventSchema({ name, description, startDate, endDate, locati
         "addressCountry": "CA"
       }
     },
-    "organizer": {
-      "@type": "Organization",
-      "name": "Auriga Football Club",
-      "url": "https://aurigafootballclub.com"
-    },
+    "organizer": { "@id": ORG_ID },
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled"
   };

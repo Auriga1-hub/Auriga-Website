@@ -114,7 +114,12 @@ function Home() {
         description="Auriga Football Club offers professional kids soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke. Join our development academy, competitive teams, personal training, or seasonal soccer camps. Book a free trial today."
         keywords="kids soccer training mississauga, youth soccer brampton, soccer academy GTA, auriga football club, soccer camps mississauga, youth football etobicoke, free soccer trial, soccer school ontario"
       />
-      <StructuredData data={[organizationSchema, localBusinessSchema, websiteSchema, buildBreadcrumbSchema([{ name: "Home", path: "/" }])]} />
+      <StructuredData data={[
+        organizationSchema, 
+        localBusinessSchema, 
+        websiteSchema, 
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }])
+      ]} />
       <Hero />
 
       {/* ANNOUNCEMENT BAR */}
