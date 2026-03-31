@@ -66,14 +66,14 @@ const locations = [
     directionsUrl: "https://www.google.com/maps/search/?api=1&query=West+Mississauga,Ontario",
   },
   {
-    title: "Etobicoke",
-    mapSrc: "https://maps.google.com/maps?q=Etobicoke,Ontario&z=14&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Etobicoke,Ontario",
-  },
-  {
     title: "Brampton",
     mapSrc: "https://maps.google.com/maps?q=Brampton,Ontario&z=14&output=embed",
     directionsUrl: "https://www.google.com/maps/search/?api=1&query=Brampton,Ontario",
+  },
+  {
+    title: "Etobicoke",
+    mapSrc: "https://maps.google.com/maps?q=Etobicoke,Ontario&z=14&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Etobicoke,Ontario",
   },
 ];
 

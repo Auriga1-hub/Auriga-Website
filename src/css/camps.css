@@ -433,6 +433,11 @@ RESPONSIVE
     width: 100%;
   }
 
+  .camps-activity-card,
+  .camps-schedule-card {
+    text-align: center;
+  }
+
   .camps-hero-title {
     font-size: 36px !important;
   }
