@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const BASE_URL = "https://aurigafc.ca";
+const BASE_URL = "https://aurigafootballclub.com";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/images/logo.webp`;
 
 /**

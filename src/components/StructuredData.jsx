@@ -37,9 +37,9 @@ export const organizationSchema = {
   "@type": "SportsOrganization",
   "name": "Auriga Football Club",
   "alternateName": "Auriga FC",
-  "url": "https://aurigafc.ca",
-  "logo": "https://aurigafc.ca/images/logo.webp",
-  "image": "https://aurigafc.ca/images/logo.webp",
+  "url": "https://aurigafootballclub.com",
+  "logo": "https://aurigafootballclub.com/images/logo.webp",
+  "image": "https://aurigafootballclub.com/images/logo.webp",
   "description": "Auriga Football Club offers professional youth soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke. Programs include fundamentals, development academy, competitive teams, personal training, and seasonal camps.",
   "sport": "Soccer",
   "foundingLocation": {
@@ -78,8 +78,8 @@ export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Auriga Football Club",
-  "image": "https://aurigafc.ca/images/logo.webp",
-  "url": "https://aurigafc.ca",
+  "image": "https://aurigafootballclub.com/images/logo.webp",
+  "url": "https://aurigafootballclub.com",
   "telephone": "+1-647-978-6798",
   "email": "info@aurigafootball.com",
   "address": {
@@ -108,14 +108,14 @@ export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Auriga Football Club",
-  "url": "https://aurigafc.ca",
+  "url": "https://aurigafootballclub.com",
   "description": "Professional youth soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke.",
   "publisher": {
     "@type": "Organization",
     "name": "Auriga Football Club",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://aurigafc.ca/images/logo.webp"
+      "url": "https://aurigafootballclub.com/images/logo.webp"
     }
   }
 };
@@ -144,7 +144,7 @@ export function buildCourseSchema({ name, description, provider = "Auriga Footba
     "provider": {
       "@type": "Organization",
       "name": provider,
-      "url": "https://aurigafc.ca"
+      "url": "https://aurigafootballclub.com"
     },
     "location": {
       "@type": "Place",
@@ -167,7 +167,7 @@ export function buildBreadcrumbSchema(items) {
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": `https://aurigafc.ca${item.path}`
+      "item": `https://aurigafootballclub.com${item.path}`
     }))
   };
 }
@@ -194,7 +194,7 @@ export function buildEventSchema({ name, description, startDate, endDate, locati
     "organizer": {
       "@type": "Organization",
       "name": "Auriga Football Club",
-      "url": "https://aurigafc.ca"
+      "url": "https://aurigafootballclub.com"
     },
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled"

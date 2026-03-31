@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://aurigafc.ca/sitemap.xml
+Sitemap: https://aurigafootballclub.com/sitemap.xml
