@@ -1,4 +1,6 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/location_select.css";
 import "../css/home.css";
 
@@ -57,6 +59,12 @@ function LocationSelect() {
 
   return (
     <>
+      <SEOHead
+        title={`${config.title} | Choose Training Location | Auriga FC`}
+        description={`Select your preferred training location for ${config.title} at Auriga Football Club. Available in Mississauga Central, Mississauga West, Etobicoke, and Brampton.`}
+        keywords={`soccer training locations, ${config.title.toLowerCase()} mississauga, youth soccer brampton, soccer near me, auriga fc locations`}
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: config.title, path: "/programs/location_select" }])} />
 
       {/* HERO */}
       <div className="location-select-hero">

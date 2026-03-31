@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/brampton.css";
 
 const programs = [
@@ -35,6 +37,13 @@ function Brampton() {
   return (
     <>
 
+      {/* HERO */}
+      <SEOHead
+        title="Soccer Training Brampton | Youth Programs Ages 4-13 | Auriga FC"
+        description="Youth soccer training in Brampton, Ontario. Professional coaching for ages 4–13 with year-round sessions. Build skills, confidence, and team play at Auriga Football Club."
+        keywords="soccer training brampton, youth soccer brampton, kids soccer lessons brampton, soccer academy brampton, auriga fc brampton"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Programs", path: "/programs/location_select" }, { name: "Brampton", path: "/programs/recreation/brampton" }])} />
       {/* HERO */}
       <div className="bram-hero">
         <div className="bram-hero-overlay" />

@@ -1,5 +1,7 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildFAQSchema, buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/faq.css";
 
 const faqs = [
@@ -91,6 +93,15 @@ function FAQItem({ question, answer, index }) {
 function FAQ() {
   return (
     <>
+      <SEOHead
+        title="FAQ | Auriga Football Club | Youth Soccer Questions & Answers"
+        description="Find answers to frequently asked questions about Auriga FC's youth soccer programs, registration, schedules, equipment, refund policy, and more. Kids soccer training in Mississauga & Brampton."
+        keywords="soccer faq, youth soccer questions, kids soccer registration, auriga fc questions, soccer program information mississauga"
+      />
+      <StructuredData data={[
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Resources", path: "/faq" }, { name: "FAQ", path: "/faq" }]),
+        buildFAQSchema(faqs)
+      ]} />
 
       {/* HERO */}
       <div className="faq-hero">

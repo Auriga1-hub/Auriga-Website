@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Hero from "../components/hero";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { organizationSchema, localBusinessSchema, websiteSchema, buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/home.css";
 import "../css/player_development.css";
 import "../css/personal_training.css";
@@ -107,6 +109,12 @@ function Home() {
 
   return (
     <>
+      <SEOHead
+        title="Auriga FC | Kids Soccer Training Mississauga & Brampton | Ages 4-13"
+        description="Auriga Football Club offers professional kids soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke. Join our development academy, competitive teams, personal training, or seasonal soccer camps. Book a free trial today."
+        keywords="kids soccer training mississauga, youth soccer brampton, soccer academy GTA, auriga football club, soccer camps mississauga, youth football etobicoke, free soccer trial, soccer school ontario"
+      />
+      <StructuredData data={[organizationSchema, localBusinessSchema, websiteSchema, buildBreadcrumbSchema([{ name: "Home", path: "/" }])]} />
       <Hero />
 
       {/* ANNOUNCEMENT BAR */}

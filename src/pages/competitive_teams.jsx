@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import TestimonialBar from "../components/TestimonialBar";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/competitive_teams.css";
 
 const teams = [
@@ -40,6 +42,12 @@ const pathwayFeatures = [
 function CompetitiveTeams() {
   return (
     <>
+      <SEOHead
+        title="Competitive Soccer Teams | Youth League Mississauga & Brampton | Auriga FC"
+        description="Join Auriga FC's invite-based competitive development teams for youth soccer players. Structured team training, league play, tournaments, and a clear pathway to higher levels. Mississauga & Brampton."
+        keywords="competitive youth soccer teams, soccer league mississauga, youth tournament teams, competitive soccer brampton, invite-based soccer program"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Programs", path: "/programs/location_select" }, { name: "Competitive Teams", path: "/programs/competitive-teams" }])} />
 
       {/* HERO */}
       <div className="ct-hero">

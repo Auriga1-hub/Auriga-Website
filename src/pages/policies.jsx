@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/policies.css";
 
 const clubPolicies = [
@@ -47,6 +49,12 @@ const clubPolicies = [
 function Policies() {
   return (
     <>
+      <SEOHead
+        title="Club Policies & Forms | Auriga Football Club"
+        description="Review Auriga Football Club's policies including Code of Conduct, Conflict of Interest, and refund guidelines. Aligned with Ontario Soccer Association and Canada Soccer standards."
+        keywords="soccer club policies, auriga fc code of conduct, soccer refund policy, youth sports policies, ontario soccer rules"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Policies", path: "/policies" }])} />
 
       {/* HERO */}
       <div className="policy-hero">

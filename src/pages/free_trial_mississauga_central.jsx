@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import SEOHead from "../components/SEOHead";
 import "../css/trial.css";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
@@ -109,6 +110,12 @@ function TrialMississaugaCentral() {
 
   return (
     <>
+      <SEOHead
+        title="Free Soccer Trial Mississauga Central | Book Now | Auriga FC"
+        description="Book a free soccer trial session at our Mississauga Central location. Experience Auriga FC's professional youth coaching firsthand. Ages 4–13. Limited spots available."
+        keywords="free soccer trial mississauga, try soccer free, kids soccer trial central mississauga, free youth soccer session, auriga fc trial"
+      />
+
       {/* HERO */}
       <div className="trial-hero">
         <div className="trial-hero-overlay" />

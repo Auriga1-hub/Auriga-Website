@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/about.css";
 
 function About() {
   return (
     <>
+      <SEOHead
+        title="About Auriga FC | Youth Soccer Academy Mississauga & Brampton"
+        description="Learn about Auriga Football Club's mission, vision, and coaching philosophy. Professional youth soccer academy developing young players ages 4–13 in Mississauga, Brampton, and Etobicoke."
+        keywords="about auriga football club, youth soccer academy mississauga, soccer coaching philosophy, kids soccer school brampton, youth development soccer"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])} />
 
       {/* HERO */}
       <div className="about-hero">

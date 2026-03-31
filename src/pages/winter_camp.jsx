@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import TestimonialBar from "../components/TestimonialBar";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema, buildEventSchema } from "../components/StructuredData";
 import "../css/camps.css";
 
 const activities = [
@@ -34,6 +36,15 @@ const schedule = [
 function WinterCamp() {
   return (
     <>
+      <SEOHead
+        title="Winter Soccer Camp Mississauga & Brampton | Ages 4-13 | Auriga FC"
+        description="Keep your child active during winter break with Auriga FC's winter soccer camp. Indoor training, multi-sport activities, and team-building for ages 4–13 in Mississauga, Brampton & Etobicoke."
+        keywords="winter soccer camp mississauga, kids winter camp brampton, holiday soccer camp, winter sports camp etobicoke, indoor soccer camp"
+      />
+      <StructuredData data={[
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Camps", path: "/programs/camps" }, { name: "Winter Camp", path: "/programs/winter-camp" }]),
+        buildEventSchema({ name: "Auriga FC Winter Soccer Camp", description: "Winter break soccer and multi-sport camp for ages 4-13 in Mississauga, Brampton, and Etobicoke.", startDate: "2026-12-21", endDate: "2027-01-02", locationName: "Mississauga, Ontario" })
+      ]} />
 
       {/* HERO */}
       <div className="camps-hero">

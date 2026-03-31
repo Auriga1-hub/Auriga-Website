@@ -27,7 +27,7 @@ function Navbar() {
         </button>
 
         {/* NAVIGATION */}
-        <nav className={`site-navigation ${isOpen ? 'nav-open' : ''}`}>
+        <nav className={`site-navigation ${isOpen ? 'nav-open' : ''}`} aria-label="Main navigation">
 
           <ul className="site-menu">
 

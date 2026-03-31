@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import TestimonialBar from "../components/TestimonialBar";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema, buildEventSchema } from "../components/StructuredData";
 import "../css/camps.css";
 
 const activities = [
@@ -34,6 +36,15 @@ const schedule = [
 function MarchBreakCamp() {
   return (
     <>
+      <SEOHead
+        title="March Break Soccer Camp | Kids Camp Mississauga & Brampton | Auriga FC"
+        description="Action-packed March Break soccer camp for kids ages 4–13. Soccer training, multi-sport activities, and outdoor fun at Auriga FC in Mississauga, Brampton & Etobicoke."
+        keywords="march break camp mississauga, spring break soccer camp, kids march break activities brampton, march break sports camp, soccer camp etobicoke"
+      />
+      <StructuredData data={[
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Camps", path: "/programs/camps" }, { name: "March Break Camp", path: "/programs/march-break-camp" }]),
+        buildEventSchema({ name: "Auriga FC March Break Soccer Camp", description: "March Break soccer and multi-sport camp for ages 4-13 in Mississauga, Brampton, and Etobicoke.", startDate: "2027-03-15", endDate: "2027-03-19", locationName: "Mississauga, Ontario" })
+      ]} />
 
       {/* HERO */}
       <div className="camps-hero">

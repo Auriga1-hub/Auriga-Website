@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import programs from "../data/programs";
 import TestimonialBar from "../components/TestimonialBar";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema, buildCourseSchema } from "../components/StructuredData";
 import "../css/program_page.css";
 
 function ProgramPage() {
@@ -18,6 +20,15 @@ function ProgramPage() {
 
   return (
     <>
+      <SEOHead
+        title={`${programData.title} | Auriga FC Soccer Program`}
+        description={`Register for ${programData.title} at Auriga Football Club. Ages ${programData.age}, professional coaching, small groups, ${programData.location}. ${programData.price}. Secure your spot today.`}
+        keywords={`${programData.title.toLowerCase()}, youth soccer ${location.replace('_', ' ')}, kids soccer program, auriga fc registration, soccer training ages ${programData.age}`}
+      />
+      <StructuredData data={[
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Programs", path: "/programs/location_select" }, { name: location.replace('_', ' '), path: `/programs/recreation/${location}` }, { name: programData.title, path: `/programs/recreation/${location}/${program}` }]),
+        buildCourseSchema({ name: programData.title, description: `Youth soccer training program for ages ${programData.age} at ${programData.location}. Professional coaching in a structured, small-group environment.`, locationName: programData.location })
+      ]} />
 
       {/* HERO */}
       <section className="program-hero">

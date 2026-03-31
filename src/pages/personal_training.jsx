@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
 import TestimonialBar from "../components/TestimonialBar";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema, buildCourseSchema } from "../components/StructuredData";
 import "../css/personal_training.css";
 
 function PersonalTraining() {
   return (
     <>
+      <SEOHead
+        title="Personal Soccer Training | 1-on-1 Coaching Mississauga | Auriga FC"
+        description="Accelerate your child's soccer development with personal 1-on-1 and small group training. Position-specific coaching, goalkeeper training, and game-realistic sessions for ages 7–13 in Mississauga & Brampton."
+        keywords="personal soccer training, 1-on-1 soccer coaching, private soccer lessons mississauga, goalkeeper training kids, soccer skills training brampton"
+      />
+      <StructuredData data={[
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Programs", path: "/programs/location_select" }, { name: "Personal Training", path: "/programs/personal-training" }]),
+        buildCourseSchema({ name: "Auriga Personal Soccer Training", description: "1-on-1 and small group personal soccer training for ages 7-13. Position-specific coaching including specialized goalkeeper training." })
+      ]} />
+
       {/* HERO */}
       <div className="pt-hero">
         <div className="pt-hero-overlay" />

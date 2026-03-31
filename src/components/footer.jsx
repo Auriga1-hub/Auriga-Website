@@ -3,7 +3,7 @@ import "../css/footer.css";
 
 function Footer() {
   return (
-    <footer className="footer-section">
+    <footer className="footer-section" aria-label="Site footer">
 
       <div className="footer-main">
 

@@ -3,6 +3,8 @@ import "../css/contact.css";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { localBusinessSchema, buildBreadcrumbSchema } from "../components/StructuredData";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 
@@ -104,6 +106,12 @@ function Contact() {
 
   return (
     <>
+      <SEOHead
+        title="Contact Auriga FC | Youth Soccer Registration Mississauga & Brampton"
+        description="Contact Auriga Football Club for youth soccer registration, program inquiries, or free trial bookings. Call 647-978-6798 or email info@aurigafootball.com. Located in Mississauga, ON."
+        keywords="contact auriga fc, soccer registration mississauga, youth soccer inquiries, register kids soccer brampton, soccer club contact"
+      />
+      <StructuredData data={[localBusinessSchema, buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])]} />
 
       {/* HERO */}
       <div className="contact-hero">

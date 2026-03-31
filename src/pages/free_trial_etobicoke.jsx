@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import SEOHead from "../components/SEOHead";
 import "../css/trial.css";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
@@ -109,6 +110,12 @@ function TrialEtobicoke() {
 
   return (
     <>
+      <SEOHead
+        title="Free Soccer Trial Etobicoke | Book Now | Auriga FC"
+        description="Book a free soccer trial session in Etobicoke. Experience Auriga FC's professional youth coaching for ages 4–13. Limited availability — register now!"
+        keywords="free soccer trial etobicoke, try soccer free etobicoke, kids soccer trial toronto west, free youth soccer session etobicoke"
+      />
+
       {/* HERO */}
       <div className="trial-hero">
         <div className="trial-hero-overlay" />

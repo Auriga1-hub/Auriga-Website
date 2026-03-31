@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/mississauga_west.css";
 
 const programs = [
@@ -34,6 +36,13 @@ const trainingCards = [
 function MississaugaWest() {
   return (
     <>
+      {/* HERO */}
+      <SEOHead
+        title="Soccer Training Mississauga West | Youth Programs | Auriga FC"
+        description="Youth soccer training programs in west Mississauga. Professional coaching for ages 4–13 with year-round spring, summer, fall, and winter sessions at Auriga Football Club."
+        keywords="soccer training mississauga west, youth soccer west mississauga, kids soccer lessons, soccer program meadowvale, auriga fc"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Programs", path: "/programs/location_select" }, { name: "Mississauga West", path: "/programs/recreation/mississauga_west" }])} />
       {/* HERO */}
       <div className="mw-hero">
         <div className="mw-hero-overlay" />

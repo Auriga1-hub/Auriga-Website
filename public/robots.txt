@@ -1,0 +1,6 @@
+# Auriga Football Club - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aurigafc.ca/sitemap.xml

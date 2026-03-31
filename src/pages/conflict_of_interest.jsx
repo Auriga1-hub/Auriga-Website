@@ -1,3 +1,5 @@
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/policies.css";
 
 const guidelines = [
@@ -71,6 +73,12 @@ const overviewCards = [
 function ConflictOfInterest() {
   return (
     <>
+      <SEOHead
+        title="Conflict of Interest Policy | Auriga Football Club"
+        description="Auriga FC's Conflict of Interest policy provides guidelines for identifying, managing, and disclosing conflicts of interest within club operations."
+        keywords="conflict of interest policy, soccer club governance, auriga fc policy, youth sports ethics"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Policies", path: "/policies" }, { name: "Conflict of Interest", path: "/policies/conflict-of-interest" }])} />
 
       {/* HERO */}
       <div className="policy-hero">

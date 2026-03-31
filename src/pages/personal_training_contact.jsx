@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import SEOHead from "../components/SEOHead";
 import "../css/contact.css";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
@@ -106,6 +107,12 @@ function PersonalTrainingContact() {
 
   return (
     <>
+      <SEOHead
+        title="Personal Training Inquiry | 1-on-1 Soccer Coaching | Auriga FC"
+        description="Contact Auriga FC to book personal 1-on-1 or small group soccer training sessions. Tailored coaching for your child's specific development goals. Mississauga & Brampton."
+        keywords="book personal soccer training, private soccer coaching inquiry, 1-on-1 soccer sessions, auriga fc personal training contact"
+      />
+
       <div className="contact-hero">
         <div className="contact-hero-overlay" />
         <div className="contact-hero-container">

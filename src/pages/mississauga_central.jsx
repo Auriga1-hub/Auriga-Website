@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/mississauga_central.css";
 
 const programs = [
@@ -34,6 +36,13 @@ const trainingCards = [
 function MississaugaCentral() {
   return (
     <>
+      <SEOHead
+        title="Soccer Training Mississauga Central | Youth Programs | Auriga FC"
+        description="Professional youth soccer training programs in central Mississauga. Spring, summer, fall, and winter sessions for ages 4–13. Structured coaching focused on skill development."
+        keywords="soccer training mississauga central, youth soccer mississauga, kids soccer lessons central mississauga, soccer program near me"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Programs", path: "/programs/location_select" }, { name: "Mississauga Central", path: "/programs/recreation/mississauga_central" }])} />
+
       {/* HERO */}
       <div className="mc-hero">
         <div className="mc-hero-overlay" />

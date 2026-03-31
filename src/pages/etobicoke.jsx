@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/etobicoke.css";
 
 const programs = [
@@ -34,6 +36,13 @@ const trainingCards = [
 function Etobicoke() {
   return (
     <>
+      {/* HERO */}
+      <SEOHead
+        title="Soccer Training Etobicoke | Youth Programs Ages 4-13 | Auriga FC"
+        description="Professional youth soccer training in Etobicoke, Ontario. Structured coaching for ages 4–13 with year-round sessions focused on skill development, teamwork, and confidence."
+        keywords="soccer training etobicoke, youth soccer etobicoke, kids soccer lessons toronto west, soccer program etobicoke, auriga fc etobicoke"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Programs", path: "/programs/location_select" }, { name: "Etobicoke", path: "/programs/recreation/etobicoke" }])} />
       {/* HERO */}
       <div className="eto-hero">
         <div className="eto-hero-overlay" />

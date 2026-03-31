@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import TestimonialBar from "../components/TestimonialBar";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema, buildEventSchema } from "../components/StructuredData";
 import "../css/camps.css";
 
 const activities = [
@@ -34,6 +36,15 @@ const schedule = [
 function Camps() {
   return (
     <>
+      <SEOHead
+        title="Summer Soccer Camp Mississauga | Ages 4-13 | Auriga FC"
+        description="Join Auriga FC's summer soccer camp for kids ages 4–13. A full week of soccer, multi-sport activities, and fun in Mississauga, Brampton, and Etobicoke. Register now!"
+        keywords="summer soccer camp mississauga, kids summer camp brampton, soccer day camp, summer sports camp etobicoke, youth soccer camp GTA"
+      />
+      <StructuredData data={[
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Camps", path: "/programs/camps" }, { name: "Summer Camp", path: "/programs/camps" }]),
+        buildEventSchema({ name: "Auriga FC Summer Soccer Camp", description: "Week-long summer soccer and multi-sport camp for ages 4-13 in Mississauga, Brampton, and Etobicoke.", startDate: "2026-07-06", endDate: "2026-08-28", locationName: "Mississauga, Ontario" })
+      ]} />
 
       {/* HERO */}
       <div className="camps-hero">

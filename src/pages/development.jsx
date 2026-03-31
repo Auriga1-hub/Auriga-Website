@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import TestimonialBar from "../components/TestimonialBar";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema, buildCourseSchema } from "../components/StructuredData";
 import "../css/development.css";
 
 const skills = [
@@ -50,6 +52,15 @@ const coachingCerts = [
 function Development() {
   return (
     <>
+      <SEOHead
+        title="Development Academy | Advanced Youth Soccer Training Mississauga & Brampton"
+        description="Join the Auriga Development Academy for advanced youth soccer training. Small-group sessions, certified coaches, and a clear pathway to competitive teams. Ages 7–12 in Mississauga & Brampton."
+        keywords="soccer development academy, advanced youth soccer training, soccer academy mississauga, competitive soccer pathway, youth football development brampton"
+      />
+      <StructuredData data={[
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Programs", path: "/programs/location_select" }, { name: "Development Academy", path: "/programs/development" }]),
+        buildCourseSchema({ name: "Auriga Development Academy", description: "Advanced youth soccer training program for ages 7-12. Small-group sessions focusing on technical development, game intelligence, and competitive readiness." })
+      ]} />
 
       {/* HERO */}
       <div className="dev-hero">

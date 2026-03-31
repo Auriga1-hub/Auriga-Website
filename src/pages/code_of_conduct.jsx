@@ -1,3 +1,5 @@
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/policies.css";
 
 const conductItems = [
@@ -100,6 +102,12 @@ const legalSections = [
 function CodeOfConduct() {
   return (
     <>
+      <SEOHead
+        title="Code of Conduct | Auriga Football Club"
+        description="Auriga FC's Code of Conduct outlines standards for respect, sportsmanship, safety, and parental involvement for all participants, parents, and staff."
+        keywords="soccer code of conduct, youth soccer rules, auriga fc expectations, sportsmanship policy"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Policies", path: "/policies" }, { name: "Code of Conduct", path: "/policies/code-of-conduct" }])} />
 
       {/* HERO */}
       <div className="policy-hero">

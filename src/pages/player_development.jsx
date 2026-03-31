@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
+import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/player_development.css";
 
 function PlayerDevelopment() {
   return (
     <>
+      <SEOHead
+        title="Player Development Pathway | Auriga FC Soccer Academy"
+        description="Discover Auriga FC's clear player development pathway from fundamentals to competitive teams. Structured progression for young soccer players ages 4–13 in Mississauga & Brampton."
+        keywords="player development soccer, soccer pathway mississauga, youth soccer progression, soccer academy development, kids soccer levels"
+      />
+      <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Resources", path: "/resources/player-development" }, { name: "Player Development", path: "/resources/player-development" }])} />
+
       {/* HERO */}
       <div className="player-dev-hero">
         <div className="player-dev-hero-overlay" />
