@@ -12,22 +12,27 @@ function StructuredData({ data }) {
   useEffect(() => {
     if (!data) return;
 
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    
-    // If it's an array, wrap it in a @graph for cleaner Google detection
+    // Use a hash or stringified data to avoid referential equality triggers on every React render
+    const stringifiedData = JSON.stringify(data);
     const output = Array.isArray(data) 
       ? { "@context": "https://schema.org", "@graph": data }
       : data;
 
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
     script.textContent = JSON.stringify(output);
     script.setAttribute("data-seo", "structured-data");
+    
+    // Safety check to remove any previous rogue structured data tags injected by this component
+    const oldScript = document.querySelector('script[data-seo="structured-data"]');
+    if (oldScript) oldScript.remove();
+
     document.head.appendChild(script);
 
     return () => {
       script.remove();
     };
-  }, [data]);
+  }, [JSON.stringify(data)]);
 
   return null;
 }
