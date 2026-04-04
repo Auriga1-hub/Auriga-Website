@@ -7,6 +7,12 @@ function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="site-navbar">
 
@@ -14,7 +20,7 @@ function Navbar() {
 
         {/* LOGO */}
         <div className="site-logo">
-          <NavLink to="/" className="logo-wrapper">
+          <NavLink to="/" className="logo-wrapper" onClick={() => { closeMenu(); scrollToTop(); }}>
             <img src="/images/logo.webp" alt="Auriga Football Club" className="navbar-logo" fetchpriority="high" loading="eager" />
           </NavLink>
         </div>
@@ -35,7 +41,10 @@ function Navbar() {
             <li>
               <NavLink
                 to="/"
-                onClick={closeMenu}
+                onClick={() => {
+                  closeMenu();
+                  scrollToTop();
+                }}
                 className={({ isActive }) =>
                   isActive ? "menu-link active" : "menu-link"
                 }
