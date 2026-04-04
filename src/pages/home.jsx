@@ -57,18 +57,18 @@ const galleryImages = [
 const locations = [
   {
     title: "Mississauga Central",
-    mapSrc: "https://maps.google.com/maps?q=Central+Mississauga,Ontario&z=14&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Central+Mississauga,Ontario",
+    mapSrc: "https://maps.google.com/maps?q=T.+L.+Kennedy+Secondary+School,+3100+Hurontario+St,+Mississauga,+ON+L5B+1N7&z=17&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/t9JDDXpqjAmm46qW6?g_st=iwb",
   },
   {
     title: "Mississauga West",
-    mapSrc: "https://maps.google.com/maps?q=West+Mississauga,Ontario&z=14&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=West+Mississauga,Ontario",
+    mapSrc: "https://maps.google.com/maps?q=John+Fraser+Secondary+School,+2665+Erin+Centre+Blvd,+Mississauga,+ON+L5M+5H6&z=17&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/fWEZ3YbyeXtEnNgWA?g_st=iwb",
   },
   {
     title: "Brampton",
-    mapSrc: "https://maps.google.com/maps?q=Brampton,Ontario&z=14&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Brampton,Ontario",
+    mapSrc: "https://maps.google.com/maps?q=Bramalea+Secondary+School,+510+Balmoral+Dr,+Brampton,+ON+L6T+1W4&z=17&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/oPMQQJDYttSQmQvC7?g_st=iwb",
   },
   {
     title: "Etobicoke",
