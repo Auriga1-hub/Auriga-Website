@@ -33,16 +33,16 @@ const locations = [
     directionsUrl: "https://maps.app.goo.gl/fWEZ3YbyeXtEnNgWA?g_st=iwb",
   },
   {
-    city: "Etobicoke",
-    slug: "etobicoke",
-    mapSrc: "https://maps.google.com/maps?q=Etobicoke,Ontario&z=14&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Etobicoke,Ontario",
-  },
-  {
     city: "Brampton",
     slug: "brampton",
     mapSrc: "https://maps.google.com/maps?q=Bramalea+Secondary+School,+510+Balmoral+Dr,+Brampton,+ON+L6T+1W4&z=17&output=embed",
     directionsUrl: "https://maps.app.goo.gl/oPMQQJDYttSQmQvC7?g_st=iwb",
+  },
+  {
+    city: "Etobicoke",
+    slug: "etobicoke",
+    mapSrc: "https://maps.google.com/maps?q=Etobicoke,Ontario&z=14&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Etobicoke,Ontario",
   },
 ];
 

@@ -79,7 +79,7 @@ function ProgramPage() {
               </div>
             </div>
             <div className="split-image">
-              <img src="/images/bg4.webp" alt="Training session" loading="lazy" decoding="async" width="600" height="450" />
+              <img src="/images/training-schedule.webp" alt="Training Schedule Image" loading="lazy" decoding="async" width="600" height="450" />
             </div>
           </div>
         </div>

@@ -165,7 +165,7 @@ function Home() {
           <div className="about-wrapper">
 
             <div className="about-image">
-              <img src="/images/bg_3.webp" alt="Auriga Football Club" loading="lazy" width="600" height="400" />
+              <img src="/images/about-us.webp" alt="About Us Image" loading="lazy" width="600" height="400" />
             </div>
 
             <div className="about-content">
