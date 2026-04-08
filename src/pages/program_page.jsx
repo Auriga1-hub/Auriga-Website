@@ -18,6 +18,20 @@ function ProgramPage() {
     return <div style={{ padding: "120px", color: "white" }}>Program not found</div>;
   }
 
+  const scheduleItems = location === "brampton" && season === "spring" && age === "u4-13"
+    ? [
+        "Mondays & Wednesdays",
+        "Ages 4-8, 5:30 - 6:30 PM",
+        "Ages 9-13, 6:30 - 7:30 PM",
+        "Uniforms Provided on First Day",
+      ]
+    : [
+        "2 sessions per week",
+        "Weekday evening training",
+        programData.location,
+        "Final training days confirmed in April",
+      ];
+
   return (
     <>
       <SEOHead
@@ -58,10 +72,9 @@ function ProgramPage() {
                 <h3>Spring Program</h3>
                 <p className="schedule-dates">{programData.date}</p>
                 <ul className="schedule-list">
-                  <li>2 sessions per week</li>
-                  <li>Weekday evening training</li>
-                  <li>{programData.location}</li>
-                  <li>Final training days confirmed in April</li>
+                  {scheduleItems.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -113,6 +126,23 @@ function ProgramPage() {
             {programData.announcement.subtitle}
           </p>
         </div>
+      )}
+
+      {location === "brampton" && (
+        <section className="program-section light">
+          <div className="program-container">
+            <div className="location-card">
+              <h2 className="section-title">Location</h2>
+              <div className="section-divider" />
+              <p>Hilldale Public School</p>
+              <p>
+                <a href="https://share.google/nwSYNEKPygTDNRNBF" target="_blank" rel="noreferrer">
+                  https://share.google/nwSYNEKPygTDNRNBF
+                </a>
+              </p>
+            </div>
+          </div>
+        </section>
       )}
 
       {/* BENEFITS */}
@@ -189,7 +219,7 @@ function ProgramPage() {
             <div className="steps">
               <div className="step">Step 1: Secure spot with $30 deposit</div>
               <div className="step">Step 2: Attend first session</div>
-              <div className="step">Step 3: Full refund after day 1 if needed</div>
+              <div className="step">Step 3: Full refund after day one if the program is not the right fit</div>
               <div className="step">Step 4: Season confirmed from session 2</div>
             </div>
           </div>
@@ -236,9 +266,8 @@ function ProgramPage() {
               <h3 className="policy-heading">Refund Policy</h3>
               <ul className="policy-refund-list">
                 <li>If you choose not to continue after the first session, your $30 deposit will be fully refunded.</li>
-                <li>If the final confirmed training location/days does not work for your family, the deposit will also be fully refunded.</li>
                 <li>From the second session onward, the deposit becomes non-refundable, as spots are confirmed and staffing is finalized.</li>
-                <li>After the second session, no refunds are issued.</li>
+                <li>After the second session, no refunds are issued unless communicated otherwise.</li>
               </ul>
             </div>
           </div>

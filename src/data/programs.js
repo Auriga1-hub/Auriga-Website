@@ -64,8 +64,8 @@ const programs = {
         description: "A fun and structured introduction to soccer for young players ages 4–13.",
         registerUrl: "https://aurigafc.playbookapi.com/programs/camp_registration/?class_package%5B%5D=64287",
         announcement: {
-          title: "Brampton Area (Exact field confirmed by April 6)",
-          subtitle: "Final field permit confirmation in early April. All training remains within Brampton."
+          title: "Brampton Area - Field Confirmed (Hilldale Public School)",
+          subtitle: "All training remains in Hilldale Public School for Spring & Summer."
         }
       },
     },

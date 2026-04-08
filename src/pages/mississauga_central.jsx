@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/mississauga_central.css";
+import "../css/program_page.css";
 
 const programs = [
   {
