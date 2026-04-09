@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import programs from "../data/programs";
 import TestimonialBar from "../components/TestimonialBar";
 import SEOHead from "../components/SEOHead";
@@ -286,6 +286,16 @@ function ProgramPage() {
             <a href={programData.registerUrl} target="_blank" rel="noreferrer" className="program-btn">
               Secure Your Spot
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="program-faq">
+        <div className="program-container">
+          <div className="faq-content">
+            <p>Have any more questions? Please visit our FAQ's page.</p>
+            <Link to="/faq" className="faq-btn">Visit FAQ</Link>
           </div>
         </div>
       </section>

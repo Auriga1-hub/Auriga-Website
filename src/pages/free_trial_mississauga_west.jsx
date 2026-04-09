@@ -3,6 +3,8 @@ import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
 import SEOHead from "../components/SEOHead";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "../css/trial.css";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
@@ -11,6 +13,7 @@ function TrialMississaugaWest() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const turnstileRef = useRef(null);
   const widgetIdRef = useRef(null);
 
@@ -57,6 +60,12 @@ function TrialMississaugaWest() {
     setError("");
     setLoading(true);
 
+    if (!selectedDate) {
+      setError("Please select a preferred date.");
+      setLoading(false);
+      return;
+    }
+
     const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
     if (!turnstileResponse) {
       setError("Please complete the captcha verification.");
@@ -74,7 +83,7 @@ function TrialMississaugaWest() {
       player_name: form.player_name.value,
       dob: form.dob.value,
       years_played: form.years_played.value,
-      preferred_date: form.preferred_date.value,
+      preferred_date: selectedDate.toISOString().split("T")[0],
       preferred_time: form.preferred_time.value,
       heard_about: form.heard_about.value,
       message: form.message.value,
@@ -150,7 +159,7 @@ function TrialMississaugaWest() {
                   </p>
                   <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "12px 20px", borderRadius: "10px", marginTop: "16px", display: "inline-block" }}>
                     <span style={{ color: "#10b981", fontWeight: "800", display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
-                      🗓️ Runs strictly on Mondays & Wednesdays
+                      🗓️ Runs strictly on Mondays only
                     </span>
                   </div>
                 </div>
@@ -201,15 +210,23 @@ function TrialMississaugaWest() {
                     <h3 className="trial-fieldset-title">Booking Details</h3>
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Preferred Date (Mon & Wed Only) <span className="req">*</span></label>
-                        <input type="date" name="preferred_date" required />
+                        <label>Preferred Date (Mondays Only) <span className="req">*</span></label>
+                        <DatePicker
+                          selected={selectedDate}
+                          onChange={(date) => setSelectedDate(date)}
+                          filterDate={(date) => date.getDay() === 1}
+                          placeholderText="Select a Monday"
+                          dateFormat="yyyy-MM-dd"
+                          required
+                          className="date-picker-input"
+                        />
                       </div>
                       <div className="form-group">
                         <label>Preferred Time <span className="req">*</span></label>
                         <select name="preferred_time" required>
                           <option value="">Select Time</option>
-                          <option>6:00 PM</option>
-                          <option>7:00 PM</option>
+                          <option>Ages 4-8, 6-7PM</option>
+                          <option>Ages 9-13, 7-8PM</option>
                         </select>
                       </div>
                     </div>

@@ -275,7 +275,7 @@ GOALKEEPER SECTION
   color: #cbd5e1;
   margin-bottom: 18px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
 }
 
@@ -468,6 +468,24 @@ RESPONSIVE
 
   .pt-container {
     padding: 0 24px;
+  }
+
+  .pt-feature-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+  }
+
+  .pt-gk-list.centered {
+    width: 100%;
+  }
+
+  .pt-gk-list.centered li {
+    justify-content: center;
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto 18px;
   }
 
   .pt-cta-btn {

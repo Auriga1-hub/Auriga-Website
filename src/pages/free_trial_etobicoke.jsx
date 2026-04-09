@@ -208,8 +208,8 @@ function TrialEtobicoke() {
                         <label>Preferred Time <span className="req">*</span></label>
                         <select name="preferred_time" required>
                           <option value="">Select Time</option>
-                          <option>6:00 PM</option>
-                          <option>7:00 PM</option>
+                          <option>Ages 4-8, 6-7PM</option>
+                          <option>Ages 9-13, 7-8PM</option>
                         </select>
                       </div>
                     </div>

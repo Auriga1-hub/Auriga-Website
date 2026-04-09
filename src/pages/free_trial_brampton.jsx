@@ -3,6 +3,8 @@ import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
 import SEOHead from "../components/SEOHead";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "../css/trial.css";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
@@ -11,6 +13,7 @@ function TrialBrampton() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const turnstileRef = useRef(null);
   const widgetIdRef = useRef(null);
 
@@ -57,6 +60,12 @@ function TrialBrampton() {
     setError("");
     setLoading(true);
 
+    if (!selectedDate) {
+      setError("Please select a preferred date.");
+      setLoading(false);
+      return;
+    }
+
     const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
     if (!turnstileResponse) {
       setError("Please complete the captcha verification.");
@@ -74,7 +83,7 @@ function TrialBrampton() {
       player_name: form.player_name.value,
       dob: form.dob.value,
       years_played: form.years_played.value,
-      preferred_date: form.preferred_date.value,
+      preferred_date: selectedDate.toISOString().split("T")[0],
       preferred_time: form.preferred_time.value,
       heard_about: form.heard_about.value,
       message: form.message.value,
@@ -205,14 +214,22 @@ function TrialBrampton() {
                     <div className="form-row">
                       <div className="form-group">
                         <label>Preferred Date (Mon & Wed Only) <span className="req">*</span></label>
-                        <input type="date" name="preferred_date" required />
+                        <DatePicker
+                          selected={selectedDate}
+                          onChange={(date) => setSelectedDate(date)}
+                          filterDate={(date) => date.getDay() === 1 || date.getDay() === 3}
+                          placeholderText="Select Monday or Wednesday"
+                          dateFormat="yyyy-MM-dd"
+                          required
+                          className="date-picker-input"
+                        />
                       </div>
                       <div className="form-group">
                         <label>Preferred Time <span className="req">*</span></label>
                         <select name="preferred_time" required>
                           <option value="">Select Time</option>
-                          <option>6:00 PM</option>
-                          <option>7:00 PM</option>
+                          <option>Ages 4-8, 6-7PM</option>
+                          <option>Ages 9-13, 7-8PM</option>
                         </select>
                       </div>
                     </div>

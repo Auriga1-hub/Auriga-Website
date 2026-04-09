@@ -113,6 +113,12 @@ function MississaugaWest() {
             <Link to="/contact" className="mw-cta-btn">Register Now</Link>
           </div>
 
+          {/* FAQ Section */}
+          <div className="mw-faq">
+            <p>Have any more questions? Please visit our FAQ's page.</p>
+            <Link to="/faq" className="mw-faq-btn">Visit FAQ</Link>
+          </div>
+
         </div>
       </section>
     </>

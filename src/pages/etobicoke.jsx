@@ -113,6 +113,12 @@ function Etobicoke() {
             <Link to="/contact" className="eto-cta-btn">Register Now</Link>
           </div>
 
+          {/* FAQ Section */}
+          <div className="eto-faq">
+            <p>Have any more questions? Please visit our FAQ's page.</p>
+            <Link to="/faq" className="eto-faq-btn">Visit FAQ</Link>
+          </div>
+
         </div>
       </section>
     </>

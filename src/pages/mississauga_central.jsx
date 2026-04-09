@@ -113,6 +113,12 @@ function MississaugaCentral() {
             <Link to="/contact" className="mc-cta-btn">Register Now</Link>
           </div>
 
+          {/* FAQ Section */}
+          <div className="mc-faq">
+            <p>Have any more questions? Please visit our FAQ's page.</p>
+            <Link to="/faq" className="mc-faq-btn">Visit FAQ</Link>
+          </div>
+
         </div>
       </section>
     </>
