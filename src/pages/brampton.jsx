@@ -9,7 +9,7 @@ const programs = [
     title: "Spring Development Training Program",
     age: "Ages: 4–13",
     date: "May 18 – July 24, 2026",
-    path: "/programs/recreation/brampton/spring-u4-13",
+    path: "/programs/recreation/brampton/spring-program",
   },
 ];
 

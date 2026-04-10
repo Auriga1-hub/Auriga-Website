@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/navbar";
@@ -42,6 +42,12 @@ const Policies = lazy(() => import("./pages/policies"));
 const CodeOfConduct = lazy(() => import("./pages/code_of_conduct"));
 const ConflictOfInterest = lazy(() => import("./pages/conflict_of_interest"));
 const PlayerDevelopment = lazy(() => import("./pages/player_development"));
+
+// Redirect to standalone spring landing page
+function SpringBramptonPage() {
+  useEffect(() => { window.location.replace('/spring-landing.html'); }, []);
+  return null;
+}
 
 // Lightweight loading component
 const PageLoader = () => (
@@ -98,6 +104,9 @@ function App() {
             <Route path="/programs/recreation/mississauga_west" element={<MississaugaWest />} />
             <Route path="/programs/recreation/etobicoke" element={<Etobicoke />} />
             <Route path="/programs/recreation/brampton" element={<Brampton />} />
+
+            {/* SPRING BRAMPTON LANDING PAGE */}
+            <Route path="/programs/recreation/brampton/spring-program" element={<SpringBramptonPage />} />
 
             {/* DYNAMIC PROGRAM PAGES */}
             <Route path="/programs/recreation/:location/:program" element={<ProgramPage />} />
