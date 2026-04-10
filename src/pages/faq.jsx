@@ -6,8 +6,8 @@ import "../css/faq.css";
 
 const faqs = [
   {
-    question: "What if the final field location changes?",
-    answer: "Spring field permits are confirmed by the city in early April. All training will remain within the same central Mississauga/Brampton area as advertised.\n\nIf the final confirmed location does not work for your family, your $30 deposit will be fully refunded."
+    question: "Is the field confirmed for spring and summer?",
+    answer: "Yes — the location is confirmed and does not change until the end of the summer season."
   },
   {
     question: "What happens if it rains?",
