@@ -9,7 +9,7 @@ const programs = [
     title: "Spring Development Training Program",
     age: "Ages: 4–13",
     date: "May 18 – July 24, 2026",
-    path: "/programs/recreation/mississauga_west/spring-u4-13",
+    path: "/programs/recreation/spring/mississauga_west",
   },
 ];
 
@@ -76,9 +76,9 @@ function MississaugaWest() {
                     <span>🗓</span> {prog.date}
                   </div>
                 </div>
-                <Link to={prog.path} className="mw-learn-btn">
+                <a href="/programs/recreation/spring/mississauga_west" className="mw-learn-btn">
                   Learn More →
-                </Link>
+                </a>
               </div>
             ))}
           </div>

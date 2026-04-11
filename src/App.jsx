@@ -45,7 +45,22 @@ const PlayerDevelopment = lazy(() => import("./pages/player_development"));
 
 // Redirect to standalone spring landing page
 function SpringBramptonPage() {
-  useEffect(() => { window.location.replace('/spring-landing.html'); }, []);
+  useEffect(() => { window.location.replace('/programs/recreation/brampton/spring/index.html'); }, []);
+  return null;
+}
+
+function SpringBramptonLegacyPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/brampton/spring'); }, []);
+  return null;
+}
+
+function SpringMississaugaCentralPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/spring/mississauga_central/index.html'); }, []);
+  return null;
+}
+
+function SpringMississaugaWestPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/spring/mississauga_west/index.html'); }, []);
   return null;
 }
 
@@ -106,7 +121,12 @@ function App() {
             <Route path="/programs/recreation/brampton" element={<Brampton />} />
 
             {/* SPRING BRAMPTON LANDING PAGE */}
-            <Route path="/programs/recreation/brampton/spring-program" element={<SpringBramptonPage />} />
+            <Route path="/spring-landing" element={<SpringBramptonLegacyPage />} />
+            <Route path="/spring-landing.html" element={<SpringBramptonLegacyPage />} />
+            <Route path="/programs/recreation/brampton/spring" element={<SpringBramptonPage />} />
+            <Route path="/programs/recreation/brampton/spring-program" element={<SpringBramptonLegacyPage />} />
+            <Route path="/programs/recreation/spring/mississauga_central" element={<SpringMississaugaCentralPage />} />
+            <Route path="/programs/recreation/spring/mississauga_west" element={<SpringMississaugaWestPage />} />
 
             {/* DYNAMIC PROGRAM PAGES */}
             <Route path="/programs/recreation/:location/:program" element={<ProgramPage />} />

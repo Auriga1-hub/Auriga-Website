@@ -9,7 +9,7 @@ const programs = [
     title: "Spring Development Training Program",
     age: "Ages: 4–13",
     date: "May 18 – July 24, 2026",
-    path: "/programs/recreation/mississauga_central/spring-u4-13",
+    path: "/programs/recreation/spring/mississauga_central",
   },
 ];
 
@@ -76,9 +76,9 @@ function MississaugaCentral() {
                     <span>🗓</span> {prog.date}
                   </div>
                 </div>
-                <Link to={prog.path} className="mc-learn-btn">
+                <a href={prog.path} className="mc-learn-btn">
                   Learn More →
-                </Link>
+                </a>
               </div>
             ))}
           </div>

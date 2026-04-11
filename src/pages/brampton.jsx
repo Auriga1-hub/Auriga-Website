@@ -9,7 +9,7 @@ const programs = [
     title: "Spring Development Training Program",
     age: "Ages: 4–13",
     date: "May 18 – July 24, 2026",
-    path: "/programs/recreation/brampton/spring-program",
+    path: "/programs/recreation/brampton/spring",
   },
 ];
 
@@ -77,9 +77,9 @@ function Brampton() {
                     <span>🗓</span> {prog.date}
                   </div>
                 </div>
-                <Link to={prog.path} className="bram-learn-btn">
+                <a href="/programs/recreation/brampton/spring" className="bram-learn-btn">
                   Learn More →
-                </Link>
+                </a>
               </div>
             ))}
           </div>
