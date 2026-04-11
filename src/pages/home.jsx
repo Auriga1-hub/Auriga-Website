@@ -26,7 +26,7 @@ const programs = [
     description:
       "Designed for players who want to improve beyond the basics, the Development Academy focuses on technical skills, decision-making, and game awareness. Sessions are structured to challenge players and prepare them for higher levels of play.",
     cta: "Join Development Academy",
-    path: "/programs/location_select?program=recreation",
+    path: "/programs/development",
   },
   {
     image: "/images/IMG_0349.webp",

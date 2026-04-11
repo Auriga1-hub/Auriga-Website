@@ -12,7 +12,6 @@ const About = lazy(() => import("./pages/about"));
 const Contact = lazy(() => import("./pages/contact"));
 
 /* PROGRAM LANDING PAGES */
-const Development = lazy(() => import("./pages/development"));
 const Camps = lazy(() => import("./pages/camps"));
 const WinterCamp = lazy(() => import("./pages/winter_camp"));
 const MarchBreakCamp = lazy(() => import("./pages/march_break_camp"));
@@ -64,6 +63,11 @@ function SpringMississaugaWestPage() {
   return null;
 }
 
+function DevelopmentAcademyPage() {
+  useEffect(() => { window.location.replace('/programs/development-academy/index.html'); }, []);
+  return null;
+}
+
 // Lightweight loading component
 const PageLoader = () => (
   <div style={{ 
@@ -97,7 +101,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
 
-            <Route path="/programs/development" element={<Development />} />
+            <Route path="/programs/development" element={<DevelopmentAcademyPage />} />
             <Route path="/programs/personal-training" element={<PersonalTraining />} />
             <Route path="/programs/personal-training/contact" element={<PersonalTrainingContact />} />
             <Route path="/programs/competitive-teams" element={<CompetitiveTeams />} />

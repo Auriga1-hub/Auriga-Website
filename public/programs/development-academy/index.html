@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11331992201"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'AW-11331992201');
+        </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auriga Football Club | Development Academy</title>
+    <meta name="description" content="Development Academy for serious players ages 7-13. Advanced technical and tactical training with limited July intake.">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        auriga: {
+                            navy: '#0b1f35',
+                            navyDeep: '#071a2d',
+                            blue: '#2563eb',
+                            blueDark: '#1d4ed8',
+                            emerald: '#10b981',
+                            slateText: '#cbd5e1',
+                            muted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Nunito', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .section-label {
+            color: #10b981;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .homepage-testimonial {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .homepage-testimonial.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        .site-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(11, 26, 47, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 100px;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .site-logo img {
+            height: 60px;
+            width: auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .site-navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .site-menu {
+            display: flex;
+            align-items: center;
+            gap: 38px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .site-menu li {
+            position: relative;
+        }
+
+        .menu-link,
+        .nav-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #e5e7eb;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            line-height: 1;
+            padding: 0;
+            background: none;
+            border: none;
+        }
+
+        .menu-link:hover,
+        .nav-label:hover,
+        .menu-link.active {
+            color: #10b981;
+        }
+
+        .menu-link::after,
+        .nav-label::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: #10b981;
+            transition: width 0.25s ease;
+        }
+
+        .menu-link:hover::after,
+        .menu-link.active::after,
+        .nav-label:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 18px);
+            left: 0;
+            min-width: 260px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.02);
+            list-style: none;
+            margin: 0;
+            padding: 12px;
+            opacity: 0;
+            transform: translateY(6px);
+            pointer-events: none;
+            transition: all 0.25s ease;
+            z-index: 1000;
+        }
+
+        .site-menu li.has-children:hover .dropdown {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .has-children::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 18px;
+        }
+
+        .dropdown li {
+            display: block;
+            width: 100%;
+        }
+
+        .dropdown li a {
+            display: block;
+            padding: 14px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #e5e7eb;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown li a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #10b981;
+            transform: translateX(4px);
+        }
+
+        .free-trial-button a {
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.28);
+            color: #cbd5e1;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .free-trial-button a:hover {
+            border-color: #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.07);
+            transform: translateY(-1px);
+        }
+
+        .cta-button a {
+            display: inline-block;
+            padding: 11px 24px;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #2563eb, #10b981);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3), 0 0 0 0 rgba(16, 185, 129, 0);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-button a:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4), 0 0 20px rgba(16, 185, 129, 0.35);
+        }
+
+        .dropdown::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: 24px;
+            width: 12px;
+            height: 12px;
+            background: rgba(15, 23, 42, 0.65);
+            transform: rotate(45deg);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            color: #10b981;
+            position: relative;
+            top: 1px;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: white;
+            margin-bottom: 5px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle span:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 992px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .whatsapp-fab {
+                display: inline-flex !important;
+            }
+
+            .mobile-toggle.active span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+
+            .mobile-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-toggle.active span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+
+            .site-navigation {
+                position: fixed;
+                top: 100px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 100px);
+                background: rgba(11, 26, 47, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px 40px;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                overflow-y: auto;
+            }
+
+            .site-navigation.nav-open {
+                transform: translateX(0);
+            }
+
+            .site-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 24px;
+            }
+
+            .site-menu li {
+                width: 100%;
+            }
+
+            .menu-link,
+            .nav-label {
+                font-size: 18px;
+                padding: 10px 0;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .has-children {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .dropdown {
+                position: static;
+                opacity: 1;
+                pointer-events: auto;
+                transform: none;
+                box-shadow: none;
+                background: rgba(255, 255, 255, 0.03);
+                border: none;
+                margin-top: 10px;
+                padding: 10px 14px;
+                width: 100%;
+                display: none;
+            }
+
+            .site-menu li.has-children:hover .dropdown,
+            .site-menu li.has-children:active .dropdown,
+            .site-menu li.has-children:focus-within .dropdown {
+                display: block;
+            }
+
+            .free-trial-button,
+            .cta-button {
+                width: 100%;
+            }
+
+            .free-trial-button {
+                margin-top: 20px;
+            }
+
+            .free-trial-button a,
+            .cta-button a {
+                display: block;
+                text-align: center;
+                width: 100%;
+                padding: 14px 24px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-auriga-navy font-body text-auriga-slateText antialiased">
+    <header class="site-navbar">
+        <div class="header-container">
+            <div class="site-logo">
+                <a href="/" class="logo-wrapper">
+                    <img src="/images/logo.webp" alt="Auriga Football Club" class="navbar-logo">
+                </a>
+            </div>
+
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="site-navigation" id="site-navigation" aria-label="Main navigation">
+                <ul class="site-menu">
+                    <li><a href="/" class="menu-link active">Home</a></li>
+                    <li><a href="/about" class="menu-link">About</a></li>
+
+                    <li class="has-children">
+                        <span class="menu-link nav-label">Programs <span class="dropdown-arrow">▾</span></span>
+                        <ul class="dropdown">
+                            <li><a href="/programs/location_select?program=recreation">Fundamentals</a></li>
+                            <li><a href="/programs/development">Development</a></li>
+                            <li><a href="/programs/competitive-teams">Competitive Teams</a></li>
+                            <li><a href="/programs/personal-training">Personal Training</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-children">
+                        <span class="menu-link nav-label">Camps <span class="dropdown-arrow">▾</span></span>
+                        <ul class="dropdown">
+                            <li><a href="/programs/camps">Summer Camp</a></li>
+                            <li><a href="/programs/winter-camp">Winter Camp</a></li>
+                            <li><a href="/programs/march-break-camp">March Break Camp</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-children">
+                        <span class="menu-link nav-label">Resources <span class="dropdown-arrow">▾</span></span>
+                        <ul class="dropdown">
+                            <li><a href="/resources/player-development">Player Development</a></li>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/policies">Policies</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="free-trial-button"><a href="/programs/location_select?program=trial">Free Trial</a></li>
+                    <li class="cta-button"><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative isolate overflow-hidden">
+            <img src="/images/IMG_0351.webp" alt="Advanced youth soccer training session" class="absolute inset-0 h-full w-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#061226]/95 via-[#061226]/88 to-[#061226]/40"></div>
+
+            <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-20 pt-24 sm:px-8 md:grid-cols-2 md:items-center md:py-28">
+                <div class="max-w-xl">
+                    <p class="section-label mb-5 text-center md:text-left">Premium Program | Limited July Intake</p>
+                    <h1 class="text-center font-heading text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-left">Development Academy - For Serious Young Players</h1>
+                    <p class="mt-5 text-center text-lg leading-relaxed text-auriga-slateText md:text-left">Advanced soccer training for players aged 7-13 focused on technical, tactical, and long-term development.</p>
+
+                    <div class="mt-8 grid gap-3 text-sm sm:grid-cols-2">
+                        <p class="rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Start:</span> Starting July (Limited Intake)</p>
+                        <p class="rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Schedule:</span> 2 Sessions per Week (90 min)</p>
+                    </div>
+
+                    <div class="mt-3 flex justify-start">
+                        <p class="w-full rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Location:</span> Mississauga and Brampton</p>
+                    </div>
+
+                    <div class="mt-4 flex justify-start md:justify-center">
+                        <a href="#waitlist" class="inline-flex w-full items-center justify-center rounded-[6px] bg-[#2f63df] px-8 py-[13px] font-heading text-[17px] font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8] md:w-auto">Join the Waitlist</a>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-[#0f2a3c]/85 p-4 shadow-2xl backdrop-blur-sm">
+                    <div class="relative overflow-hidden rounded-xl" data-carousel>
+                        <img src="/images/program_1.webp" alt="Players training with high intensity" class="carousel-slide h-[290px] w-full rounded-xl object-cover opacity-100 transition-opacity duration-500 sm:h-[340px] md:h-[300px] lg:h-[340px]">
+                        <img src="/images/img_3.webp" alt="Technical soccer development drills" class="carousel-slide absolute inset-0 h-[290px] w-full rounded-xl object-cover opacity-0 transition-opacity duration-500 sm:h-[340px] md:h-[300px] lg:h-[340px]">
+
+                        <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2" data-dots>
+                            <button type="button" class="carousel-dot h-2.5 w-2.5 rounded-full bg-white/90" aria-label="Go to slide 1"></button>
+                            <button type="button" class="carousel-dot h-2.5 w-2.5 rounded-full bg-white/40" aria-label="Go to slide 2"></button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 rounded-xl border border-white/10 bg-[#102c40] p-5">
+                        <p class="font-heading text-xs font-bold uppercase tracking-[0.14em] text-auriga-emerald">Development Academy</p>
+                        <p class="mt-2 font-heading text-xl font-bold text-white">Ages 7-13</p>
+                        <p class="mt-2 text-sm text-auriga-slateText">Progression-based small group training built for players ready for a more demanding environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-b from-auriga-navyDeep to-auriga-navy py-16 sm:py-20">
+            <div class="mx-auto max-w-6xl px-5 sm:px-8">
+                <div class="grid gap-8 md:grid-cols-2">
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 text-center md:text-left">
+                        <p class="section-label mb-3">Who This Program Is Designed For</p>
+                        <h2 class="font-heading text-3xl font-bold text-white">Players Ready for a Bigger Challenge</h2>
+                        <ul class="mt-5 space-y-3 text-base">
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Players serious about improving and training consistently</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Players moving beyond recreational level</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Players aiming for competitive teams or leagues</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Players ready for a more demanding training environment</li>
+                        </ul>
+                        <p class="mt-6 rounded-lg border border-[#ef4444]/40 bg-[#ef4444]/10 px-4 py-3 font-heading text-sm font-bold uppercase tracking-[0.05em] text-[#fca5a5]">This is not a beginner program.</p>
+                    </article>
+
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 text-center md:text-left">
+                        <p class="section-label mb-3">How Selection Works</p>
+                        <h2 class="font-heading text-3xl font-bold text-white">Trial Required Before Enrollment</h2>
+                        <p class="mt-5 text-base leading-relaxed">All players must attend a trial session before joining.</p>
+                        <ul class="mt-5 space-y-3 text-base">
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Assessment of current level</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Proper group placement</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Invitation-only enrollment after trial</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#081a2e] py-16 sm:py-20">
+            <div class="mx-auto max-w-6xl px-5 sm:px-8">
+                <p class="section-label mb-3 text-center">A Step Above Regular Training</p>
+                <h2 class="text-center font-heading text-3xl font-bold text-white sm:text-4xl">What Makes This Different</h2>
+                <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-6 text-center md:text-left">
+                        <h3 class="font-heading text-lg font-bold text-white">Technical Mastery</h3>
+                        <p class="mt-3 text-sm leading-relaxed">Ball control, passing quality, first touch, and fast decision-making under pressure.</p>
+                    </article>
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-6 text-center md:text-left">
+                        <h3 class="font-heading text-lg font-bold text-white">Tactical Understanding</h3>
+                        <p class="mt-3 text-sm leading-relaxed">Positioning, awareness, and game intelligence taught through realistic scenarios.</p>
+                    </article>
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-6 text-center md:text-left">
+                        <h3 class="font-heading text-lg font-bold text-white">Higher Intensity</h3>
+                        <p class="mt-3 text-sm leading-relaxed">More demanding sessions with stronger expectations around focus and consistency.</p>
+                    </article>
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-6 text-center md:text-left">
+                        <h3 class="font-heading text-lg font-bold text-white">Ongoing Tracking</h3>
+                        <p class="mt-3 text-sm leading-relaxed">Regular coaching feedback and development tracking to guide progress over time.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-b from-auriga-navy to-auriga-navyDeep py-16 sm:py-20">
+            <div class="mx-auto max-w-6xl px-5 sm:px-8">
+                <div class="grid gap-7 md:grid-cols-2">
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 text-center md:text-left">
+                        <p class="section-label mb-3">Program Structure</p>
+                        <h2 class="font-heading text-3xl font-bold text-white">Built Around Consistent Progress</h2>
+                        <ul class="mt-5 space-y-3 text-base">
+                            <li><span class="text-auriga-emerald">•</span> 2 sessions per week</li>
+                            <li><span class="text-auriga-emerald">•</span> 90-minute sessions</li>
+                            <li><span class="text-auriga-emerald">•</span> Small group focused training</li>
+                            <li><span class="text-auriga-emerald">•</span> Age group: 7-13</li>
+                            <li><span class="text-auriga-emerald">•</span> Progression-based training (not participation-based)</li>
+                        </ul>
+                    </article>
+
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 text-center md:text-left">
+                        <p class="section-label mb-3">What Players Will Gain</p>
+                        <h2 class="font-heading text-3xl font-bold text-white">Outcomes That Transfer to Matches</h2>
+                        <ul class="mt-5 space-y-3 text-base">
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Strong technical foundation</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Improved game awareness and decision-making</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Increased confidence on the ball</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Preparation for competitive teams and leagues</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#081f3a] py-14 sm:py-16">
+            <div class="mx-auto max-w-5xl px-5 sm:px-8">
+                <article class="rounded-xl border border-auriga-emerald/35 bg-[#0f2a3c] p-7 text-center">
+                    <p class="section-label mb-3">Program Commitment</p>
+                    <h2 class="font-heading text-3xl font-bold text-white">Premium Training Standard</h2>
+                    <p class="mt-4 text-base leading-relaxed">This is a higher-level training program with increased structure, intensity, and coaching focus.</p>
+                    <p class="mt-4 text-base leading-relaxed">Pricing is higher than our recreational program and reflects the level of training provided.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="waitlist" class="bg-[#081f3a] pb-16 pt-8 sm:pb-20 sm:pt-10">
+            <div class="mx-auto max-w-4xl px-5 sm:px-8">
+                <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 sm:p-9">
+                    <p class="section-label mb-3 text-center md:text-left">Join the Development Academy Waitlist</p>
+                    <h2 class="text-center font-heading text-3xl font-bold text-white md:text-left">Limited Spots Available for July</h2>
+                    <p class="mt-4 text-center text-base text-auriga-slateText md:text-left">Limited spots available for July. Submit your details to be considered for trials.</p>
+
+                    <form id="waitlist-form" class="mt-8 grid gap-5 sm:grid-cols-2">
+                        <label class="text-sm font-semibold text-auriga-slateText">Parent Name
+                            <input type="text" name="parentName" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Enter parent name">
+                        </label>
+
+                        <label class="text-sm font-semibold text-auriga-slateText">Email
+                            <input type="email" name="email" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Enter email address">
+                        </label>
+
+                        <label class="text-sm font-semibold text-auriga-slateText">Phone Number
+                            <input type="tel" name="phone" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Enter phone number">
+                        </label>
+
+                        <label class="text-sm font-semibold text-auriga-slateText">Child's Name
+                            <input type="text" name="childName" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Enter child's name">
+                        </label>
+
+                        <label class="text-sm font-semibold text-auriga-slateText">Child's Age
+                            <input type="number" name="childAge" min="7" max="13" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="7-13">
+                        </label>
+
+                        <label class="text-sm font-semibold text-auriga-slateText">Child's Current Level
+                            <select name="level" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white focus:border-auriga-blue focus:outline-none">
+                                <option value="" disabled selected>Select current level</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Recreational">Recreational</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced / Club">Advanced / Club</option>
+                            </select>
+                        </label>
+
+                        <label class="text-sm font-semibold text-auriga-slateText sm:col-span-2">Message (optional)
+                            <textarea name="message" rows="4" class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Tell us anything helpful about your child's training goals"></textarea>
+                        </label>
+
+                        <div class="sm:col-span-2">
+                            <button type="submit" class="inline-flex w-full items-center justify-center rounded-[8px] bg-[#2f63df] px-8 py-3 font-heading text-base font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8]">Join Waitlist</button>
+                        </div>
+                    </form>
+
+                    <p id="waitlist-confirmation" class="mt-6 hidden rounded-lg border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-sm font-semibold text-[#a7f3d0]">Thank you! We'll review your submission and contact you with trial details.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="relative bg-gradient-to-b from-[#071a2d] to-[#020d18] pt-[70px] text-[#cbd5f5]">
+        <div class="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-auriga-blue to-transparent opacity-80"></div>
+
+        <div class="mx-auto grid max-w-6xl gap-10 px-6 pb-14 md:grid-cols-[1.6fr_1fr_1.2fr] md:px-10">
+            <div class="text-center md:text-left">
+                <a href="/" class="inline-flex items-center no-underline">
+                    <img src="/images/logo.webp" alt="Auriga FC" class="h-20 w-auto drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)]">
+                </a>
+                <p class="mt-6 max-w-xs text-sm leading-7 text-auriga-muted">Structured youth soccer training in Mississauga, Etobicoke & Brampton for ages 4–13. Certified coaches focused on technical skill, small-group training, and long-term player development.</p>
+            </div>
+
+            <div class="text-center md:text-left">
+                <h4 class="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-auriga-emerald">Quick Links</h4>
+                <ul class="space-y-2 text-sm text-auriga-muted">
+                    <li><a href="/" class="transition hover:pl-1 hover:text-auriga-emerald">Home</a></li>
+                    <li><a href="/about" class="transition hover:pl-1 hover:text-auriga-emerald">About</a></li>
+                    <li class="mt-4 border-b border-white/10 pb-1 font-heading text-xs font-bold uppercase tracking-[0.08em] text-[#cbd5e1]">Programs</li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/location_select?program=recreation" class="transition hover:text-auriga-emerald">Fundamentals</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/development" class="transition hover:text-auriga-emerald">Development</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/competitive-teams" class="transition hover:text-auriga-emerald">Competitive Teams</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/personal-training" class="transition hover:text-auriga-emerald">Personal Training</a></li>
+                    <li class="mt-4 border-b border-white/10 pb-1 font-heading text-xs font-bold uppercase tracking-[0.08em] text-[#cbd5e1]">Camps</li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/camps" class="transition hover:text-auriga-emerald">Summer Camp</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/winter-camp" class="transition hover:text-auriga-emerald">Winter Camp</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/march-break-camp" class="transition hover:text-auriga-emerald">March Break Camp</a></li>
+                    <li class="mt-4 border-b border-white/10 pb-1 font-heading text-xs font-bold uppercase tracking-[0.08em] text-[#cbd5e1]">Resources</li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/resources/player-development" class="transition hover:text-auriga-emerald">Player Development</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/faq" class="transition hover:text-auriga-emerald">FAQ</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/policies" class="transition hover:text-auriga-emerald">Policies</a></li>
+                    <li><a href="/programs/location_select?program=trial" class="transition hover:pl-1 hover:text-auriga-emerald">Free Trial</a></li>
+                    <li><a href="/contact" class="transition hover:pl-1 hover:text-auriga-emerald">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="text-center md:text-left">
+                <h4 class="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-auriga-emerald">Contact Us</h4>
+                <ul class="space-y-4 text-sm leading-6 text-auriga-muted">
+                    <li class="flex items-start justify-center gap-3 md:justify-start">
+                        <span class="mt-0.5 inline-block w-5 text-center">📞</span>
+                        <a href="tel:6479786798" class="transition hover:text-auriga-emerald">647-978-6798</a>
+                    </li>
+                    <li class="flex items-start justify-center gap-3 md:justify-start">
+                        <span class="mt-0.5 inline-block w-5 text-center">✉</span>
+                        <a href="mailto:info@aurigafootball.com" class="transition hover:text-auriga-emerald">info@aurigafootball.com</a>
+                    </li>
+                    <li class="flex items-start justify-center gap-3 text-center md:justify-start md:text-left">
+                        <span class="mt-0.5 inline-block w-5 text-center">📍</span>
+                        <span>525 Huntington Ridge Dr,<br>Mississauga, ON L5R 2X7</span>
+                    </li>
+                    <li class="flex items-center justify-center gap-3 pt-2 text-sm md:justify-start">
+                        <a href="https://www.facebook.com/people/Auriga-Football-Club/100091466900502/" target="_blank" rel="noreferrer" class="transition hover:text-auriga-emerald">Facebook</a>
+                        <span class="text-[#334155]">|</span>
+                        <a href="https://www.instagram.com/aurigafc" target="_blank" rel="noreferrer" class="transition hover:text-auriga-emerald">Instagram</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-white/10 px-6 py-5 text-center text-[13px] text-[#475569] md:px-10">
+            <p>© <span id="footer-year"></span> Auriga Football Club — All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2">
+        <span style="background:rgba(0,0,0,0.72);color:#fff;font-size:0.72rem;font-weight:500;padding:5px 10px;border-radius:6px;white-space:nowrap;line-height:1.4;text-align:center;pointer-events:none;">Have any questions?<br>Text us on WhatsApp</span>
+        <a href="https://wa.me/16475631211" aria-label="Chat on WhatsApp" class="whatsapp-fab inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition hover:bg-[#1ebd5a]">
+            <svg class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+            </svg>
+        </a>
+    </div>
+
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const siteNavigation = document.getElementById('site-navigation');
+        if (mobileToggle && siteNavigation) {
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                siteNavigation.classList.toggle('nav-open');
+            });
+
+            siteNavigation.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileToggle.classList.remove('active');
+                    siteNavigation.classList.remove('nav-open');
+                });
+            });
+        }
+
+        const carousel = document.querySelector('[data-carousel]');
+        if (carousel) {
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+            let active = 0;
+
+            const render = () => {
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('opacity-100', index === active);
+                    slide.classList.toggle('opacity-0', index !== active);
+                });
+
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('bg-white/90', index === active);
+                    dot.classList.toggle('bg-white/40', index !== active);
+                });
+            };
+
+            const next = () => {
+                active = (active + 1) % slides.length;
+                render();
+            };
+
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    active = index;
+                    render();
+                });
+            });
+
+            setInterval(next, 2500);
+        }
+
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycby2EbHYyYH05wvLAoIeh0xBe4-N2rC88K3Vd_f9kP4ay3a9Zx5GUdRLQFDm6pvRESCcAw/exec';
+        const EMAILJS_SERVICE_ID = 'service_xxnuqut';
+        const EMAILJS_TEMPLATE_ID = 'template_2mzjxjm';
+        const EMAILJS_PUBLIC_KEY = 'y8xwoIn2scGe39LyZ';
+
+        if (window.emailjs) {
+            window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+        }
+
+        const waitlistForm = document.getElementById('waitlist-form');
+        const waitlistConfirmation = document.getElementById('waitlist-confirmation');
+        if (waitlistForm && waitlistConfirmation) {
+            waitlistForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(waitlistForm);
+                const payload = {
+                    sheet_name: 'development academy',
+                    target_sheet: 'development academy',
+                    parent_name: formData.get('parentName') || '',
+                    phone: formData.get('phone') || '',
+                    email: formData.get('email') || '',
+                    player_name: formData.get('childName') || '',
+                    child_age: formData.get('childAge') || '',
+                    years_played: formData.get('level') || '',
+                    message: formData.get('message') || '',
+                    timestamp: new Date().toISOString(),
+                };
+
+                try {
+                    if (window.emailjs) {
+                        const emailParams = {
+                            location: 'Mississauga and Brampton',
+                            parent_name: payload.parent_name,
+                            phone: payload.phone,
+                            email: payload.email,
+                            player_name: payload.player_name,
+                            dob: payload.child_age ? `Age ${payload.child_age}` : 'N/A',
+                            years_played: payload.years_played || 'N/A',
+                            preferred_date: 'Waitlist - July Intake',
+                            preferred_time: 'N/A',
+                            heard_about: 'Development Academy Landing Page',
+                            message: payload.message,
+                            subject: 'Development Academy Waitlist - Mississauga & Brampton',
+                        };
+
+                        await window.emailjs.send(
+                            EMAILJS_SERVICE_ID,
+                            EMAILJS_TEMPLATE_ID,
+                            emailParams,
+                            { publicKey: EMAILJS_PUBLIC_KEY }
+                        );
+                    }
+
+                    const encoded = new URLSearchParams();
+                    Object.keys(payload).forEach((key) => encoded.append(key, payload[key]));
+
+                    await fetch(GOOGLE_SHEETS_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: encoded,
+                    });
+                } catch (error) {
+                    console.error('Google Sheets waitlist sync failed:', error);
+                }
+
+                waitlistConfirmation.classList.remove('hidden');
+                waitlistForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>
