@@ -35,7 +35,7 @@ const programs = [
     description:
       "For players ready to compete, our Development Teams provide structured team training along with friendly matches, tournaments, and league participation. Players are selected based on performance, commitment, and readiness.",
     cta: "Request Tryout",
-    path: "/programs/location_select?program=trial",
+    path: "/contact",
   },
 ];
 
