@@ -48,6 +48,11 @@ function SpringBramptonPage() {
   return null;
 }
 
+function SummerBramptonPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/brampton/summer/index.html'); }, []);
+  return null;
+}
+
 function SpringBramptonLegacyPage() {
   useEffect(() => { window.location.replace('/programs/recreation/brampton/spring'); }, []);
   return null;
@@ -129,6 +134,8 @@ function App() {
             <Route path="/spring-landing.html" element={<SpringBramptonLegacyPage />} />
             <Route path="/programs/recreation/brampton/spring" element={<SpringBramptonPage />} />
             <Route path="/programs/recreation/brampton/spring-program" element={<SpringBramptonLegacyPage />} />
+            {/* SUMMER BRAMPTON LANDING PAGE */}
+            <Route path="/programs/recreation/brampton/summer" element={<SummerBramptonPage />} />
             <Route path="/programs/recreation/spring/mississauga_central" element={<SpringMississaugaCentralPage />} />
             <Route path="/programs/recreation/spring/mississauga_west" element={<SpringMississaugaWestPage />} />
 

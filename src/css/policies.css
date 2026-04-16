@@ -525,5 +525,34 @@
 
   .policy-index-card {
     padding: 36px 28px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .policy-index-icon {
+    text-align: center;
+  }
+
+  .policy-index-accent,
+  .policy-item-accent,
+  .policy-legal-accent {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .policy-legal-card {
+    text-align: center;
+  }
+
+  .policy-item {
+    text-align: center;
+  }
+
+  .policy-item-header {
+    justify-content: center;
+  }
+
+  .policy-item-points li {
+    justify-content: center;
   }
 }
