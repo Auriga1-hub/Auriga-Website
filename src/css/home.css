@@ -802,7 +802,19 @@ MAP
   transition: transform 0.6s ease;
 }
 
+.map-container .map-image {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
 .location-card:hover .map-container iframe {
+  transform: scale(1.04);
+}
+
+.location-card:hover .map-container .map-image {
   transform: scale(1.04);
 }
 

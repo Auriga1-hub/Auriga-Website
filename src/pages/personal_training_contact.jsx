@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import { trackFormError, trackLeadGenerated } from "../utils/analytics";
 import SEOHead from "../components/SEOHead";
 import "../css/contact.css";
 
@@ -64,6 +65,12 @@ function PersonalTrainingContact() {
 
     const turnstileResponse = window.turnstile?.getResponse(ptWidgetIdRef.current);
     if (!turnstileResponse) {
+      trackFormError({
+        formName: "personal_training",
+        formLocation: "personal_training_contact",
+        errorType: "captcha_missing",
+        errorMessage: "turnstile_not_completed",
+      });
       setPtError("Please complete the captcha verification.");
       setPtLoading(false);
       return;
@@ -91,13 +98,31 @@ function PersonalTrainingContact() {
       );
 
       if (result.status === 200) {
+        trackLeadGenerated({
+          formName: "personal_training",
+          leadType: "personal_training_inquiry",
+          location: "general",
+          program: "personal_training",
+        });
         setPtSubmitted(true);
       } else {
+        trackFormError({
+          formName: "personal_training",
+          formLocation: "personal_training_contact",
+          errorType: "submission_failed",
+          errorMessage: "non_200_response",
+        });
         setPtError("Something went wrong. Please try again.");
         window.turnstile?.reset(ptWidgetIdRef.current);
       }
     } catch (error) {
       console.error("EmailJS Error:", error);
+      trackFormError({
+        formName: "personal_training",
+        formLocation: "personal_training_contact",
+        errorType: "request_error",
+        errorMessage: error?.text || error?.message,
+      });
       setPtError("Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(ptWidgetIdRef.current);
     } finally {
@@ -136,7 +161,13 @@ function PersonalTrainingContact() {
                   <p>Thanks for your interest in personal training. We'll be in touch soon.</p>
                 </div>
               ) : (
-                <form className="contact-form" onSubmit={handlePtSubmit}>
+                <form
+                  className="contact-form"
+                  onSubmit={handlePtSubmit}
+                  data-analytics-form="personal_training"
+                  data-analytics-location="personal_training_contact"
+                  data-analytics-program="personal_training"
+                >
                   {ptError && <div className="form-error">{ptError}</div>}
 
                   <div className="contact-form-row">

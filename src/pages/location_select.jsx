@@ -1,13 +1,14 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
+import { trackLocationSelection } from "../utils/analytics";
 import "../css/location_select.css";
 import "../css/home.css";
 
 const programConfig = {
   recreation: {
-    title: "Fundamentals",
-    subtitle: "Choose the training location closest to you and register today.",
+    title: "Fundamentals Program (Ages 4–13)",
+    subtitle: "Beginner Soccer Training in Mississauga, Brampton & Etobicoke Focused on Skills, Confidence, and Game Fundamentals for Kids Ages 4–13",
   },
   trial: {
     title: "Free Trials",
@@ -23,18 +24,21 @@ const locations = [
   {
     city: "Mississauga Central",
     slug: "mississauga_central",
+    mapImageSrc: "/images/mississauga-central-map.webp",
     mapSrc: "https://maps.google.com/maps?q=T.+L.+Kennedy+Secondary+School,+3100+Hurontario+St,+Mississauga,+ON+L5B+1N7&z=17&output=embed",
     directionsUrl: "https://maps.app.goo.gl/t9JDDXpqjAmm46qW6?g_st=iwb",
   },
   {
     city: "Mississauga West",
     slug: "mississauga_west",
+    mapImageSrc: "/images/mississauga-west-map.webp",
     mapSrc: "https://maps.google.com/maps?q=John+Fraser+Secondary+School,+2665+Erin+Centre+Blvd,+Mississauga,+ON+L5M+5H6&z=17&output=embed",
     directionsUrl: "https://maps.app.goo.gl/fWEZ3YbyeXtEnNgWA?g_st=iwb",
   },
   {
     city: "Brampton",
     slug: "brampton",
+    mapImageSrc: "/images/brampton-map.webp",
     mapSrc: "https://maps.google.com/maps?q=Bramalea+Secondary+School,+510+Balmoral+Dr,+Brampton,+ON+L6T+1W4&z=17&output=embed",
     directionsUrl: "https://maps.app.goo.gl/oPMQQJDYttSQmQvC7?g_st=iwb",
   },
@@ -54,7 +58,14 @@ function LocationSelect() {
   const config = programConfig[program] || programConfig.recreation;
 
   const handleLocationClick = (locationSlug) => {
-    navigate(`/programs/${program}/${locationSlug}`);
+    const destination = `/programs/${program}/${locationSlug}`;
+
+    trackLocationSelection({
+      programType: program,
+      location: locationSlug,
+      destination,
+    });
+    navigate(destination);
   };
 
   return (
@@ -70,7 +81,7 @@ function LocationSelect() {
       <div className="location-select-hero">
         <div className="location-select-hero-overlay" />
         <div className="location-select-hero-container">
-          <h1 className="location-select-title">Choose Your Training Location</h1>
+          <h1 className="location-select-title">{config.title}</h1>
           <p className="location-select-text">{config.subtitle}</p>
         </div>
       </div>
@@ -94,12 +105,21 @@ function LocationSelect() {
                 <h3 className="location-title">{loc.city}</h3>
 
                 <div className="map-container" style={{ flexGrow: 1 }}>
-                  <iframe
-                    src={loc.mapSrc}
-                    loading="lazy"
-                    title={loc.city}
-                    style={{ pointerEvents: "none" }} /* Prevent iframe hijacking clicks so card click works */
-                  />
+                  {loc.mapImageSrc && program !== "trial" ? (
+                    <img
+                      src={loc.mapImageSrc}
+                      alt={`${loc.city} location map`}
+                      loading="lazy"
+                      className="map-image"
+                    />
+                  ) : (
+                    <iframe
+                      src={loc.mapSrc}
+                      loading="lazy"
+                      title={loc.city}
+                      style={{ pointerEvents: "none" }} /* Prevent iframe hijacking clicks so card click works */
+                    />
+                  )}
                   {program === 'trial' && (
                     <a
                       href={loc.directionsUrl}
@@ -107,6 +127,7 @@ function LocationSelect() {
                       rel="noopener noreferrer"
                       className="directions-btn"
                       onClick={(e) => e.stopPropagation()}
+                      data-analytics-placement="location_select"
                       style={{ padding: "12px 24px", fontSize: "14px", bottom: "16px" }}
                     >
                       Get Directions 🗺️

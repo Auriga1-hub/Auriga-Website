@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -91,6 +91,19 @@ const PageLoader = () => (
 );
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.aurigaAnalyticsTrackPageView !== "function") {
+      return;
+    }
+
+    window.aurigaAnalyticsTrackPageView(
+      `${location.pathname}${location.search}${location.hash}`,
+      document.title
+    );
+  }, [location.pathname, location.search, location.hash]);
+
   return (
     <div className="app-root">
       <ScrollToTop />

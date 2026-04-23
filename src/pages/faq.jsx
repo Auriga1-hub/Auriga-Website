@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { buildFAQSchema, buildBreadcrumbSchema } from "../components/StructuredData";
+import { trackFAQOpen } from "../utils/analytics";
 import "../css/faq.css";
 
 const faqs = [
@@ -54,9 +55,16 @@ const faqs = [
 function FAQItem({ question, answer, index }) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef(null);
+  const hasTrackedOpen = useRef(false);
 
   const handleEnter = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
+
+    if (!hasTrackedOpen.current) {
+      hasTrackedOpen.current = true;
+      trackFAQOpen(question);
+    }
+
     setOpen(true);
   };
 
@@ -134,11 +142,20 @@ function FAQ() {
                 <p className="faq-cta-text">
                   Our team is happy to answer any questions about the program, schedules, or registration.
                 </p>
-                <Link to="/contact" className="faq-cta-btn">Contact Us</Link>
+                <Link
+                  to="/contact"
+                  className="faq-cta-btn"
+                  data-analytics-event="cta_click"
+                  data-analytics-placement="faq_sidebar"
+                  data-analytics-destination="/contact"
+                  data-analytics-label="contact_us"
+                >
+                  Contact Us
+                </Link>
                 <div className="faq-cta-divider" />
                 <div className="faq-cta-contact">
-                  <a href="tel:6479786798" className="faq-cta-link">📞 647-978-6798</a>
-                  <a href="mailto:info@aurigafootball.com" className="faq-cta-link">📧 info@aurigafootball.com</a>
+                  <a href="tel:6479786798" className="faq-cta-link" data-analytics-placement="faq_sidebar">📞 647-978-6798</a>
+                  <a href="mailto:info@aurigafootball.com" className="faq-cta-link" data-analytics-placement="faq_sidebar">📧 info@aurigafootball.com</a>
                 </div>
               </div>
             </div>

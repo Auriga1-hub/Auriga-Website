@@ -180,7 +180,14 @@ function Home() {
                 Auriga Football Club offers structured kids soccer training programs designed for ages 4–13. Our programs focus on technical skill development, confidence, and long-term player growth through a clear pathway from recreational training to competitive teams. Serving families in Mississauga, Brampton, and nearby areas, we provide professional coaching in a positive and disciplined environment.
               </p>
 
-              <Link to="/about" className="about-btn">
+              <Link
+                to="/about"
+                className="about-btn"
+                data-analytics-event="cta_click"
+                data-analytics-placement="home_about"
+                data-analytics-destination="/about"
+                data-analytics-label="learn_more_about"
+              >
                 Learn More
               </Link>
             </div>
@@ -214,7 +221,14 @@ function Home() {
                     {program.subHeadline}
                   </h4>
                   <p>{program.description}</p>
-                  <Link to={program.path} className="program-btn">
+                  <Link
+                    to={program.path}
+                    className="program-btn"
+                    data-analytics-event="cta_click"
+                    data-analytics-placement="home_program_card"
+                    data-analytics-destination={program.path}
+                    data-analytics-label={program.title}
+                  >
                     {program.cta}
                   </Link>
                 </div>
@@ -261,7 +275,15 @@ function Home() {
           <div className="camps-summary-grid">
 
             {/* Summer Camp */}
-            <Link to="/programs/camps" className="pt-summary-link-wrapper" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+            <Link
+              to="/programs/camps"
+              className="pt-summary-link-wrapper"
+              style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}
+              data-analytics-event="cta_click"
+              data-analytics-placement="home_camp_summary"
+              data-analytics-destination="/programs/camps"
+              data-analytics-label="summer_camp"
+            >
               <div className="pt-section-box summary-box" style={{ margin: "0", cursor: "pointer", height: "100%", flexGrow: 1, padding: "40px 16px" }}>
                 <div className="pt-summary-content" style={{ textAlign: "center", display: "flex", flexDirection: "column", height: "100%" }}>
                   <span className="pt-label">☀️ Summer</span>
@@ -279,7 +301,15 @@ function Home() {
             </Link>
 
             {/* Winter Camp */}
-            <Link to="/programs/winter-camp" className="pt-summary-link-wrapper" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+            <Link
+              to="/programs/winter-camp"
+              className="pt-summary-link-wrapper"
+              style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}
+              data-analytics-event="cta_click"
+              data-analytics-placement="home_camp_summary"
+              data-analytics-destination="/programs/winter-camp"
+              data-analytics-label="winter_camp"
+            >
               <div className="pt-section-box summary-box" style={{ margin: "0", cursor: "pointer", height: "100%", flexGrow: 1, padding: "40px 16px" }}>
                 <div className="pt-summary-content" style={{ textAlign: "center", display: "flex", flexDirection: "column", height: "100%" }}>
                   <span className="pt-label">❄️ Winter</span>
@@ -297,7 +327,15 @@ function Home() {
             </Link>
 
             {/* March Break Camp */}
-            <Link to="/programs/march-break-camp" className="pt-summary-link-wrapper" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+            <Link
+              to="/programs/march-break-camp"
+              className="pt-summary-link-wrapper"
+              style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}
+              data-analytics-event="cta_click"
+              data-analytics-placement="home_camp_summary"
+              data-analytics-destination="/programs/march-break-camp"
+              data-analytics-label="march_break_camp"
+            >
               <div className="pt-section-box summary-box" style={{ margin: "0", cursor: "pointer", height: "100%", flexGrow: 1, padding: "40px 16px" }}>
                 <div className="pt-summary-content" style={{ textAlign: "center", display: "flex", flexDirection: "column", height: "100%" }}>
                   <span className="pt-label">🌸 March Break</span>
@@ -321,7 +359,15 @@ function Home() {
       {/* PERSONAL TRAINING SUMMARY */}
       <section className="pt-summary-section" style={{ background: "#061226", padding: "50px 0" }}>
         <div className="pt-container">
-          <Link to="/programs/personal-training" className="pt-summary-link-wrapper" style={{ textDecoration: 'none' }}>
+          <Link
+            to="/programs/personal-training"
+            className="pt-summary-link-wrapper"
+            style={{ textDecoration: 'none' }}
+            data-analytics-event="cta_click"
+            data-analytics-placement="home_personal_training"
+            data-analytics-destination="/programs/personal-training"
+            data-analytics-label="personal_training"
+          >
             <div className="pt-section-box summary-box" style={{ margin: "0", cursor: "pointer" }}>
               <div className="pt-summary-content">
                 <span className="pt-label">Advanced Coaching</span>
@@ -389,6 +435,7 @@ function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="directions-btn"
+                    data-analytics-placement="home_locations"
                   >
                     Get Directions
                   </a>
@@ -432,6 +479,25 @@ function Home() {
                 onClick={() => setActiveIndex(index)}
               />
             ))}
+          </div>
+
+          <div style={{ marginTop: "22px", textAlign: "center" }}>
+            <a
+              href="https://www.google.com/search?sca_esv=f6dab0cbe71090ff&rlz=1C5OZZY_enIN1197IN1198&cs=1&sxsrf=ANbL-n67vhWktKmwURSm8J45UPK-A2BGHQ:1775834781563&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOQpv9CHLYHrPEKUmBrc4KYe8ubjTa54lil2rTGhXtamXU33s5-Dh0OvLalDOjt34ZGWikNYW3oYwe6_rwfXnjto3ljoX4AvMf15uz4f6itqwL3IMLw%3D%3D&q=Auriga+Football+Club+Reviews&sa=X&ved=2ahUKEwjIx9aKzOOTAxX6JzQIHXneEkkQ0bkNegQIHhAH&biw=1728&bih=915&dpr=2"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-block",
+                padding: "8px 24px",
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 600,
+                color: "#3b82f6",
+                borderBottom: "2px solid #3b82f6",
+                textDecoration: "none",
+              }}
+            >
+              View Google Reviews
+            </a>
           </div>
 
         </div>

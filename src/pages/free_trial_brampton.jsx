@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import { trackFormError, trackLeadGenerated } from "../utils/analytics";
 import SEOHead from "../components/SEOHead";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -61,6 +62,12 @@ function TrialBrampton() {
     setLoading(true);
 
     if (!selectedDate) {
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "brampton",
+        errorType: "missing_date",
+        errorMessage: "preferred_date_required",
+      });
       setError("Please select a preferred date.");
       setLoading(false);
       return;
@@ -68,6 +75,12 @@ function TrialBrampton() {
 
     const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
     if (!turnstileResponse) {
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "brampton",
+        errorType: "captcha_missing",
+        errorMessage: "turnstile_not_completed",
+      });
       setError("Please complete the captcha verification.");
       setLoading(false);
       return;
@@ -103,13 +116,33 @@ function TrialBrampton() {
       );
 
       if (result.status === 200) {
+        trackLeadGenerated({
+          formName: "free_trial",
+          leadType: "free_trial",
+          location: templateParams.location,
+          program: "trial",
+          preferredTime: templateParams.preferred_time,
+          heardAbout: templateParams.heard_about,
+        });
         setSubmitted(true);
       } else {
+        trackFormError({
+          formName: "free_trial",
+          formLocation: "brampton",
+          errorType: "submission_failed",
+          errorMessage: "non_200_response",
+        });
         setError("Something went wrong. Please try again.");
         window.turnstile?.reset(widgetIdRef.current);
       }
     } catch (error) {
       console.error("EmailJS Error:", error);
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "brampton",
+        errorType: "request_error",
+        errorMessage: error?.text || error?.message,
+      });
       setError("Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(widgetIdRef.current);
     } finally {
@@ -168,7 +201,13 @@ function TrialBrampton() {
 
                 {error && <div className="form-error">{error}</div>}
 
-                <form className="trial-form" onSubmit={handleSubmit}>
+                <form
+                  className="trial-form"
+                  onSubmit={handleSubmit}
+                  data-analytics-form="free_trial"
+                  data-analytics-location="brampton"
+                  data-analytics-program="trial"
+                >
 
                   {/* PARENT INFO */}
                   <div className="trial-fieldset">

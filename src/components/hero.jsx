@@ -25,11 +25,25 @@ function Hero() {
 
             <div className="hero-buttons">
 
-              <Link to="/programs/location_select" className="hero-btn hero-btn--primary">
+              <Link
+                to="/programs/location_select"
+                className="hero-btn hero-btn--primary"
+                data-analytics-event="cta_click"
+                data-analytics-placement="hero"
+                data-analytics-destination="/programs/location_select"
+                data-analytics-label="view_programs"
+              >
                 View Programs
               </Link>
 
-              <Link to="/programs/location_select?program=trial" className="hero-btn hero-btn--outline">
+              <Link
+                to="/programs/location_select?program=trial"
+                className="hero-btn hero-btn--outline"
+                data-analytics-event="cta_click"
+                data-analytics-placement="hero"
+                data-analytics-destination="/programs/location_select?program=trial"
+                data-analytics-label="book_free_trial"
+              >
                 Book Free Trial
               </Link>
 

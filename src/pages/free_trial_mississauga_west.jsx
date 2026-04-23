@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import { trackFormError, trackLeadGenerated } from "../utils/analytics";
 import SEOHead from "../components/SEOHead";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -61,6 +62,12 @@ function TrialMississaugaWest() {
     setLoading(true);
 
     if (!selectedDate) {
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "mississauga_west",
+        errorType: "missing_date",
+        errorMessage: "preferred_date_required",
+      });
       setError("Please select a preferred date.");
       setLoading(false);
       return;
@@ -68,6 +75,12 @@ function TrialMississaugaWest() {
 
     const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
     if (!turnstileResponse) {
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "mississauga_west",
+        errorType: "captcha_missing",
+        errorMessage: "turnstile_not_completed",
+      });
       setError("Please complete the captcha verification.");
       setLoading(false);
       return;
@@ -103,13 +116,33 @@ function TrialMississaugaWest() {
       );
 
       if (result.status === 200) {
+        trackLeadGenerated({
+          formName: "free_trial",
+          leadType: "free_trial",
+          location: templateParams.location,
+          program: "trial",
+          preferredTime: templateParams.preferred_time,
+          heardAbout: templateParams.heard_about,
+        });
         setSubmitted(true);
       } else {
+        trackFormError({
+          formName: "free_trial",
+          formLocation: "mississauga_west",
+          errorType: "submission_failed",
+          errorMessage: "non_200_response",
+        });
         setError("Something went wrong. Please try again.");
         window.turnstile?.reset(widgetIdRef.current);
       }
     } catch (error) {
       console.error("EmailJS Error:", error);
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "mississauga_west",
+        errorType: "request_error",
+        errorMessage: error?.text || error?.message,
+      });
       setError("Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(widgetIdRef.current);
     } finally {
@@ -166,7 +199,13 @@ function TrialMississaugaWest() {
 
                 {error && <div className="form-error">{error}</div>}
 
-                <form className="trial-form" onSubmit={handleSubmit}>
+                <form
+                  className="trial-form"
+                  onSubmit={handleSubmit}
+                  data-analytics-form="free_trial"
+                  data-analytics-location="mississauga_west"
+                  data-analytics-program="trial"
+                >
                   {/* PARENT INFO */}
                   <div className="trial-fieldset">
                     <h3 className="trial-fieldset-title">Parent / Guardian</h3>

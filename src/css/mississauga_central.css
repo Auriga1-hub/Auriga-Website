@@ -12,6 +12,14 @@ HERO
   background-position: center;
 }
 
+@media (max-width: 768px) {
+  .mc-hero {
+    background-image: url("/images/hero-home.webp");
+    background-position: 52% center;
+    background-repeat: no-repeat;
+  }
+}
+
 .mc-hero-overlay {
   position: absolute;
   inset: 0;

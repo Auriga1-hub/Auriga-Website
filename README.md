@@ -1,16 +1,39 @@
-# React + Vite
+# Auriga Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Analytics
 
-Currently, two official plugins are available:
+The site uses Google Analytics 4 with measurement ID `G-3SC8P695HJ`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Shared GA4 loader: `public/analytics.js`
+- React SPA page views: `src/App.jsx`
+- Static landing pages load the same shared script from `/analytics.js`
+- React event helpers: `src/utils/analytics.js`
 
-## React Compiler
+To change the GA4 property later, update the measurement ID in `public/analytics.js`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Tracked events now include:
 
-## Expanding the ESLint configuration
+- `page_view`
+- `scroll_depth`
+- `cta_click`
+- `contact_click`
+- `social_click`
+- `directions_click`
+- `outbound_click`
+- `form_start`
+- `form_submit_attempt`
+- `form_error`
+- `generate_lead`
+- `location_select`
+- `faq_open`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Recommended GA4 setup:
+
+- Mark `generate_lead` as a key event in Google Analytics.
+- Create custom dimensions for `form_name`, `lead_type`, `location_name`, `program_name`, `preferred_time`, `heard_about`, `program_type`, and `faq_question` if you want to report on them directly in the GA4 UI.
+
+You can view traffic data in Google Analytics:
+
+- Reports > Acquisition > Traffic acquisition for users, sessions, and traffic source
+- Reports > Tech > Tech details for device, browser, OS, and platform
+- Reports snapshot or Realtime for daily activity and live visitors

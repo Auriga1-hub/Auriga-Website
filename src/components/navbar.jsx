@@ -136,14 +136,28 @@ function Navbar() {
 
             {/* FREE TRIAL BUTTON — primary CTA */}
             <li className="free-trial-button">
-              <NavLink to="/programs/location_select?program=trial" onClick={closeMenu}>
+              <NavLink
+                to="/programs/location_select?program=trial"
+                onClick={closeMenu}
+                data-analytics-event="cta_click"
+                data-analytics-placement="navbar"
+                data-analytics-destination="/programs/location_select?program=trial"
+                data-analytics-label="free_trial"
+              >
                 Free Trial
               </NavLink>
             </li>
 
             {/* CONTACT BUTTON — ghost/outline */}
             <li className="cta-button">
-              <NavLink to="/contact" onClick={closeMenu}>
+              <NavLink
+                to="/contact"
+                onClick={closeMenu}
+                data-analytics-event="cta_click"
+                data-analytics-placement="navbar"
+                data-analytics-destination="/contact"
+                data-analytics-label="contact"
+              >
                 Contact
               </NavLink>
             </li>

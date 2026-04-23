@@ -3,6 +3,7 @@ import "../css/contact.css";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "../utils/emailConfig";
 import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import { trackFormError, trackLeadGenerated } from "../utils/analytics";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { localBusinessSchema, buildBreadcrumbSchema } from "../components/StructuredData";
 
@@ -64,6 +65,12 @@ function Contact() {
 
     const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
     if (!turnstileResponse) {
+      trackFormError({
+        formName: "contact",
+        formLocation: "contact_page",
+        errorType: "captcha_missing",
+        errorMessage: "turnstile_not_completed",
+      });
       setError("Please complete the captcha verification.");
       setLoading(false);
       return;
@@ -90,13 +97,31 @@ function Contact() {
       );
 
       if (result.status === 200) {
+        trackLeadGenerated({
+          formName: "contact",
+          leadType: "contact_inquiry",
+          location: "general",
+          program: "general_inquiry",
+        });
         setSubmitted(true);
       } else {
+        trackFormError({
+          formName: "contact",
+          formLocation: "contact_page",
+          errorType: "submission_failed",
+          errorMessage: "non_200_response",
+        });
         setError("Something went wrong. Please try again.");
         window.turnstile?.reset(widgetIdRef.current);
       }
     } catch (error) {
       console.error("EmailJS Error:", error);
+      trackFormError({
+        formName: "contact",
+        formLocation: "contact_page",
+        errorType: "request_error",
+        errorMessage: error?.text || error?.message,
+      });
       setError("Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(widgetIdRef.current);
     } finally {
@@ -149,7 +174,7 @@ function Contact() {
                   <div className="contact-detail-icon">📞</div>
                   <div className="contact-detail-body">
                     <span className="contact-detail-label">Phone</span>
-                    <a href="tel:6479786798" className="contact-detail-value">647-978-6798</a>
+                    <a href="tel:6479786798" className="contact-detail-value" data-analytics-placement="contact_page">647-978-6798</a>
                   </div>
                 </div>
 
@@ -157,7 +182,7 @@ function Contact() {
                   <div className="contact-detail-icon">✉️</div>
                   <div className="contact-detail-body">
                     <span className="contact-detail-label">Email</span>
-                    <a href="mailto:info@aurigafootball.com" className="contact-detail-value">info@aurigafootball.com</a>
+                    <a href="mailto:info@aurigafootball.com" className="contact-detail-value" data-analytics-placement="contact_page">info@aurigafootball.com</a>
                   </div>
                 </div>
 
@@ -172,10 +197,10 @@ function Contact() {
               </div>
 
               <div className="contact-socials">
-                <a href="https://www.facebook.com/people/Auriga-Football-Club/100091466900502/" target="_blank" rel="noreferrer" className="contact-social-btn">
+                <a href="https://www.facebook.com/people/Auriga-Football-Club/100091466900502/" target="_blank" rel="noreferrer" className="contact-social-btn" data-analytics-placement="contact_page">
                   Facebook
                 </a>
-                <a href="https://www.instagram.com/aurigafc" target="_blank" rel="noreferrer" className="contact-social-btn">
+                <a href="https://www.instagram.com/aurigafc" target="_blank" rel="noreferrer" className="contact-social-btn" data-analytics-placement="contact_page">
                   Instagram
                 </a>
               </div>
@@ -191,7 +216,13 @@ function Contact() {
                   <p>Thanks for reaching out. We'll get back to you shortly.</p>
                 </div>
               ) : (
-                <form className="contact-form" onSubmit={handleSubmit}>
+                <form
+                  className="contact-form"
+                  onSubmit={handleSubmit}
+                  data-analytics-form="contact"
+                  data-analytics-location="contact_page"
+                  data-analytics-program="general_inquiry"
+                >
 
                   {error && <div className="form-error">{error}</div>}
 

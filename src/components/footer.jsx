@@ -64,8 +64,28 @@ function Footer() {
               <Link to="/policies">Policies</Link>
             </li>
 
-            <li><Link to="/programs/location_select?program=trial">Free Trial</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+            <li>
+              <Link
+                to="/programs/location_select?program=trial"
+                data-analytics-event="cta_click"
+                data-analytics-placement="footer"
+                data-analytics-destination="/programs/location_select?program=trial"
+                data-analytics-label="free_trial"
+              >
+                Free Trial
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                data-analytics-event="cta_click"
+                data-analytics-placement="footer"
+                data-analytics-destination="/contact"
+                data-analytics-label="contact"
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -75,21 +95,22 @@ function Footer() {
           <ul>
             <li>
               <span className="footer-icon">📞</span>
-              <a href="tel:6479786798">647-978-6798</a>
+              <a href="tel:6479786798" data-analytics-placement="footer">647-978-6798</a>
             </li>
             <li>
               <span className="footer-icon">✉</span>
-              <a href="mailto:info@aurigafootball.com">info@aurigafootball.com</a>
+              <a href="mailto:info@aurigafootball.com" data-analytics-placement="footer">info@aurigafootball.com</a>
             </li>
             <li>
               <span className="footer-icon">📍</span>
-              <span>525 Huntington Ridge Dr,<br />Mississauga, ON L5R 2X7</span>
+              <span>765 Huron Heights Dr,<br />Mississauga, ON L4Z 4G9</span>
             </li>
             <li className="footer-social-links" style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
               <a 
                 href="https://www.facebook.com/people/Auriga-Football-Club/100091466900502/" 
                 target="_blank" 
                 rel="noreferrer" 
+                data-analytics-placement="footer"
                 style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '14px', transition: 'color 0.2s' }}
                 onMouseOver={(e) => e.target.style.color = '#10b981'}
                 onMouseOut={(e) => e.target.style.color = '#cbd5e1'}
@@ -101,6 +122,7 @@ function Footer() {
                 href="https://www.instagram.com/aurigafc" 
                 target="_blank" 
                 rel="noreferrer" 
+                data-analytics-placement="footer"
                 style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '14px', transition: 'color 0.2s' }}
                 onMouseOver={(e) => e.target.style.color = '#10b981'}
                 onMouseOut={(e) => e.target.style.color = '#cbd5e1'}
