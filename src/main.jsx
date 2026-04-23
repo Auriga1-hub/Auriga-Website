@@ -5,7 +5,11 @@ import App from "./App.jsx";
 import "./css/global.css";
 
 if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
-  window.history.scrollRestoration = "manual";
+  try {
+    window.history.scrollRestoration = "manual";
+  } catch {
+    // Some mobile webviews can throw on assigning scrollRestoration.
+  }
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(

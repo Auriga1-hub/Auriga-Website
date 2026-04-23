@@ -33,7 +33,7 @@ function Hero() {
                 data-analytics-destination="/programs/location_select"
                 data-analytics-label="view_programs"
               >
-                View Programs
+                View Fundamental Programs
               </Link>
 
               <Link

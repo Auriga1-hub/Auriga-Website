@@ -13,7 +13,11 @@ export default function ScrollToTop() {
   useLayoutEffect(() => {
     // Prefer manual so browser doesn't "help" restore previous scroll
     if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
-      window.history.scrollRestoration = "manual";
+      try {
+        window.history.scrollRestoration = "manual";
+      } catch {
+        // Ignore failures in environments where this property is not writable.
+      }
     }
 
     // Helper: attempt to scroll an element to top
