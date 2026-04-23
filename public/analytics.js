@@ -163,7 +163,7 @@
           page_path: getCurrentPath(),
         });
       }
-    } catch (error) {
+    } catch {
       // Ignore malformed URLs so analytics never breaks navigation.
     }
   }

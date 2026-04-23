@@ -30,7 +30,7 @@ export default function ScrollToTop() {
         // also try smooth API for browsers that support it
         if (typeof el.scrollTo === "function") el.scrollTo({ top: 0, left: 0, behavior: "auto" });
         return true;
-      } catch (e) {
+      } catch {
         return false;
       }
     };
@@ -79,4 +79,4 @@ export default function ScrollToTop() {
   }, [pathname, hash]);
 
   return null;
-}
+}

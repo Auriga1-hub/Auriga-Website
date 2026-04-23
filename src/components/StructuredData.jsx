@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useEffect } from "react";
 
 /**
@@ -12,8 +13,6 @@ function StructuredData({ data }) {
   useEffect(() => {
     if (!data) return;
 
-    // Use a hash or stringified data to avoid referential equality triggers on every React render
-    const stringifiedData = JSON.stringify(data);
     const output = Array.isArray(data) 
       ? { "@context": "https://schema.org", "@graph": data }
       : data;
@@ -32,7 +31,7 @@ function StructuredData({ data }) {
     return () => {
       script.remove();
     };
-  }, [JSON.stringify(data)]);
+  }, [data]);
 
   return null;
 }
@@ -163,7 +162,7 @@ export function buildFAQSchema(faqs) {
   };
 }
 
-export function buildCourseSchema({ name, description, provider = "Auriga Football Club", locationName = "Mississauga, Ontario" }) {
+export function buildCourseSchema({ name, description, locationName = "Mississauga, Ontario" }) {
   return {
     "@context": "https://schema.org",
     "@type": "Course",
