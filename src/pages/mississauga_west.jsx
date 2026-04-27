@@ -11,6 +11,12 @@ const programs = [
     date: "May 18 – July 24, 2026",
     path: "/programs/recreation/spring/mississauga_west",
   },
+  {
+    title: "Summer Development Training Program",
+    age: "Ages: 4–13",
+    date: "July 27 – September 30, 2026",
+    path: "/programs/recreation/summer/mississauga_west",
+  },
 ];
 
 const trainingCards = [
@@ -76,7 +82,7 @@ function MississaugaWest() {
                     <span>🗓</span> {prog.date}
                   </div>
                 </div>
-                <a href="/programs/recreation/spring/mississauga_west" className="mw-learn-btn">
+                <a href={prog.path} className="mw-learn-btn">
                   Learn More →
                 </a>
               </div>

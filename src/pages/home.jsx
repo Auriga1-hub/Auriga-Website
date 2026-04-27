@@ -393,6 +393,61 @@ function Home() {
         </div>
       </section>
 
+      {/* TESTIMONIALS */}
+      <section className="testimonials-section">
+        <div className="testimonials-container">
+
+          <h2 className="testimonial-title">What Parents Say About Us</h2>
+          <div 
+            className="testimonial-slider"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {testimonials.map((t, index) => (
+              <div
+                className={`testimonial ${index === activeIndex ? "active" : ""}`}
+                key={index}
+              >
+                <div className="testimonial-stars">★★★★★</div>
+                <p>{t.text}</p>
+                <div className="testimonial-author">– {t.author}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation dots */}
+          <div className="testimonial-dots">
+            {testimonials.map((_, index) => (
+              <span
+                key={index}
+                className={`testimonial-dot ${index === activeIndex ? "active" : ""}`}
+                onClick={() => setActiveIndex(index)}
+              />
+            ))}
+          </div>
+
+          <div style={{ marginTop: "22px", textAlign: "center" }}>
+            <a
+              href="https://www.google.com/search?sca_esv=f6dab0cbe71090ff&rlz=1C5OZZY_enIN1197IN1198&cs=1&sxsrf=ANbL-n67vhWktKmwURSm8J45UPK-A2BGHQ:1775834781563&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOQpv9CHLYHrPEKUmBrc4KYe8ubjTa54lil2rTGhXtamXU33s5-Dh0OvLalDOjt34ZGWikNYW3oYwe6_rwfXnjto3ljoX4AvMf15uz4f6itqwL3IMLw%3D%3D&q=Auriga+Football+Club+Reviews&sa=X&ved=2ahUKEwjIx9aKzOOTAxX6JzQIHXneEkkQ0bkNegQIHhAH&biw=1728&bih=915&dpr=2"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-block",
+                padding: "8px 24px",
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 600,
+                color: "#3b82f6",
+                borderBottom: "2px solid #3b82f6",
+                textDecoration: "none",
+              }}
+            >
+              View Google Reviews
+            </a>
+          </div>
+
+        </div>
+      </section>
+
       {/* TRAINING GALLERY */}
       <section className="gallery-section">
         <div className="gallery-heading">
@@ -448,60 +503,6 @@ function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="testimonials-section">
-        <div className="testimonials-container">
-
-          <h2 className="testimonial-title">What Parents Say About Us</h2>
-          <div 
-            className="testimonial-slider"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {testimonials.map((t, index) => (
-              <div
-                className={`testimonial ${index === activeIndex ? "active" : ""}`}
-                key={index}
-              >
-                <div className="testimonial-stars">★★★★★</div>
-                <p>{t.text}</p>
-                <div className="testimonial-author">– {t.author}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Navigation dots */}
-          <div className="testimonial-dots">
-            {testimonials.map((_, index) => (
-              <span
-                key={index}
-                className={`testimonial-dot ${index === activeIndex ? "active" : ""}`}
-                onClick={() => setActiveIndex(index)}
-              />
-            ))}
-          </div>
-
-          <div style={{ marginTop: "22px", textAlign: "center" }}>
-            <a
-              href="https://www.google.com/search?sca_esv=f6dab0cbe71090ff&rlz=1C5OZZY_enIN1197IN1198&cs=1&sxsrf=ANbL-n67vhWktKmwURSm8J45UPK-A2BGHQ:1775834781563&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOQpv9CHLYHrPEKUmBrc4KYe8ubjTa54lil2rTGhXtamXU33s5-Dh0OvLalDOjt34ZGWikNYW3oYwe6_rwfXnjto3ljoX4AvMf15uz4f6itqwL3IMLw%3D%3D&q=Auriga+Football+Club+Reviews&sa=X&ved=2ahUKEwjIx9aKzOOTAxX6JzQIHXneEkkQ0bkNegQIHhAH&biw=1728&bih=915&dpr=2"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-block",
-                padding: "8px 24px",
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 600,
-                color: "#3b82f6",
-                borderBottom: "2px solid #3b82f6",
-                textDecoration: "none",
-              }}
-            >
-              View Google Reviews
-            </a>
-          </div>
-
-        </div>
-      </section>
     </>
   );
 }

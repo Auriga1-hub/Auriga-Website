@@ -131,8 +131,8 @@ PROGRAMS SECTION
 
 .mw-program-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  max-width: 680px;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1100px;
   margin: 0 auto;
   gap: 32px;
 }
@@ -375,6 +375,9 @@ RESPONSIVE
   .mw-program-grid,
   .mw-training-grid {
     grid-template-columns: 1fr;
+  }
+  .mw-program-grid {
+    max-width: 680px;
   }
   .mw-hero-title {
     font-size: 36px !important;

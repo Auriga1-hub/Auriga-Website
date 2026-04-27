@@ -11,6 +11,12 @@ const programs = [
     date: "May 18 – July 24, 2026",
     path: "/programs/recreation/spring/mississauga_central",
   },
+  {
+    title: "Summer Development Training Program",
+    age: "Ages: 4–13",
+    date: "July 28 – September 29, 2026",
+    path: "/programs/recreation/summer/mississauga_central",
+  },
 ];
 
 const trainingCards = [

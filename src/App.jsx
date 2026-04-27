@@ -68,6 +68,16 @@ function SpringMississaugaWestPage() {
   return null;
 }
 
+function SummerMississaugaWestPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/summer/mississauga_west/index.html'); }, []);
+  return null;
+}
+
+function SummerMississaugaCentralPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/summer/mississauga_central/index.html'); }, []);
+  return null;
+}
+
 function DevelopmentAcademyPage() {
   useEffect(() => { window.location.replace('/programs/development-academy/index.html'); }, []);
   return null;
@@ -151,6 +161,8 @@ function App() {
             <Route path="/programs/recreation/brampton/summer" element={<SummerBramptonPage />} />
             <Route path="/programs/recreation/spring/mississauga_central" element={<SpringMississaugaCentralPage />} />
             <Route path="/programs/recreation/spring/mississauga_west" element={<SpringMississaugaWestPage />} />
+            <Route path="/programs/recreation/summer/mississauga_central" element={<SummerMississaugaCentralPage />} />
+            <Route path="/programs/recreation/summer/mississauga_west" element={<SummerMississaugaWestPage />} />
 
             {/* DYNAMIC PROGRAM PAGES */}
             <Route path="/programs/recreation/:location/:program" element={<ProgramPage />} />
