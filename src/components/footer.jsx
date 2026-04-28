@@ -99,7 +99,7 @@ function Footer() {
             </li>
             <li>
               <span className="footer-icon">✉</span>
-              <a href="mailto:info@aurigafootball.com" data-analytics-placement="footer">info@aurigafootball.com</a>
+              <a href="mailto:info@aurigafootballclub.com" data-analytics-placement="footer">info@aurigafootballclub.com</a>
             </li>
             <li>
               <span className="footer-icon">📍</span>

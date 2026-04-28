@@ -182,7 +182,7 @@ function Contact() {
                   <div className="contact-detail-icon">✉️</div>
                   <div className="contact-detail-body">
                     <span className="contact-detail-label">Email</span>
-                    <a href="mailto:info@aurigafootball.com" className="contact-detail-value" data-analytics-placement="contact_page">info@aurigafootball.com</a>
+                    <a href="mailto:info@aurigafootballclub.com" className="contact-detail-value" data-analytics-placement="contact_page">info@aurigafootballclub.com</a>
                   </div>
                 </div>
 
@@ -190,7 +190,7 @@ function Contact() {
                   <div className="contact-detail-icon">📍</div>
                   <div className="contact-detail-body">
                     <span className="contact-detail-label">Location</span>
-                    <span className="contact-detail-value">525 Huntington Ridge Dr,<br />Mississauga, ON L5R 2X7</span>
+                    <span className="contact-detail-value">765 Huron Heights Dr,<br />Mississauga, ON L4Z 4G9</span>
                   </div>
                 </div>
 
