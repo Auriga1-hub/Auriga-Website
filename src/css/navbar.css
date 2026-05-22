@@ -43,7 +43,7 @@ LOGO
 }
 
 .site-logo img {
-  height: 60px;
+  height: 76px;
   width: auto;
   display: block;
   transition: all 0.3s ease;
@@ -471,4 +471,4 @@ MOBILE HAMBURGER MENU
     width: 100%;
     padding: 14px 24px;
   }
-}
+}
