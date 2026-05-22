@@ -267,8 +267,8 @@ function TrialBrampton() {
                         <label>Preferred Time <span className="req">*</span></label>
                         <select name="preferred_time" required>
                           <option value="">Select Time</option>
-                          <option>Ages 4-8, 6-7PM</option>
-                          <option>Ages 9-13, 7-8PM</option>
+                          <option>U4-8, 5:30-6:30 PM</option>
+                          <option>U9-13, 6:30-7:30 PM</option>
                         </select>
                       </div>
                     </div>

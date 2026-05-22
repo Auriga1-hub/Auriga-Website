@@ -192,7 +192,7 @@ function TrialMississaugaCentral() {
                   </p>
                   <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "12px 20px", borderRadius: "10px", marginTop: "16px", display: "inline-block" }}>
                     <span style={{ color: "#10b981", fontWeight: "800", display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
-                      🗓️ Runs strictly on Fridays
+                      🗓️ Runs strictly on Tuesdays and Thursdays
                     </span>
                   </div>
                 </div>
@@ -249,12 +249,12 @@ function TrialMississaugaCentral() {
                     <h3 className="trial-fieldset-title">Booking Details</h3>
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Preferred Date (Friday Only) <span className="req">*</span></label>
+                        <label>Preferred Date (Tuesdays and Thursdays Only) <span className="req">*</span></label>
                         <DatePicker
                           selected={selectedDate}
                           onChange={(date) => setSelectedDate(date)}
-                          filterDate={(date) => date.getDay() === 5}
-                          placeholderText="Select a Friday"
+                          filterDate={(date) => date.getDay() === 2 || date.getDay() === 4}
+                          placeholderText="Select a Tuesday or Thursday"
                           dateFormat="yyyy-MM-dd"
                           required
                           className="date-picker-input"
@@ -264,8 +264,8 @@ function TrialMississaugaCentral() {
                         <label>Preferred Time <span className="req">*</span></label>
                         <select name="preferred_time" required>
                           <option value="">Select Time</option>
-                          <option>Ages 4-8, 6-7PM</option>
-                          <option>Ages 9-13, 7-8PM</option>
+                          <option>U4-8, 5:30-6:30 PM</option>
+                          <option>U9-13, 6:30-7:30 PM</option>
                         </select>
                       </div>
                     </div>
