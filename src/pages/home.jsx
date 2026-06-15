@@ -71,9 +71,9 @@ const locations = [
     directionsUrl: "https://maps.app.goo.gl/oPMQQJDYttSQmQvC7?g_st=iwb",
   },
   {
-    title: "Etobicoke",
-    mapSrc: "https://maps.google.com/maps?q=Etobicoke,Ontario&z=14&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Etobicoke,Ontario",
+    title: "Brampton West",
+    mapSrc: "https://maps.google.com/maps?q=Brampton+West,+Ontario&z=12&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/DrkMiQr9ZoDLbx6Y9",
   },
 ];
 
@@ -480,11 +480,26 @@ function Home() {
                 <h3 className="location-title">{loc.title}</h3>
 
                 <div className="map-container">
-                  <iframe
-                    src={loc.mapSrc}
-                    loading="lazy"
-                    title={loc.title}
-                  />
+                  <div style={{ position: "relative", height: "340px" }}>
+                    <iframe
+                      src={loc.mapSrc}
+                      loading="lazy"
+                      title={loc.title}
+                    />
+                    {loc.title === "Brampton West" && (
+                      <a
+                        href={loc.directionsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Brampton West location in Google Maps"
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          zIndex: 2,
+                        }}
+                      />
+                    )}
+                  </div>
                   <a
                     href={loc.directionsUrl}
                     target="_blank"

@@ -22,6 +22,7 @@ const TrialMississaugaCentral = lazy(() => import("./pages/free_trial_mississaug
 const TrialMississaugaWest = lazy(() => import("./pages/free_trial_mississauga_west"));
 const TrialEtobicoke = lazy(() => import("./pages/free_trial_etobicoke"));
 const TrialBrampton = lazy(() => import("./pages/free_trial_brampton"));
+const TrialBramptonWest = lazy(() => import("./pages/free_trial_brampton_west"));
 
 /* LOCATION SELECTOR */
 const LocationSelect = lazy(() => import("./pages/location_select"));
@@ -31,6 +32,7 @@ const MississaugaCentral = lazy(() => import("./pages/mississauga_central"));
 const MississaugaWest = lazy(() => import("./pages/mississauga_west"));
 const Etobicoke = lazy(() => import("./pages/etobicoke"));
 const Brampton = lazy(() => import("./pages/brampton"));
+const BramptonWest = lazy(() => import("./pages/brampton_west"));
 
 /* PROGRAM PAGE */
 const ProgramPage = lazy(() => import("./pages/program_page"));
@@ -50,6 +52,11 @@ function SpringBramptonPage() {
 
 function SummerBramptonPage() {
   useEffect(() => { window.location.replace('/programs/recreation/brampton/summer/index.html'); }, []);
+  return null;
+}
+
+function SummerBramptonWestPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/brampton-west/summer/index.html'); }, []);
   return null;
 }
 
@@ -142,6 +149,7 @@ function App() {
             <Route path="/programs/trial/mississauga_west" element={<TrialMississaugaWest />} />
             <Route path="/programs/trial/etobicoke" element={<TrialEtobicoke />} />
             <Route path="/programs/trial/brampton" element={<TrialBrampton />} />
+            <Route path="/programs/trial/brampton-west" element={<TrialBramptonWest />} />
 
             {/* LOCATION SELECTOR */}
             <Route path="/programs/location_select" element={<LocationSelect />} />
@@ -151,6 +159,7 @@ function App() {
             <Route path="/programs/recreation/mississauga_west" element={<MississaugaWest />} />
             <Route path="/programs/recreation/etobicoke" element={<Etobicoke />} />
             <Route path="/programs/recreation/brampton" element={<Brampton />} />
+            <Route path="/programs/recreation/brampton-west" element={<BramptonWest />} />
 
             {/* SPRING BRAMPTON LANDING PAGE */}
             <Route path="/spring-landing" element={<SpringBramptonLegacyPage />} />
@@ -159,6 +168,7 @@ function App() {
             <Route path="/programs/recreation/brampton/spring-program" element={<SpringBramptonLegacyPage />} />
             {/* SUMMER BRAMPTON LANDING PAGE */}
             <Route path="/programs/recreation/brampton/summer" element={<SummerBramptonPage />} />
+            <Route path="/programs/recreation/brampton-west/summer" element={<SummerBramptonWestPage />} />
             <Route path="/programs/recreation/spring/mississauga_central" element={<SpringMississaugaCentralPage />} />
             <Route path="/programs/recreation/spring/mississauga_west" element={<SpringMississaugaWestPage />} />
             <Route path="/programs/recreation/summer/mississauga_central" element={<SummerMississaugaCentralPage />} />

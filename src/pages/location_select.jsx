@@ -8,7 +8,7 @@ import "../css/home.css";
 const programConfig = {
   recreation: {
     title: "Fundamentals Program (Ages 4–13)",
-    subtitle: "Beginner Soccer Training in Mississauga, Brampton & Etobicoke Focused on Skills, Confidence, and Game Fundamentals for Kids Ages 4–13",
+    subtitle: "Beginner Soccer Training in Mississauga, Brampton & Brampton West Focused on Skills, Confidence, and Game Fundamentals for Kids Ages 4–13",
   },
   trial: {
     title: "Free Trials",
@@ -45,10 +45,10 @@ const locations = [
     directionsUrl: "https://www.google.com/maps/search/?api=1&query=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3",
   },
   {
-    city: "Etobicoke",
-    slug: "etobicoke",
-    mapSrc: "https://maps.google.com/maps?q=Etobicoke,Ontario&z=14&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Etobicoke,Ontario",
+    city: "Brampton West",
+    slug: "brampton-west",
+    mapSrc: "https://maps.google.com/maps?q=Brampton+West,+Ontario&z=12&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/DrkMiQr9ZoDLbx6Y9",
   },
 ];
 
@@ -74,7 +74,7 @@ function LocationSelect() {
     <>
       <SEOHead
         title={`${config.title} | Choose Training Location | Auriga FC`}
-        description={`Select your preferred training location for ${config.title} at Auriga Football Club. Available in Mississauga Central, Mississauga West, Etobicoke, and Brampton.`}
+        description={`Select your preferred training location for ${config.title} at Auriga Football Club. Available in Mississauga Central, Mississauga West, Brampton, and Brampton West.`}
         keywords={`soccer training locations, ${config.title.toLowerCase()} mississauga, youth soccer brampton, soccer near me, auriga fc locations`}
       />
       <StructuredData data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: config.title, path: "/programs/location_select" }])} />
