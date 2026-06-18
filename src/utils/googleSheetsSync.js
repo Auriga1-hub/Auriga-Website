@@ -64,15 +64,31 @@ export const syncToGoogleSheets = async (data) => {
     return formData;
   };
 
-  try {
-    // First attempt uses CORS so we can verify actual server response.
-    const response = await fetch(EMAILJS_CONFIG.GOOGLE_SHEETS_URL, {
-      method: "POST",
+  const buildRequestOptions = () => {
+    if (isFreeTrialSubmission) {
+      return {
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(enrichedData),
+      };
+    }
+
+    return {
       mode: "cors",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       },
       body: buildFormData(),
+    };
+  };
+
+  try {
+    // First attempt uses CORS so we can verify actual server response.
+    const response = await fetch(EMAILJS_CONFIG.GOOGLE_SHEETS_URL, {
+      method: "POST",
+      ...buildRequestOptions(),
     });
 
     const responseText = (await response.text()).trim();
