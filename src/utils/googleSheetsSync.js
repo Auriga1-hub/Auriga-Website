@@ -65,16 +65,6 @@ export const syncToGoogleSheets = async (data) => {
   };
 
   const buildRequestOptions = () => {
-    if (isFreeTrialSubmission) {
-      return {
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(enrichedData),
-      };
-    }
-
     return {
       mode: "cors",
       headers: {
