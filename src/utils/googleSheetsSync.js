@@ -28,10 +28,31 @@ export const syncToGoogleSheets = async (data) => {
       }
     : {};
 
+  const freeTrialAliases = isFreeTrialSubmission
+    ? {
+        name: data.parent_name || data.from_name || data.name || "",
+        from_name: data.parent_name || data.from_name || data.name || "",
+        email: data.email || data.from_email || "",
+        from_email: data.email || data.from_email || "",
+        player: data.player_name || data.child_name || "",
+        player_full_name: data.player_name || data.child_name || "",
+        date_of_birth: data.dob || "",
+        birth_date: data.dob || "",
+        preferred: data.preferred_date || "",
+        preferred_day: data.preferred_date || "",
+        additional_message: data.message || "",
+        message_details: data.message || "",
+        how_they_heard: data.heard_about || "",
+        referral_source: data.heard_about || "",
+        years_played_in_club: data.years_played || "",
+      }
+    : {};
+
   // Add routing hints and timestamp for tracking.
   const enrichedData = {
     ...data,
     ...routingHints,
+    ...freeTrialAliases,
     timestamp: new Date().toISOString(),
   };
 
