@@ -72,7 +72,7 @@ function Footer() {
                 data-analytics-destination="/programs/location_select?program=trial"
                 data-analytics-label="free_trial"
               >
-                Free Trial
+                Free Assessment
               </Link>
             </li>
             <li>

@@ -57,8 +57,8 @@ const galleryImages = [
 const locations = [
   {
     title: "Mississauga Central",
-    mapSrc: "https://maps.google.com/maps?q=T.+L.+Kennedy+Secondary+School,+3100+Hurontario+St,+Mississauga,+ON+L5B+1N7&z=17&output=embed",
-    directionsUrl: "https://maps.app.goo.gl/t9JDDXpqjAmm46qW6?g_st=iwb",
+    mapSrc: "https://maps.google.com/maps?q=4765+Huron+Heights+Dr,+Mississauga,+ON+L4Z+4G9&z=17&output=embed",
+    directionsUrl: "https://share.google/JJJdxpHYQGxSsKIvk",
   },
   {
     title: "Mississauga West",
@@ -67,13 +67,13 @@ const locations = [
   },
   {
     title: "Brampton",
-    mapSrc: "https://maps.google.com/maps?q=Bramalea+Secondary+School,+510+Balmoral+Dr,+Brampton,+ON+L6T+1W4&z=17&output=embed",
-    directionsUrl: "https://maps.app.goo.gl/oPMQQJDYttSQmQvC7?g_st=iwb",
+    mapSrc: "https://maps.google.com/maps?q=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3&z=17&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3",
   },
   {
     title: "Brampton West",
-    mapSrc: "https://maps.google.com/maps?q=Brampton+West,+Ontario&z=12&output=embed",
-    directionsUrl: "https://maps.app.goo.gl/DrkMiQr9ZoDLbx6Y9",
+    mapSrc: "https://maps.google.com/maps?q=45+Daviselm+Drive,+Brampton,+ON+L6X+0Z3&z=17&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=45+Daviselm+Drive,+Brampton,+ON+L6X+0Z3",
   },
 ];
 
@@ -111,7 +111,7 @@ function Home() {
     <>
       <SEOHead
         title="Auriga FC | Kids Soccer Training Mississauga & Brampton | Ages 4-13"
-        description="Auriga Football Club offers professional kids soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke. Join our development academy, competitive teams, personal training, or seasonal soccer camps. Book a free trial today."
+        description="Auriga Football Club offers professional kids soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke. Join our development academy, competitive teams, personal training, or seasonal soccer camps. Book a free assessment today."
         keywords="kids soccer training mississauga, youth soccer brampton, soccer academy GTA, auriga football club, soccer camps mississauga, youth football etobicoke, free soccer trial, soccer school ontario"
       />
       <StructuredData data={[

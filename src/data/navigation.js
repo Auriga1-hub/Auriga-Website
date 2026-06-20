@@ -11,7 +11,7 @@ const navigation = [
     name: "Programs",
     dropdown: [
       { name: "Recreational Programs", path: "/programs/location_select?program=recreation" },
-      { name: "Free Trials",           path: "/programs/location_select?program=trial" },
+      { name: "Free Assessments",           path: "/programs/location_select?program=trial" },
       { name: "Christmas Camps",       path: "/programs/christmas-camps" },
     ],
   },

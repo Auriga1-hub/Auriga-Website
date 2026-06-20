@@ -144,7 +144,7 @@ function App() {
             <Route path="/programs/winter-camp" element={<WinterCamp />} />
             <Route path="/programs/march-break-camp" element={<MarchBreakCamp />} />
 
-            {/* FREE TRIAL */}
+            {/* FREE ASSESSMENT */}
             <Route path="/programs/trial/mississauga_central" element={<TrialMississaugaCentral />} />
             <Route path="/programs/trial/mississauga_west" element={<TrialMississaugaWest />} />
             <Route path="/programs/trial/etobicoke" element={<TrialEtobicoke />} />

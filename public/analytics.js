@@ -123,7 +123,7 @@
       var url = new URL(href, window.location.origin);
       var isDirectionsLink = /maps\.app|google\.[^/]+\/maps|google\.com\/maps|maps\.google/i.test(url.href) || /directions/i.test(linkText);
       var isSocialLink = /facebook|instagram/i.test(url.hostname);
-      var isLikelyCta = /(btn|cta|button)/i.test(link.className) || /(register|book|learn more|free trial|contact|explore|tryout|view programs)/i.test(linkText);
+      var isLikelyCta = /(btn|cta|button)/i.test(link.className) || /(register|book|learn more|free assessment|contact|explore|tryout|view programs)/i.test(linkText);
 
       if (isSocialLink) {
         trackEvent("social_click", {

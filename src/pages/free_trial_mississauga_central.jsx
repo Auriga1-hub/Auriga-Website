@@ -100,7 +100,7 @@ function TrialMississaugaCentral() {
       preferred_time: form.preferred_time.value,
       heard_about: form.heard_about.value,
       message: form.message.value,
-      subject: "Free Trial Registration - Mississauga Central",
+      subject: "Free Assessment Registration - Mississauga Central",
       "g-recaptcha-response": turnstileResponse,
     };
 
@@ -162,9 +162,9 @@ function TrialMississaugaCentral() {
       <div className="trial-hero">
         <div className="trial-hero-overlay" />
         <div className="trial-hero-container">
-          <h1 className="trial-hero-title">Mississauga Central Free Trial</h1>
+          <h1 className="trial-hero-title">Mississauga Central Free Assessment</h1>
           <p className="trial-hero-text">
-            Book a free trial session for your child and experience Auriga
+            Book a free assessment session for your child and experience Auriga
             Football Club training firsthand.
           </p>
         </div>
@@ -185,9 +185,9 @@ function TrialMississaugaCentral() {
               <>
                 <div className="trial-form-header">
                   <span className="trial-label">Mississauga Central Location</span>
-                  <h2 className="trial-form-title">Free Trial Registration</h2>
+                  <h2 className="trial-form-title">Free Assessment Registration</h2>
                   <p className="trial-notice">
-                    Free trial availability at our Mississauga Central location is currently limited.
+                    Free assessment availability at our Mississauga Central location is currently limited.
                     Please contact us directly if no dates are available.
                   </p>
                   <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "12px 20px", borderRadius: "10px", marginTop: "16px", display: "inline-block" }}>

@@ -11,8 +11,8 @@ const programConfig = {
     subtitle: "Beginner Soccer Training in Mississauga, Brampton & Brampton West Focused on Skills, Confidence, and Game Fundamentals for Kids Ages 4–13",
   },
   trial: {
-    title: "Free Trials",
-    subtitle: "Pick your preferred location and book your free trial session.",
+    title: "Free Assessments",
+    subtitle: "Pick your preferred location and book your free assessment session.",
   },
   camp: {
     title: "Christmas Camps",
@@ -24,8 +24,7 @@ const locations = [
   {
     city: "Mississauga Central",
     slug: "mississauga_central",
-    mapImageSrc: "/images/mississauga-central-map.webp",
-    mapSrc: "https://maps.google.com/maps?q=T.+L.+Kennedy+Secondary+School,+3100+Hurontario+St,+Mississauga,+ON+L5B+1N7&z=17&output=embed",
+    mapSrc: "https://maps.google.com/maps?q=4765+Huron+Heights+Dr,+Mississauga,+ON+L4Z+4G9&z=17&output=embed",
     trialMapSrc: "https://maps.google.com/maps?q=4765+Huron+Heights+Dr,+Mississauga,+ON+L4Z+4G9&z=17&output=embed",
     trialDirectionsUrl: "https://share.google/JJJdxpHYQGxSsKIvk",
     directionsUrl: "https://maps.app.goo.gl/t9JDDXpqjAmm46qW6?g_st=iwb",
@@ -33,22 +32,20 @@ const locations = [
   {
     city: "Mississauga West",
     slug: "mississauga_west",
-    mapImageSrc: "/images/mississauga-west-map.webp",
     mapSrc: "https://maps.google.com/maps?q=John+Fraser+Secondary+School,+2665+Erin+Centre+Blvd,+Mississauga,+ON+L5M+5H6&z=17&output=embed",
     directionsUrl: "https://maps.app.goo.gl/fWEZ3YbyeXtEnNgWA?g_st=iwb",
   },
   {
     city: "Brampton",
     slug: "brampton",
-    mapImageSrc: "/images/brampton-map.webp",
     mapSrc: "https://maps.google.com/maps?q=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3&z=17&output=embed",
     directionsUrl: "https://www.google.com/maps/search/?api=1&query=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3",
   },
   {
     city: "Brampton West",
     slug: "brampton-west",
-    mapSrc: "https://maps.google.com/maps?q=Brampton+West,+Ontario&z=12&output=embed",
-    directionsUrl: "https://maps.app.goo.gl/DrkMiQr9ZoDLbx6Y9",
+    mapSrc: "https://maps.google.com/maps?q=45+Daviselm+Drive,+Brampton,+ON+L6X+0Z3&z=17&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=45+Daviselm+Drive,+Brampton,+ON+L6X+0Z3",
   },
 ];
 

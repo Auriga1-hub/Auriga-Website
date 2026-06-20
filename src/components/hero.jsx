@@ -44,7 +44,7 @@ function Hero() {
                 data-analytics-destination="/programs/location_select?program=trial"
                 data-analytics-label="book_free_trial"
               >
-                Book Free Trial
+                Book Free Assessment
               </Link>
 
             </div>

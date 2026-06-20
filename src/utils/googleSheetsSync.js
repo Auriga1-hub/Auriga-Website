@@ -14,15 +14,15 @@ export const syncToGoogleSheets = async (data) => {
   const isFreeTrialSubmission =
     data?.formName === "free_trial" ||
     data?.leadType === "free_trial" ||
-    /free trial/i.test(String(data?.subject || ""));
+    /free assessment/i.test(String(data?.subject || ""));
 
   const routingHints = isFreeTrialSubmission
     ? {
         // Multiple aliases are included because different GAS versions often check different keys.
-        sheet_name: "free trial",
-        target_sheet: "free trial",
-        destination_tab: "free trial",
-        inquiry_type: "Free Trial",
+        sheet_name: "free assessment",
+        target_sheet: "free assessment",
+        destination_tab: "free assessment",
+        inquiry_type: "Free Assessment",
         form_name: "free_trial",
         lead_type: "free_trial",
       }

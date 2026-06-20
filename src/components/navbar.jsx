@@ -134,7 +134,7 @@ function Navbar() {
               </ul>
             </li>
 
-            {/* FREE TRIAL BUTTON — primary CTA */}
+            {/* FREE ASSESSMENT BUTTON — primary CTA */}
             <li className="free-trial-button">
               <NavLink
                 to="/programs/location_select?program=trial"
@@ -144,7 +144,7 @@ function Navbar() {
                 data-analytics-destination="/programs/location_select?program=trial"
                 data-analytics-label="free_trial"
               >
-                Free Trial
+                Free Assessment
               </NavLink>
             </li>
 
