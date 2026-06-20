@@ -15,6 +15,7 @@ function TrialBrampton() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
+  const [preferredTime, setPreferredTime] = useState("");
   const turnstileRef = useRef(null);
   const widgetIdRef = useRef(null);
 
@@ -73,6 +74,18 @@ function TrialBrampton() {
       return;
     }
 
+    if (!preferredTime) {
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "brampton",
+        errorType: "missing_time",
+        errorMessage: "preferred_time_required",
+      });
+      setError("Please select a preferred time.");
+      setLoading(false);
+      return;
+    }
+
     const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
     if (!turnstileResponse) {
       trackFormError({
@@ -97,7 +110,7 @@ function TrialBrampton() {
       dob: form.dob.value,
       years_played: form.years_played.value,
       preferred_date: selectedDate.toISOString().split("T")[0],
-      preferred_time: form.preferred_time.value,
+      preferred_time: preferredTime,
       heard_about: form.heard_about.value,
       message: form.message.value,
       subject: "Free Assessment Registration - Brampton",
@@ -194,7 +207,7 @@ function TrialBrampton() {
                   </p>
                   <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "12px 20px", borderRadius: "10px", marginTop: "16px", display: "inline-block" }}>
                     <span style={{ color: "#10b981", fontWeight: "800", display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
-                      🗓️ Runs strictly on Mondays & Wednesdays
+                      🗓️ Runs on Sundays, Mondays & Wednesdays
                     </span>
                   </div>
                 </div>
@@ -252,12 +265,15 @@ function TrialBrampton() {
                     <h3 className="trial-fieldset-title">Booking Details</h3>
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Preferred Date (Mon & Wed Only) <span className="req">*</span></label>
+                        <label>Preferred Date (Sun, Mon & Wed Only) <span className="req">*</span></label>
                         <DatePicker
                           selected={selectedDate}
-                          onChange={(date) => setSelectedDate(date)}
-                          filterDate={(date) => date.getDay() === 1 || date.getDay() === 3}
-                          placeholderText="Select Monday or Wednesday"
+                          onChange={(date) => {
+                            setSelectedDate(date);
+                            setPreferredTime("");
+                          }}
+                          filterDate={(date) => date.getDay() === 0 || date.getDay() === 1 || date.getDay() === 3}
+                          placeholderText="Select Sunday, Monday, or Wednesday"
                           dateFormat="yyyy-MM-dd"
                           required
                           className="date-picker-input"
@@ -265,10 +281,21 @@ function TrialBrampton() {
                       </div>
                       <div className="form-group">
                         <label>Preferred Time <span className="req">*</span></label>
-                        <select name="preferred_time" required>
+                        <select
+                          name="preferred_time"
+                          value={preferredTime}
+                          onChange={(e) => setPreferredTime(e.target.value)}
+                          required
+                        >
                           <option value="">Select Time</option>
-                          <option>U4-8, 5:30-6:30 PM</option>
-                          <option>U9-13, 6:30-7:30 PM</option>
+                          {selectedDate?.getDay() === 0 ? (
+                            <option>Ages 4-13, 6:00-7:00 PM</option>
+                          ) : (
+                            <>
+                              <option>U4-8, 5:30-6:30 PM</option>
+                              <option>U9-13, 6:30-7:30 PM</option>
+                            </>
+                          )}
                         </select>
                       </div>
                     </div>
