@@ -24,7 +24,7 @@ const trainingCards = [
     icon: "📍",
     title: "Location",
     description:
-      "David Suzuki Secondary School, Brampton West. Professional outdoor training environment designed to support every stage of your child's development.",
+      "10750 Chinguacousy Rd, Brampton, ON L7A 2Z7. Professional outdoor training environment designed to support every stage of your child's development.",
   },
   {
     icon: "📅",

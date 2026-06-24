@@ -72,8 +72,8 @@ const locations = [
   },
   {
     title: "Brampton West",
-    mapSrc: "https://maps.google.com/maps?q=45+Daviselm+Drive,+Brampton,+ON+L6X+0Z3&z=17&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=45+Daviselm+Drive,+Brampton,+ON+L6X+0Z3",
+    mapSrc: "https://maps.google.com/maps?q=10750+Chinguacousy+Rd,+Brampton,+ON+L7A+2Z7&z=17&output=embed",
+    directionsUrl: "https://share.google/aVWhIMZ2cx39XlKXQ",
   },
 ];
 
