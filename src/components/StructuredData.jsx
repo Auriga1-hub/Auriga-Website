@@ -78,7 +78,7 @@ export const organizationSchema = {
   "email": "info@aurigafootball.com",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "525 Huntington Ridge Dr",
+    "streetAddress": "4765 Huron Heights Dr",
     "addressLocality": "Mississauga",
     "addressRegion": "ON",
     "postalCode": "L5R 2X7",
@@ -108,7 +108,7 @@ export const localBusinessSchema = {
   "email": "info@aurigafootball.com",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "525 Huntington Ridge Dr",
+    "streetAddress": "4765 Huron Heights Dr",
     "addressLocality": "Mississauga",
     "addressRegion": "ON",
     "postalCode": "L5R 2X7",
@@ -209,7 +209,7 @@ export function buildEventSchema({ name, description, startDate, endDate, locati
       "name": locationName,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": locationAddress || "525 Huntington Ridge Dr",
+        "streetAddress": locationAddress || "4765 Huron Heights Dr",
         "addressLocality": "Mississauga",
         "addressRegion": "ON",
         "addressCountry": "CA"

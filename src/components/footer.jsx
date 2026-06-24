@@ -103,7 +103,7 @@ function Footer() {
             </li>
             <li>
               <span className="footer-icon">📍</span>
-              <span>765 Huron Heights Dr,<br />Mississauga, ON L4Z 4G9</span>
+              <span>4765 Huron Heights Dr,<br />Mississauga, ON L4Z 4G9</span>
             </li>
             <li className="footer-social-links" style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
               <a 

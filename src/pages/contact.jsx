@@ -190,7 +190,7 @@ function Contact() {
                   <div className="contact-detail-icon">📍</div>
                   <div className="contact-detail-body">
                     <span className="contact-detail-label">Location</span>
-                    <span className="contact-detail-value">765 Huron Heights Dr,<br />Mississauga, ON L4Z 4G9</span>
+                    <span className="contact-detail-value">4765 Huron Heights Dr,<br />Mississauga, ON L4Z 4G9</span>
                   </div>
                 </div>
 

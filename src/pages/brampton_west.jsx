@@ -8,7 +8,7 @@ const programs = [
   {
     title: "Summer Development Training Program",
     age: "Ages: 4–13",
-    date: "June 28 – August 30, 2026",
+    date: "July 5 - Sept 6, 2026",
     path: "/programs/recreation/brampton-west/summer",
   },
 ];
