@@ -62,8 +62,8 @@ const locations = [
   },
   {
     title: "Mississauga West",
-    mapSrc: "https://maps.google.com/maps?q=John+Fraser+Secondary+School,+2665+Erin+Centre+Blvd,+Mississauga,+ON+L5M+5H6&z=17&output=embed",
-    directionsUrl: "https://maps.app.goo.gl/fWEZ3YbyeXtEnNgWA?g_st=iwb",
+    mapSrc: "https://maps.google.com/maps?q=F.B.+McFarren+Memorial+Park,+5255+McFarren+Blvd,+Mississauga,+ON+L5M+5E9&z=17&output=embed",
+    directionsUrl: "https://share.google/UmfOXeVrZ45FQfoBR",
   },
   {
     title: "Brampton",
