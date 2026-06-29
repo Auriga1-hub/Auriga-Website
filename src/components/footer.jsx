@@ -14,7 +14,7 @@ function Footer() {
           </Link>
 
           <p className="footer-desc">
-            Structured youth soccer training in Mississauga, Etobicoke & Brampton for ages 4–13.
+            Structured youth soccer training in Mississauga & Brampton for ages 4–13.
             Certified coaches focused on technical skill, small-group training, and
             long-term player development.
           </p>

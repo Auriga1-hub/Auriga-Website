@@ -38,12 +38,12 @@ function WinterCamp() {
     <>
       <SEOHead
         title="Winter Soccer Camp Mississauga & Brampton | Ages 4-13 | Auriga FC"
-        description="Keep your child active during winter break with Auriga FC's winter soccer camp. Indoor training, multi-sport activities, and team-building for ages 4–13 in Mississauga, Brampton & Etobicoke."
-        keywords="winter soccer camp mississauga, kids winter camp brampton, holiday soccer camp, winter sports camp etobicoke, indoor soccer camp"
+        description="Keep your child active during winter break with Auriga FC's winter soccer camp. Indoor training, multi-sport activities, and team-building for ages 4–13 in Mississauga and Brampton."
+        keywords="winter soccer camp mississauga, kids winter camp brampton, holiday soccer camp, indoor soccer camp, youth soccer camp GTA"
       />
       <StructuredData data={[
         buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Camps", path: "/programs/camps" }, { name: "Winter Camp", path: "/programs/winter-camp" }]),
-        buildEventSchema({ name: "Auriga FC Winter Soccer Camp", description: "Winter break soccer and multi-sport camp for ages 4-13 in Mississauga, Brampton, and Etobicoke.", startDate: "2026-12-21", endDate: "2027-01-02", locationName: "Mississauga, Ontario" })
+        buildEventSchema({ name: "Auriga FC Winter Soccer Camp", description: "Winter break soccer and multi-sport camp for ages 4-13 in Mississauga and Brampton.", startDate: "2026-12-21", endDate: "2027-01-02", locationName: "Mississauga, Ontario" })
       ]} />
 
       {/* HERO */}
@@ -58,7 +58,7 @@ function WinterCamp() {
           <div className="camps-hero-meta">
             <span>❄️ Winter Break</span>
             <span>⚽ Ages 4–13</span>
-            <span>📍 Mississauga Central, Mississauga West, Etobicoke &amp; Brampton</span>
+            <span>📍 Mississauga Central, Mississauga West &amp; Brampton</span>
           </div>
         </div>
       </div>

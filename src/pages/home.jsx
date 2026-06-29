@@ -111,8 +111,8 @@ function Home() {
     <>
       <SEOHead
         title="Auriga FC | Kids Soccer Training Mississauga & Brampton | Ages 4-13"
-        description="Auriga Football Club offers professional kids soccer training for ages 4–13 in Mississauga, Brampton, and Etobicoke. Join our development academy, competitive teams, personal training, or seasonal soccer camps. Book a free assessment today."
-        keywords="kids soccer training mississauga, youth soccer brampton, soccer academy GTA, auriga football club, soccer camps mississauga, youth football etobicoke, free soccer trial, soccer school ontario"
+        description="Auriga Football Club offers professional kids soccer training for ages 4–13 in Mississauga and Brampton. Join our development academy, competitive teams, personal training, or seasonal soccer camps. Book a free assessment today."
+        keywords="kids soccer training mississauga, youth soccer brampton, soccer academy GTA, auriga football club, soccer camps mississauga, free soccer trial, soccer school ontario"
       />
       <StructuredData data={[
         organizationSchema, 
