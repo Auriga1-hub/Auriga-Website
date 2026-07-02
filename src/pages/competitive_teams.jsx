@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import TestimonialBar from "../components/TestimonialBar";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
 import "../css/competitive_teams.css";
@@ -64,9 +63,6 @@ function CompetitiveTeams() {
           </div>
         </div>
       </div>
-
-      <TestimonialBar />
-
 
       {/* INTRO */}
       <section className="ct-intro-section">
@@ -199,7 +195,7 @@ function CompetitiveTeams() {
               more competitive environment, you can request a tryout. All players are assessed before
               being invited into a competitive team.
             </p>
-            <Link to="/contact" className="ct-cta-btn">Request a Tryout</Link>
+            <a href="/programs/development-academy/index.html#waitlist" className="ct-cta-btn">Request a Tryout</a>
             <span className="ct-cta-note">(Spots are limited and selections are based on performance and readiness.)</span>
           </div>
         </div>

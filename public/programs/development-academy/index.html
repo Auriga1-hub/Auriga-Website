@@ -22,7 +22,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <title>Auriga Football Club | Development Academy</title>
     <meta name="description" content="Development Academy for serious players ages 7-12. Advanced technical and tactical training with limited July intake.">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -497,21 +499,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
             <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-20 pt-24 sm:px-8 md:grid-cols-2 md:items-center md:py-28">
                 <div class="max-w-xl">
-                    <p class="section-label mb-5 text-center md:text-left">Development Program | Limited July Intake</p>
                     <h1 class="text-center font-heading text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-left">Development Academy - For Serious Young Players</h1>
                     <p class="mt-5 text-center text-lg leading-relaxed text-auriga-slateText md:text-left">Advanced soccer training for players aged 7-12 focused on technical, tactical, and long-term development.</p>
 
                     <div class="mt-8 grid gap-3 text-sm sm:grid-cols-2">
-                        <p class="rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Start:</span> Starting July (Limited Intake)</p>
-                        <p class="rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Schedule:</span> 3 Sessions per Week (60 min)</p>
+                        <p class="rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Start:</span> Season Starting July</p>
+                        <p class="rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Schedule:</span> 2 Sessions per Week (90 min)</p>
                     </div>
 
                     <div class="mt-3 flex justify-start">
-                        <p class="w-full rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Location:</span> Mississauga and Brampton</p>
+                        <p class="w-full rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Location:</span> Scott's Brae Park, 855 Brass Winds Pl, Mississauga, ON L5W 1T3</p>
+                    </div>
+
+                    <div class="mt-3 flex justify-start">
+                        <p class="w-full rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Days and Time:</span> Tuesdays and Thursdays 6:30-8pm</p>
                     </div>
 
                     <div class="mt-4 flex justify-start md:justify-center">
-                        <a href="#waitlist" class="inline-flex w-full items-center justify-center rounded-[6px] bg-[#2f63df] px-8 py-[13px] font-heading text-[17px] font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8] md:w-auto">Join the Waitlist</a>
+                        <a href="#waitlist" class="inline-flex w-full items-center justify-center rounded-[6px] bg-[#2f63df] px-8 py-[13px] text-center font-heading text-[17px] font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8] md:w-auto">book your tryout session</a>
                     </div>
                 </div>
 
@@ -596,8 +601,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <p class="section-label mb-3">Program Structure</p>
                         <h2 class="font-heading text-3xl font-bold text-white">Built Around Consistent Progress</h2>
                         <ul class="mt-5 space-y-3 text-base">
-                            <li><span class="text-auriga-emerald">•</span> 3 sessions per week</li>
-                            <li><span class="text-auriga-emerald">•</span> 60-minute sessions</li>
+                            <li><span class="text-auriga-emerald">•</span> 2 sessions per week</li>
+                            <li><span class="text-auriga-emerald">•</span> 90-minute sessions</li>
                             <li><span class="text-auriga-emerald">•</span> Small group focused training</li>
                             <li><span class="text-auriga-emerald">•</span> Age group: 7-12</li>
                             <li><span class="text-auriga-emerald">•</span> Progression-based training (not participation-based)</li>
@@ -632,9 +637,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <section id="waitlist" class="bg-[#081f3a] pb-16 pt-8 sm:pb-20 sm:pt-10">
             <div class="mx-auto max-w-4xl px-5 sm:px-8">
                 <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 sm:p-9">
-                    <p class="section-label mb-3 text-center md:text-left">Join the Development Academy Waitlist</p>
-                    <h2 class="text-center font-heading text-3xl font-bold text-white md:text-left">Limited Spots Available for July</h2>
-                    <p class="mt-4 text-center text-base text-auriga-slateText md:text-left">Limited spots available for July. Submit your details to be considered for trials.</p>
+                    <h2 class="text-center font-heading text-3xl font-bold text-white md:text-left">Book Your Development Group Tryout</h2>
+                    <p class="mt-3 rounded-lg border border-[#ef4444]/40 bg-[#ef4444]/10 px-4 py-3 text-center font-heading text-sm font-bold uppercase tracking-[0.05em] text-[#fca5a5] md:text-left">This is not a beginner program.</p>
+                    <p class="mt-4 text-center text-base text-auriga-slateText md:text-left">Limited spots available for tryouts. Submit your details to be considered for trials.</p>
 
                     <form id="waitlist-form" class="mt-8 grid gap-5 sm:grid-cols-2">
                         <label class="text-sm font-semibold text-auriga-slateText">Parent Name
@@ -667,12 +672,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             </select>
                         </label>
 
+                        <label class="text-sm font-semibold text-auriga-slateText">Tryout Date
+                            <input type="text" name="tryoutDate" required placeholder="Select tryout date" class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none">
+                            <span class="mt-2 block text-xs text-[#8fb0c9]">Only Tuesdays and Thursdays are available.</span>
+                        </label>
+
                         <label class="text-sm font-semibold text-auriga-slateText sm:col-span-2">Message (optional)
                             <textarea name="message" rows="4" class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Tell us anything helpful about your child's training goals"></textarea>
                         </label>
 
                         <div class="sm:col-span-2">
-                            <button type="submit" class="inline-flex w-full items-center justify-center rounded-[8px] bg-[#2f63df] px-8 py-3 font-heading text-base font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8]">Join Waitlist</button>
+                            <button type="submit" class="inline-flex w-full items-center justify-center rounded-[8px] bg-[#2f63df] px-8 py-3 font-heading text-base font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8]">book your tryout session</button>
                         </div>
                     </form>
 
@@ -690,7 +700,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <a href="/" class="inline-flex items-center no-underline">
                     <img src="/images/logo.webp" alt="Auriga FC" class="h-20 w-auto drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)]">
                 </a>
-                <p class="mt-6 max-w-xs text-sm leading-7 text-auriga-muted">Structured youth soccer training in Mississauga, Etobicoke & Brampton for ages 4–13. Certified coaches focused on technical skill, small-group training, and long-term player development.</p>
+                <p class="mt-6 max-w-xs text-sm leading-7 text-auriga-muted">Structured youth soccer training in Mississauga & Brampton for ages 4–13. Certified coaches focused on technical skill, small-group training, and long-term player development.</p>
             </div>
 
             <div class="text-center md:text-left">
@@ -810,8 +820,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         const waitlistForm = document.getElementById('waitlist-form');
         const waitlistConfirmation = document.getElementById('waitlist-confirmation');
         if (waitlistForm && waitlistConfirmation) {
+            const tryoutDateInput = waitlistForm.querySelector('input[name="tryoutDate"]');
+            const isAllowedTryoutDate = (value) => {
+                if (!value) return false;
+                const day = new Date(`${value}T00:00:00`).getDay();
+                return day === 2 || day === 4;
+            };
+
+            if (tryoutDateInput && window.flatpickr) {
+                window.flatpickr(tryoutDateInput, {
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    disableMobile: true,
+                    disable: [
+                        (date) => {
+                            const day = date.getDay();
+                            return day !== 2 && day !== 4;
+                        },
+                    ],
+                });
+            }
+
+            if (tryoutDateInput) {
+                tryoutDateInput.addEventListener('input', () => {
+                    if (isAllowedTryoutDate(tryoutDateInput.value)) {
+                        tryoutDateInput.setCustomValidity('');
+                    } else {
+                        tryoutDateInput.setCustomValidity('Please choose a Tuesday or Thursday.');
+                    }
+                });
+            }
+
             waitlistForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
+
+                const selectedTryoutDate = tryoutDateInput ? tryoutDateInput.value : '';
+                if (!isAllowedTryoutDate(selectedTryoutDate)) {
+                    if (tryoutDateInput) {
+                        tryoutDateInput.setCustomValidity('Please choose a Tuesday or Thursday.');
+                        tryoutDateInput.reportValidity();
+                    }
+                    return;
+                }
+                if (tryoutDateInput) {
+                    tryoutDateInput.setCustomValidity('');
+                }
 
                 const formData = new FormData(waitlistForm);
                 const payload = {
@@ -829,7 +882,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     dob: formData.get('childAge') ? `Age ${formData.get('childAge')}` : '',
                     years_played: formData.get('level') || '',
                     current_level: formData.get('level') || '',
-                    preferred_date: 'Waitlist - July Intake',
+                    preferred_date: formData.get('tryoutDate') || '',
                     preferred_time: 'N/A',
                     heard_about: 'Development Academy Landing Page',
                     subject: 'Development Academy Waitlist - Mississauga & Brampton',
@@ -848,7 +901,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             player_name: payload.player_name,
                             dob: payload.child_age ? `Age ${payload.child_age}` : 'N/A',
                             years_played: payload.years_played || 'N/A',
-                            preferred_date: 'Waitlist - July Intake',
+                            preferred_date: formData.get('tryoutDate') || 'N/A',
                             preferred_time: 'N/A',
                             heard_about: 'Development Academy Landing Page',
                             message: payload.message,
@@ -877,6 +930,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
                 waitlistConfirmation.classList.remove('hidden');
                 waitlistForm.reset();
+                if (tryoutDateInput) {
+                    tryoutDateInput.setCustomValidity('');
+                }
             });
         }
     </script>
