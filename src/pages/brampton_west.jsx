@@ -112,6 +112,7 @@ function BramptonWest() {
             <h2>Join Auriga Football Club</h2>
             <p>Develop your skills with professional coaching and a structured program.</p>
             <Link to="/contact" className="bram-cta-btn">Register Now</Link>
+            <p className="bram-cta-note">Registrations closed for Ages 4-8. Only 4-5 spots remaining for Ages 9-13.</p>
           </div>
 
         </div>
