@@ -79,6 +79,11 @@ function Navbar() {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to="/programs/girls-soccer-brampton-central" onClick={closeMenu}>
+                    Girls Soccer Program
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to="/programs/development" onClick={closeMenu}>
                     Development
                   </NavLink>

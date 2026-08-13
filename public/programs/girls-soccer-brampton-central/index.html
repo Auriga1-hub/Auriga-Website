@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <link rel="apple-touch-icon" href="/favicon.webp" />
+    <title>Girls Soccer in Brampton | Girls Soccer Starter Program | Auriga Football Club</title>
+    <meta name="description" content="Looking for girls soccer in Brampton? Join Auriga Football Club's Girls Soccer Starter Program. A beginner-friendly girls-only soccer program focused on confidence, friendships, movement, and soccer fundamentals in a supportive environment.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        auriga: {
+                            navy: '#0b1f35',
+                            navyDeep: '#071a2d',
+                            blue: '#2563eb',
+                            blueDark: '#1d4ed8',
+                            emerald: '#10b981',
+                            slateText: '#cbd5e1',
+                            muted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Nunito', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .section-label {
+            color: #10b981;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .homepage-testimonial {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .homepage-testimonial.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        .site-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(11, 26, 47, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 100px;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .site-logo img {
+            height: 60px;
+            width: auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .site-navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .site-menu {
+            display: flex;
+            align-items: center;
+            gap: 38px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .site-menu li {
+            position: relative;
+        }
+
+        .menu-link,
+        .nav-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #e5e7eb;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            line-height: 1;
+            padding: 0;
+            background: none;
+            border: none;
+        }
+
+        .menu-link:hover,
+        .nav-label:hover,
+        .menu-link.active,
+        .nav-label.active {
+            color: #10b981;
+        }
+
+        .menu-link::after,
+        .nav-label::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: #10b981;
+            transition: width 0.25s ease;
+        }
+
+        .menu-link:hover::after,
+        .menu-link.active::after,
+        .nav-label.active::after,
+        .nav-label:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 18px);
+            left: 0;
+            min-width: 260px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.02);
+            list-style: none;
+            margin: 0;
+            padding: 12px;
+            opacity: 0;
+            transform: translateY(6px);
+            pointer-events: none;
+            transition: all 0.25s ease;
+            z-index: 1000;
+        }
+
+        .site-menu li.has-children:hover .dropdown {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .has-children::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 18px;
+        }
+
+        .dropdown li {
+            display: block;
+            width: 100%;
+        }
+
+        .dropdown li a {
+            display: block;
+            padding: 14px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #e5e7eb;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown li a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #10b981;
+            transform: translateX(4px);
+        }
+
+        .free-trial-button a {
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.28);
+            color: #cbd5e1;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .free-trial-button a:hover {
+            border-color: #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.07);
+            transform: translateY(-1px);
+        }
+
+        .cta-button a {
+            display: inline-block;
+            padding: 11px 24px;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #2563eb, #10b981);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3), 0 0 0 0 rgba(16, 185, 129, 0);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-button a:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4), 0 0 20px rgba(16, 185, 129, 0.35);
+        }
+
+        .dropdown::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: 24px;
+            width: 12px;
+            height: 12px;
+            background: rgba(15, 23, 42, 0.65);
+            transform: rotate(45deg);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            color: #10b981;
+            position: relative;
+            top: 1px;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: white;
+            margin-bottom: 5px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle span:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 992px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .mobile-toggle.active span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+
+            .mobile-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-toggle.active span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+
+            .site-navigation {
+                position: fixed;
+                top: 100px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 100px);
+                background: rgba(11, 26, 47, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px 40px;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                overflow-y: auto;
+            }
+
+            .site-navigation.nav-open {
+                transform: translateX(0);
+            }
+
+            .site-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 24px;
+            }
+
+            .site-menu li {
+                width: 100%;
+            }
+
+            .menu-link,
+            .nav-label {
+                font-size: 18px;
+                padding: 10px 0;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .has-children {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .dropdown {
+                position: static;
+                opacity: 1;
+                pointer-events: auto;
+                transform: none;
+                box-shadow: none;
+                background: rgba(255, 255, 255, 0.03);
+                border: none;
+                margin-top: 10px;
+                padding: 10px 14px;
+                width: 100%;
+                display: none;
+            }
+
+            .site-menu li.has-children:hover .dropdown,
+            .site-menu li.has-children:active .dropdown,
+            .site-menu li.has-children:focus-within .dropdown {
+                display: block;
+            }
+
+            .free-trial-button,
+            .cta-button {
+                width: 100%;
+            }
+
+            .free-trial-button {
+                margin-top: 20px;
+            }
+
+            .free-trial-button a,
+            .cta-button a {
+                display: block;
+                text-align: center;
+                width: 100%;
+                padding: 14px 24px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-auriga-navy font-body text-auriga-slateText antialiased">
+    <header class="site-navbar">
+        <div class="header-container">
+            <div class="site-logo">
+                <a href="/" class="logo-wrapper">
+                    <img src="/images/logo.webp" alt="Auriga Football Club" class="navbar-logo">
+                </a>
+            </div>
+
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="site-navigation" id="site-navigation" aria-label="Main navigation">
+                <ul class="site-menu">
+                    <li><a href="/" class="menu-link">Home</a></li>
+                    <li><a href="/about" class="menu-link">About</a></li>
+
+                    <li class="has-children">
+                        <span class="menu-link nav-label active">Programs <span class="dropdown-arrow">▾</span></span>
+                        <ul class="dropdown">
+                            <li><a href="/programs/location_select?program=recreation">Fundamentals</a></li>
+                            <li><a href="/programs/girls-soccer-brampton-central">Girls Soccer Program</a></li>
+                            <li><a href="/programs/development">Development</a></li>
+                            <li><a href="/programs/competitive-teams">Competitive Teams</a></li>
+                            <li><a href="/programs/personal-training">Personal Training</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-children">
+                        <span class="menu-link nav-label">Camps <span class="dropdown-arrow">▾</span></span>
+                        <ul class="dropdown">
+                            <li><a href="/programs/camps">Summer Camp</a></li>
+                            <li><a href="/programs/winter-camp">Winter Camp</a></li>
+                            <li><a href="/programs/march-break-camp">March Break Camp</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-children">
+                        <span class="menu-link nav-label">Resources <span class="dropdown-arrow">▾</span></span>
+                        <ul class="dropdown">
+                            <li><a href="/resources/player-development">Player Development</a></li>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/policies">Policies</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="free-trial-button"><a href="/programs/location_select?program=trial">Free Assessment</a></li>
+                    <li class="cta-button"><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative isolate overflow-hidden">
+            <img src="/images/ChatGPT%20Image%20Aug%2013,%202026,%2001_17_57%20PM.webp" alt="Girls soccer training session" class="absolute inset-0 h-full w-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#061226]/95 via-[#061226]/88 to-[#061226]/40"></div>
+
+            <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-20 pt-24 sm:px-8 md:grid-cols-2 md:items-center md:py-28">
+                <div class="max-w-xl">
+                    <h1 class="text-center font-heading text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-left">Girls Soccer Starter Program</h1>
+                    <p class="mt-4 text-center text-xl font-semibold text-auriga-emerald md:text-left">A Fun, Supportive &amp; Beginner-Friendly Girls-Only Soccer Experience</p>
+                    <p class="mt-5 text-center text-lg leading-relaxed text-auriga-slateText md:text-left">Designed specifically for girls who are new to soccer or looking to build confidence in a welcoming environment.</p>
+                    <p class="mt-4 text-center text-lg leading-relaxed text-auriga-slateText md:text-left">Over 5 structured sessions, players will develop confidence, coordination, movement, teamwork and strong soccer fundamentals while making new friends and enjoying the game.</p>
+
+                    <div class="mt-8 grid gap-3 text-sm">
+                        <p class="rounded-md border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-center text-white md:text-left"><span class="font-heading font-bold text-auriga-emerald">Location:</span> Hilldale Public School<br><a href="https://www.google.com/maps/place/Hilldale+Public+School/@43.7293111,-79.7307266,789m/data=!3m2!1e3!4b1!4m6!3m5!1s0x882b3d92a513f2ef:0xf7ce694648bf35f1!8m2!3d43.7293111!4d-79.7281517!16s%2Fg%2F1thnpdlh?entry=ttu&g_ep=EgoyMDI2MDQwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noreferrer" class="mt-1 inline-block text-xs text-auriga-emerald underline underline-offset-2 hover:text-white">View on Google Maps →</a></p>
+                    </div>
+
+                    <div class="mt-3 flex justify-start">
+                        <p class="w-full rounded-[6px] border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-left text-white"><span class="font-heading font-bold text-auriga-emerald">Note:</span> • Girls Only Program<br>• 5 Structured Sessions<br>• Uniform Included</p>
+                    </div>
+
+                    <div class="mt-6 grid gap-3 md:max-w-[520px] md:grid-cols-2">
+                        <a href="https://aurigafc.playbookapi.com/programs/camp_registration/?class_package%5B%5D=74923" target="_blank" rel="noreferrer" class="inline-flex w-full items-center justify-center rounded-[6px] bg-[#2f63df] px-6 py-[13px] text-center font-heading text-[15px] font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8]">Reserve Your Spot</a>
+                        <a href="https://wa.me/16475631211" target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center rounded-[6px] border border-white/20 bg-transparent px-6 py-[13px] text-center font-heading text-[15px] font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:border-auriga-emerald hover:text-auriga-emerald">Message Us</a>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-[#0f2a3c]/85 p-4 shadow-2xl backdrop-blur-sm">
+                    <div class="relative overflow-hidden rounded-xl" data-carousel>
+                        <img src="/images/94077583-2543-4e92-b120-070a8cc04484.webp" alt="Girls soccer training session" class="carousel-slide h-[290px] w-full rounded-xl object-cover opacity-100 transition-opacity duration-500 sm:h-[340px] md:h-[300px] lg:h-[340px]">
+                        <img src="/images/94077583-2543-4e92-b120-070a8cc04484%20(1).webp" alt="Girls soccer players smiling together" class="carousel-slide absolute inset-0 h-[290px] w-full rounded-xl object-cover opacity-0 transition-opacity duration-500 sm:h-[340px] md:h-[300px] lg:h-[340px]">
+
+                        <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2" data-dots>
+                            <button type="button" class="carousel-dot h-2.5 w-2.5 rounded-full bg-white/90" aria-label="Go to slide 1"></button>
+                            <button type="button" class="carousel-dot h-2.5 w-2.5 rounded-full bg-white/40" aria-label="Go to slide 2"></button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 rounded-xl border border-white/10 bg-[#102c40] p-5">
+                        <p class="font-heading text-xs font-bold uppercase tracking-[0.14em] text-auriga-emerald">FOUNDING PROGRAM</p>
+                        <p class="mt-2 font-heading text-xl font-bold text-white">Girls Ages (7-12)</p>
+                        <ul class="mt-4 space-y-2 text-sm text-auriga-slateText">
+                            <li><span class="text-auriga-emerald">•</span> Girls Only</li>
+                            <li><span class="text-auriga-emerald">•</span> Beginner Friendly</li>
+                            <li><span class="text-auriga-emerald">•</span> Confidence First</li>
+                            <li><span class="text-auriga-emerald">•</span> Long-Term Development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-b from-auriga-navyDeep to-auriga-navy py-16 sm:py-20">
+            <div class="mx-auto max-w-6xl px-5 sm:px-8">
+                <div class="rounded-xl border border-white/10 bg-[#0f2a3c] p-8 text-center md:text-left">
+                    <p class="section-label mb-3 text-center md:text-left">Why We Created This Program</p>
+                    <div class="mt-6 space-y-4 text-base leading-relaxed text-auriga-slateText">
+                        <p>Over the past year, many parents reached out asking if Auriga offered a girls-only soccer program. One of the most common concerns was that their daughters would feel more comfortable learning and developing alongside other girls in a supportive environment.</p>
+                        <p>This program was created to provide exactly that.</p>
+                        <p>Our goal is not simply to teach soccer. We want to help girls build confidence, stay active, make new friends, and develop a genuine love for the game while learning at their own pace.</p>
+                        <p>This is the first step in Auriga's long-term girls' development pathway, where players can grow from complete beginners into confident footballers in a positive and encouraging environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-b from-auriga-navy to-auriga-navyDeep py-16 sm:py-20">
+            <div class="mx-auto max-w-6xl px-5 sm:px-8">
+                <div class="grid gap-8 md:grid-cols-2">
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 text-center md:text-left">
+                        <p class="section-label mb-3">Who This Program Is For</p>
+                        <ul class="mt-5 space-y-3 text-base">
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Girls with little or no soccer experience</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Girls looking for a positive first soccer experience</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Girls wanting to build confidence</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Girls wanting to stay active</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Girls who enjoy learning in a supportive environment</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> No previous soccer experience required</li>
+                        </ul>
+                    </article>
+
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 text-center md:text-left">
+                        <p class="section-label mb-3">Program Details</p>
+                        <div class="mt-6 space-y-5 text-base">
+                            <div>
+                                <p class="font-heading text-lg font-bold text-auriga-emerald">Program Length</p>
+                                <p class="mt-2 text-white">August 26 to September 23</p>
+                            </div>
+                            <div>
+                                <p class="font-heading text-lg font-bold text-auriga-emerald">Schedule</p>
+                                <p class="mt-2 text-white">Wednesday 6-7pm</p>
+                            </div>
+                            <div>
+                                <p class="font-heading text-lg font-bold text-auriga-emerald">Session Duration</p>
+                                <p class="mt-2 text-white">60 Minutes</p>
+                            </div>
+                            <div>
+                                <p class="font-heading text-lg font-bold text-auriga-emerald">Environment</p>
+                                <ul class="mt-2 space-y-2 text-white">
+                                    <li><span class="text-auriga-emerald">•</span> Girls Only</li>
+                                    <li><span class="text-auriga-emerald">•</span> Small Groups</li>
+                                    <li><span class="text-auriga-emerald">•</span> Positive Coaching</li>
+                                    <li><span class="text-auriga-emerald">•</span> Beginner Friendly</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#081a2e] py-16 sm:py-20">
+            <div class="mx-auto max-w-6xl px-5 sm:px-8">
+                <div class="grid gap-7 md:grid-cols-2">
+                    <article class="rounded-xl border border-auriga-emerald/30 bg-[#0f2a3c] p-7 text-center md:text-left">
+                        <p class="section-label mb-3">Program Pricing</p>
+                        <h2 class="font-heading text-3xl font-bold text-white">Girls Soccer Starter Program</h2>
+                        <div class="mt-5 space-y-3">
+                            <div>
+                                <p class="font-heading text-xl font-bold uppercase tracking-[0.12em] text-auriga-emerald">5 Sessions</p>
+                                <p class="mt-1 text-sm text-auriga-slateText">August 26 to September 23</p>
+                                <p class="mt-1 text-sm text-auriga-slateText">Every Wednesday</p>
+                                <p class="mt-3 font-heading text-4xl font-black text-white">($115 + HST)</p>
+                            </div>
+                            <div class="mt-6 rounded-lg border border-white/10 bg-[#102c40] p-4">
+                                <p class="font-heading text-xl font-bold text-white">$30 Deposit</p>
+                                <ul class="mt-3 space-y-2 text-sm">
+                                    <li><span class="text-auriga-emerald">✔</span> Uniform Included</li>
+                                    <li><span class="text-auriga-emerald">✔</span> Girls Only</li>
+                                    <li><span class="text-auriga-emerald">✔</span> Beginner Friendly</li>
+                                    <li><span class="text-auriga-emerald">✔</span> Small Group Coaching</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-7 text-center md:text-left">
+                        <p class="section-label mb-3">Why Parents Choose Auriga</p>
+                        <ul class="mt-5 space-y-3 text-base">
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Girls-only learning environment</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Confidence before competition</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Long-term player development</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Certified and supportive coaches</li>
+                            <li class="flex justify-center gap-3 md:justify-start"><span class="text-auriga-emerald">•</span> Small group coaching</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#081a2e] py-16 sm:py-20">
+            <div class="mx-auto max-w-6xl px-5 sm:px-8">
+                <p class="section-label mb-3 text-center">Player Development</p>
+                <h2 class="text-center font-heading text-3xl font-bold text-white sm:text-4xl">What Your Daughter Will Learn</h2>
+                <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-6 text-center md:text-left">
+                        <h3 class="font-heading text-lg font-bold text-white">Confidence</h3>
+                        <p class="mt-3 text-sm leading-relaxed">Building self-belief through positive coaching, encouragement and small successes.</p>
+                    </article>
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-6 text-center md:text-left">
+                        <h3 class="font-heading text-lg font-bold text-white">Movement &amp; Coordination</h3>
+                        <p class="mt-3 text-sm leading-relaxed">Balance, agility, coordination and athletic movement that form the foundation for every young player.</p>
+                    </article>
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-6 text-center md:text-left">
+                        <h3 class="font-heading text-lg font-bold text-white">Soccer Fundamentals</h3>
+                        <ul class="mt-3 space-y-1 text-sm leading-relaxed">
+                            <li>• Dribbling</li>
+                            <li>• Passing</li>
+                            <li>• Receiving</li>
+                            <li>• Ball Control</li>
+                            <li>• Turning</li>
+                            <li>• Shooting Basics</li>
+                        </ul>
+                    </article>
+                    <article class="rounded-xl border border-white/10 bg-[#0f2a3c] p-6 text-center md:text-left">
+                        <h3 class="font-heading text-lg font-bold text-white">Teamwork &amp; Communication</h3>
+                        <p class="mt-3 text-sm leading-relaxed">Learning to communicate, work together and build friendships through soccer.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-b from-[#071a2d] to-[#081f3a] pb-12 pt-6 text-center sm:pb-14 sm:pt-7">
+            <div class="mx-auto max-w-6xl px-5 sm:px-10">
+                <h2 class="relative inline-block font-heading text-3xl font-bold text-white sm:text-[42px]">What Parents Say About Us
+                    <span class="mx-auto mt-3 block h-1 w-[60px] rounded bg-gradient-to-r from-auriga-blue to-auriga-emerald"></span>
+                </h2>
+
+                <div class="mx-auto mt-9 max-w-[860px]" data-testimonial-carousel>
+                    <div class="relative min-h-[320px] sm:min-h-[240px]">
+                        <article class="homepage-testimonial active">
+                            <div class="mb-3 text-[20px] tracking-[4px] text-[#facc15]">★★★★★</div>
+                            <p class="relative rounded-[14px] bg-[#0b2239] px-5 py-6 font-body text-sm leading-7 text-[#dbeafe] shadow-[0_20px_40px_rgba(0,0,0,0.45)] sm:px-10 sm:py-8 sm:text-[16px] sm:leading-[1.7]">
+                                <span class="absolute left-[22px] top-[-8px] font-serif text-[80px] leading-none text-auriga-blue opacity-[0.22]">“</span>
+                                Auriga FC has been incredible for my son. In just a year, he has built confidence, learned teamwork, and made great friends. The coaches provide constructive, supportive feedback that helps kids grow both in skills and character. Beyond soccer, he's developed resilience, sportsmanship, and perseverance in a positive environment.
+                            </p>
+                            <div class="mt-4 font-heading text-[15px] font-bold text-white sm:text-base">– Massoma Jafari</div>
+                        </article>
+                    </div>
+
+                    <div class="mt-8">
+                        <a href="https://www.google.com/search?sca_esv=f6dab0cbe71090ff&rlz=1C5OZZY_enIN1197IN1198&cs=1&sxsrf=ANbL-n67vhWktKmwURSm8J45UPK-A2BGHQ:1775834781563&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOQpv9CHLYHrPEKUmBrc4KYe8ubjTa54lil2rTGhXtamXU33s5-Dh0OvLalDOjt34ZGWikNYW3oYwe6_rwfXnjto3ljoX4AvMf15uz4f6itqwL3IMLw%3D%3D&q=Auriga+Football+Club+Reviews&sa=X&ved=2ahUKEwjIx9aKzOOTAxX6JzQIHXneEkkQ0bkNegQIHhAH&biw=1728&bih=915&dpr=2" target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-2 font-heading font-semibold text-auriga-blue hover:text-auriga-emerald transition-colors duration-300 border-b-2 border-auriga-blue hover:border-auriga-emerald">
+                            View Google Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#081f3a] py-16 sm:py-20">
+            <div class="mx-auto max-w-5xl px-5 sm:px-8">
+                <p class="section-label mb-3 text-center md:text-center">How Registration Works</p>
+                <h2 class="text-center font-heading text-3xl font-bold text-white sm:text-4xl md:text-center">Simple, Risk-Free Start</h2>
+
+                <ol class="mt-8 grid gap-4 sm:grid-cols-2">
+                    <li class="rounded-lg border border-white/10 bg-[#0f2a3c] p-5 text-sm"><span class="font-heading font-bold text-auriga-emerald">Step 1:</span> Secure your spot with a $30 deposit.</li>
+                    <li class="rounded-lg border border-white/10 bg-[#0f2a3c] p-5 text-sm"><span class="font-heading font-bold text-auriga-emerald">Step 2:</span> Attend your first session.</li>
+                    <li class="rounded-lg border border-white/10 bg-[#0f2a3c] p-5 text-sm"><span class="font-heading font-bold text-auriga-emerald">Step 3:</span> If after the first session you feel the program isn't the right fit, let us know before attending the second session and we'll provide a full refund.</li>
+                    <li class="rounded-lg border border-white/10 bg-[#0f2a3c] p-5 text-sm"><span class="font-heading font-bold text-auriga-emerald">Step 4:</span> Continue your soccer journey with Auriga.</li>
+                </ol>
+
+                <article class="mt-10 rounded-xl border border-white/10 bg-[#0f2a3c] p-7">
+                    <h3 class="font-heading text-2xl font-bold text-white">Registration, Deposits &amp; Refund Policy</h3>
+                    <h4 class="mt-5 font-heading text-lg font-bold text-white">Registration &amp; Deposit</h4>
+                    <ul class="mt-2 space-y-2 text-sm leading-relaxed">
+                        <li class="flex gap-3"><span class="text-auriga-emerald">•</span>To secure a spot in the program, a $30 deposit is required at registration.</li>
+                        <li class="flex gap-3"><span class="text-auriga-emerald">•</span>This deposit is applied toward your total program fee.</li>
+                    </ul>
+
+                    <h4 class="mt-5 font-heading text-lg font-bold text-white">Refund Policy</h4>
+                    <ul class="mt-2 space-y-2 text-sm leading-relaxed">
+                        <li class="flex gap-3"><span class="text-auriga-emerald">•</span>If you choose not to continue after the first session, your $30 deposit will be fully refunded.</li>
+                        <li class="flex gap-3"><span class="text-auriga-emerald">•</span>From the second session onward, the deposit becomes non-refundable, as spots are confirmed and staffing is finalized.</li>
+                        <li class="flex gap-3"><span class="text-auriga-emerald">•</span>After the second session, no refunds are issued unless communicated otherwise.</li>
+                    </ul>
+                </article>
+
+                <article class="relative mt-6 overflow-hidden rounded-[16px] border border-auriga-emerald/35 bg-[#0d2b47]/70 px-4 py-5 text-center shadow-[0_14px_30px_rgba(0,0,0,0.4)] sm:px-6 sm:py-6">
+                    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-auriga-blue via-[#14b8a6] to-auriga-emerald"></div>
+                    <h3 class="font-heading text-xl font-extrabold text-white sm:text-2xl">Why We Keep Our Groups Small</h3>
+                    <span class="mx-auto mt-3 block h-1 w-[78px] rounded-full bg-gradient-to-r from-auriga-emerald to-auriga-blue"></span>
+                    <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#9fbad1] sm:text-lg">We intentionally keep our Girls Soccer Starter Program small so every player receives more individual attention, more touches on the ball, and greater confidence throughout every session.</p>
+
+                    <ul class="mt-5 flex flex-wrap justify-center gap-2 sm:gap-3">
+                        <li class="rounded-full border border-auriga-emerald/30 bg-auriga-emerald/10 px-4 py-2 font-heading text-sm font-bold text-auriga-emerald sm:text-base">Individual Coaching Attention</li>
+                        <li class="rounded-full border border-auriga-emerald/30 bg-auriga-emerald/10 px-4 py-2 font-heading text-sm font-bold text-auriga-emerald sm:text-base">More Ball Touches</li>
+                        <li class="rounded-full border border-auriga-emerald/30 bg-auriga-emerald/10 px-4 py-2 font-heading text-sm font-bold text-auriga-emerald sm:text-base">Higher Confidence</li>
+                        <li class="rounded-full border border-auriga-emerald/30 bg-auriga-emerald/10 px-4 py-2 font-heading text-sm font-bold text-auriga-emerald sm:text-base">Better Learning Environment</li>
+                    </ul>
+                </article>
+
+                <section class="mt-6 rounded-[16px] border border-white/10 bg-[#0d2b47]/40 p-4 sm:p-6">
+                    <h2 class="text-center font-heading text-3xl font-extrabold text-auriga-blue sm:text-4xl">Become One of Our Founding Players</h2>
+                    <p class="mx-auto mt-4 max-w-xl text-center text-base leading-relaxed text-auriga-slateText">Join Auriga's first Girls Soccer Starter Program and give your daughter a positive first soccer experience in a supportive girls-only environment.</p>
+                    <div class="mt-5 grid gap-4 text-left sm:grid-cols-2">
+                        <article class="rounded-xl border border-white/10 bg-[#102f4f] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.35)]">
+                            <a href="https://aurigafc.playbookapi.com/programs/camp_registration/?class_package%5B%5D=74923" target="_blank" rel="noreferrer" class="inline-flex w-full items-center justify-center rounded-[10px] bg-[#2f63df] px-5 py-3 font-heading text-sm font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8]">Reserve Your Spot</a>
+                        </article>
+                        <article class="rounded-xl border border-white/10 bg-[#102f4f] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.35)]">
+                            <a href="https://wa.me/16475631211" target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center rounded-[10px] border border-white/20 bg-transparent px-5 py-3 font-heading text-sm font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:border-auriga-emerald hover:text-auriga-emerald">Message Us</a>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="bg-[#081f3a] py-10 text-center sm:py-12">
+            <div class="mx-auto max-w-3xl px-5 sm:px-8">
+                <p class="text-base leading-relaxed text-[#8faabf]">Have any more questions? Please visit our FAQ's page.</p>
+                <a href="/faq" class="mt-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-auriga-emerald to-auriga-blue px-8 py-3 font-heading text-xs font-bold uppercase tracking-[0.08em] text-white shadow-[0_8px_25px_rgba(0,0,0,0.3)] transition hover:-translate-y-0.5 hover:shadow-[0_15px_40px_rgba(0,0,0,0.4),0_0_20px_rgba(16,185,129,0.2)]">Visit FAQ</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="relative bg-gradient-to-b from-[#071a2d] to-[#020d18] pt-[70px] text-[#cbd5f5]">
+        <div class="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-auriga-blue to-transparent opacity-80"></div>
+
+        <div class="mx-auto grid max-w-6xl gap-10 px-6 pb-14 md:grid-cols-[1.6fr_1fr_1.2fr] md:px-10">
+            <div class="text-center md:text-left">
+                <a href="/" class="inline-flex items-center no-underline">
+                    <img src="/images/logo.webp" alt="Auriga FC" class="h-20 w-auto drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)]">
+                </a>
+                <p class="mt-6 max-w-xs text-sm leading-7 text-auriga-muted">Structured youth soccer training in Mississauga &amp; Brampton for ages 4–13. Certified coaches focused on technical skill, small-group training, and long-term player development.</p>
+            </div>
+
+            <div class="text-center md:text-left">
+                <h4 class="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-auriga-emerald">Quick Links</h4>
+                <ul class="space-y-2 text-sm text-auriga-muted">
+                    <li><a href="/" class="transition hover:pl-1 hover:text-auriga-emerald">Home</a></li>
+                    <li><a href="/about" class="transition hover:pl-1 hover:text-auriga-emerald">About</a></li>
+                    <li class="mt-4 border-b border-white/10 pb-1 font-heading text-xs font-bold uppercase tracking-[0.08em] text-[#cbd5e1]">Programs</li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/location_select?program=recreation" class="transition hover:text-auriga-emerald">Fundamentals</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/girls-soccer-brampton-central" class="transition hover:text-auriga-emerald">Girls Soccer Program</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/development" class="transition hover:text-auriga-emerald">Development</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/competitive-teams" class="transition hover:text-auriga-emerald">Competitive Teams</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/personal-training" class="transition hover:text-auriga-emerald">Personal Training</a></li>
+                    <li class="mt-4 border-b border-white/10 pb-1 font-heading text-xs font-bold uppercase tracking-[0.08em] text-[#cbd5e1]">Camps</li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/camps" class="transition hover:text-auriga-emerald">Summer Camp</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/winter-camp" class="transition hover:text-auriga-emerald">Winter Camp</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/programs/march-break-camp" class="transition hover:text-auriga-emerald">March Break Camp</a></li>
+                    <li class="mt-4 border-b border-white/10 pb-1 font-heading text-xs font-bold uppercase tracking-[0.08em] text-[#cbd5e1]">Resources</li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/resources/player-development" class="transition hover:text-auriga-emerald">Player Development</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/faq" class="transition hover:text-auriga-emerald">FAQ</a></li>
+                    <li class="pl-3 text-[13px] text-[#64748b]"><a href="/policies" class="transition hover:text-auriga-emerald">Policies</a></li>
+                    <li><a href="/programs/location_select?program=trial" class="transition hover:pl-1 hover:text-auriga-emerald">Free Assessment</a></li>
+                    <li><a href="/contact" class="transition hover:pl-1 hover:text-auriga-emerald">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="text-center md:text-left">
+                <h4 class="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-auriga-emerald">Contact Us</h4>
+                <ul class="space-y-4 text-sm leading-6 text-auriga-muted">
+                    <li class="flex items-start justify-center gap-3 md:justify-start">
+                        <span class="mt-0.5 inline-block w-5 text-center">📞</span>
+                        <a href="tel:6479786798" class="transition hover:text-auriga-emerald">647-978-6798</a>
+                    </li>
+                    <li class="flex items-start justify-center gap-3 md:justify-start">
+                        <span class="mt-0.5 inline-block w-5 text-center">✉</span>
+                        <a href="mailto:info@aurigafootballclub.com" class="transition hover:text-auriga-emerald">info@aurigafootballclub.com</a>
+                    </li>
+                    <li class="flex items-start justify-center gap-3 text-center md:justify-start md:text-left">
+                        <span class="mt-0.5 inline-block w-5 text-center">📍</span>
+                        <span>4765 Huron Heights Dr,<br>Mississauga, ON L4Z 4G9</span>
+                    </li>
+                    <li class="flex items-center justify-center gap-3 pt-2 text-sm md:justify-start">
+                        <a href="https://www.facebook.com/people/Auriga-Football-Club/100091466900502/" target="_blank" rel="noreferrer" class="transition hover:text-auriga-emerald">Facebook</a>
+                        <span class="text-[#334155]">|</span>
+                        <a href="https://www.instagram.com/aurigafc" target="_blank" rel="noreferrer" class="transition hover:text-auriga-emerald">Instagram</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-white/10 px-6 py-5 text-center text-[13px] text-[#475569] md:px-10">
+            <p>© <span id="footer-year"></span> Auriga Football Club — All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const siteNavigation = document.getElementById('site-navigation');
+
+        if (mobileToggle && siteNavigation) {
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                siteNavigation.classList.toggle('nav-open');
+            });
+
+            siteNavigation.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileToggle.classList.remove('active');
+                    siteNavigation.classList.remove('nav-open');
+                });
+            });
+        }
+
+        const carousel = document.querySelector('[data-carousel]');
+        if (carousel) {
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+            let active = 0;
+
+            const render = () => {
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('opacity-100', index === active);
+                    slide.classList.toggle('opacity-0', index !== active);
+                });
+
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('bg-white/90', index === active);
+                    dot.classList.toggle('bg-white/40', index !== active);
+                });
+            };
+
+            const next = () => {
+                active = (active + 1) % slides.length;
+                render();
+            };
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    active = index;
+                    render();
+                });
+            });
+
+            setInterval(next, 2500);
+        }
+    </script>
+</body>
+</html>
