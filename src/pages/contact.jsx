@@ -133,7 +133,7 @@ function Contact() {
     <>
       <SEOHead
         title="Contact Auriga FC | Youth Soccer Registration Mississauga & Brampton"
-        description="Contact Auriga Football Club for youth soccer registration, program inquiries, or free assessment bookings. Call 647-978-6798 or email info@aurigafootball.com. Located in Mississauga, ON."
+        description="Contact Auriga Football Club for youth soccer registration, program inquiries, or free assessment bookings. Call 647-978-6798 or email info@aurigafootballclub.com. Located in Mississauga, ON."
         keywords="contact auriga fc, soccer registration mississauga, youth soccer inquiries, register kids soccer brampton, soccer club contact"
       />
       <StructuredData data={[localBusinessSchema, buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])]} />

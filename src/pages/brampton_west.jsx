@@ -11,6 +11,12 @@ const programs = [
     date: "July 5 - Sept 6, 2026",
     path: "/programs/recreation/brampton-west/summer",
   },
+  {
+    title: "Fall/Winter Development Training Program",
+    age: "Ages: 4–13",
+    date: "July 5 - Sept 6, 2026",
+    path: "/programs/recreation/brampton-west/winter",
+  },
 ];
 
 const trainingCards = [

@@ -48,7 +48,7 @@ const faqs = [
   },
   {
     question: "How do I register or ask questions?",
-    answer: "You can register directly through our programs page, fill out the contact form, or reach us directly:\n\n📞 647-978-6798\n📧 info@aurigafootball.com"
+    answer: "You can register directly through our programs page, fill out the contact form, or reach us directly:\n\n📞 647-978-6798\n📧 info@aurigafootballclub.com"
   },
 ];
 
@@ -155,7 +155,7 @@ function FAQ() {
                 <div className="faq-cta-divider" />
                 <div className="faq-cta-contact">
                   <a href="tel:6479786798" className="faq-cta-link" data-analytics-placement="faq_sidebar">📞 647-978-6798</a>
-                  <a href="mailto:info@aurigafootball.com" className="faq-cta-link" data-analytics-placement="faq_sidebar">📧 info@aurigafootball.com</a>
+                  <a href="mailto:info@aurigafootballclub.com" className="faq-cta-link" data-analytics-placement="faq_sidebar">📧 info@aurigafootballclub.com</a>
                 </div>
               </div>
             </div>

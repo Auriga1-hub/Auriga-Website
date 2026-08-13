@@ -75,7 +75,7 @@ export const organizationSchema = {
     { "@type": "City", "name": "Etobicoke", "containedInPlace": { "@type": "State", "name": "Ontario" } }
   ],
   "telephone": "+1-647-978-6798",
-  "email": "info@aurigafootball.com",
+  "email": "info@aurigafootballclub.com",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "4765 Huron Heights Dr",
@@ -92,7 +92,7 @@ export const organizationSchema = {
     "@type": "ContactPoint",
     "telephone": "+1-647-978-6798",
     "contactType": "customer service",
-    "email": "info@aurigafootball.com",
+    "email": "info@aurigafootballclub.com",
     "availableLanguage": "English"
   }
 };
@@ -105,7 +105,7 @@ export const localBusinessSchema = {
   "image": LOGO_URL,
   "url": DOMAIN,
   "telephone": "+1-647-978-6798",
-  "email": "info@aurigafootball.com",
+  "email": "info@aurigafootballclub.com",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "4765 Huron Heights Dr",
