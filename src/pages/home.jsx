@@ -154,7 +154,7 @@ function Home() {
             }}>
               Announcement
             </span>
-            Spring Program begins on May 18
+            Registration for Fall Programs begins on August 20
           </p>
         </div>
       </div>
