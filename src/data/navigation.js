@@ -4,8 +4,12 @@ const navigation = [
     path: "/",
   },
   {
-    name: "About",
-    path: "/about",
+    name: "Our Club",
+    dropdown: [
+      { name: "About Us",            path: "/about" },
+      { name: "Careers",             path: "/careers" },
+      { name: "Player Development",  path: "/resources/player-development" },
+    ],
   },
   {
     name: "Programs",
@@ -19,7 +23,6 @@ const navigation = [
     name: "Resources",
     dropdown: [
       { name: "Regulations & Policies", path: "/resources/regulations" },
-      { name: "Player Development",     path: "/resources/player-development" },
     ],
   },
 ];

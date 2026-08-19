@@ -455,7 +455,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <nav class="site-navigation" id="site-navigation" aria-label="Main navigation">
                 <ul class="site-menu">
                     <li><a href="/" class="menu-link">Home</a></li>
-                    <li><a href="/about" class="menu-link">About</a></li>
+
+                    <li class="has-children">
+                        <span class="menu-link nav-label">Our Club <span class="dropdown-arrow">▾</span></span>
+                        <ul class="dropdown">
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/careers">Careers</a></li>
+                            <li><a href="/resources/player-development">Player Development</a></li>
+                        </ul>
+                    </li>
 
                     <li class="has-children">
                         <span class="menu-link nav-label">Programs <span class="dropdown-arrow">▾</span></span>
@@ -480,7 +488,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <li class="has-children">
                         <span class="menu-link nav-label">Resources <span class="dropdown-arrow">▾</span></span>
                         <ul class="dropdown">
-                            <li><a href="/resources/player-development">Player Development</a></li>
                             <li><a href="/faq">FAQ</a></li>
                             <li><a href="/policies">Policies</a></li>
                         </ul>

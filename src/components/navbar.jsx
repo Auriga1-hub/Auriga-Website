@@ -53,17 +53,23 @@ function Navbar() {
               </NavLink>
             </li>
 
-            {/* ABOUT */}
-            <li>
-              <NavLink
-                to="/about"
-                onClick={closeMenu}
-                className={({ isActive }) =>
-                  isActive ? "menu-link active" : "menu-link"
-                }
-              >
-                About
-              </NavLink>
+            {/* OUR CLUB */}
+            <li className="has-children">
+              <span className="menu-link nav-label">
+                Our Club
+                <span className="dropdown-arrow">▾</span>
+              </span>
+              <ul className="dropdown">
+                <li>
+                  <NavLink to="/about" onClick={closeMenu}>About Us</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/careers" onClick={closeMenu}>Careers</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/resources/player-development" onClick={closeMenu}>Player Development</NavLink>
+                </li>
+              </ul>
             </li>
 
             {/* PROGRAMS */}
@@ -127,9 +133,6 @@ function Navbar() {
                 <span className="dropdown-arrow">▾</span>
               </span>
               <ul className="dropdown">
-                <li>
-                  <NavLink to="/resources/player-development" onClick={closeMenu}>Player Development</NavLink>
-                </li>
                 <li>
                   <NavLink to="/faq" onClick={closeMenu}>FAQ</NavLink>
                 </li>

@@ -10,6 +10,7 @@ import FloatingElements from "./components/FloatingElements";
 const Home = lazy(() => import("./pages/home"));
 const About = lazy(() => import("./pages/about"));
 const Contact = lazy(() => import("./pages/contact"));
+const Careers = lazy(() => import("./pages/careers"));
 
 /* PROGRAM LANDING PAGES */
 const Camps = lazy(() => import("./pages/camps"));
@@ -145,6 +146,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/careers" element={<Careers />} />
 
             <Route path="/programs/development" element={<DevelopmentAcademyPage />} />
             <Route path="/programs/personal-training" element={<PersonalTraining />} />
