@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "../css/navbar.css";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const isProgramsActive = location.pathname.startsWith("/programs/recreation/");
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
@@ -74,7 +76,7 @@ function Navbar() {
 
             {/* PROGRAMS */}
             <li className="has-children">
-              <span className="menu-link nav-label">
+              <span className={`menu-link nav-label${isProgramsActive ? " active" : ""}`}>
                 Programs
                 <span className="dropdown-arrow">▾</span>
               </span>
