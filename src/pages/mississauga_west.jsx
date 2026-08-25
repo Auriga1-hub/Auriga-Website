@@ -17,6 +17,18 @@ const programs = [
     date: "July 27 – September 30, 2026",
     path: "/programs/recreation/summer/mississauga_west",
   },
+  {
+    title: "Fall Development Training Program",
+    age: "Ages: 4–13",
+    date: "October 6 – January 15",
+    path: "/programs/recreation/fall/mississauga_west",
+  },
+  {
+    title: "Winter Development Training Program",
+    age: "Ages: 4–13",
+    date: "January 19 – April 30",
+    path: "/programs/recreation/winter/mississauga_west",
+  },
 ];
 
 const trainingCards = [

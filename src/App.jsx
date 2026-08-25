@@ -106,6 +106,16 @@ function WinterMississaugaCentralPage() {
   return null;
 }
 
+function FallMississaugaWestPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/fall/mississauga_west/index.html'); }, []);
+  return null;
+}
+
+function WinterMississaugaWestPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/winter/mississauga_west/index.html'); }, []);
+  return null;
+}
+
 function DevelopmentAcademyPage() {
   useEffect(() => { window.location.replace('/programs/development-academy/index.html'); }, []);
   return null;
@@ -199,6 +209,8 @@ function App() {
             <Route path="/programs/recreation/summer/mississauga_west" element={<SummerMississaugaWestPage />} />
             <Route path="/programs/recreation/fall/mississauga_central" element={<FallMississaugaCentralPage />} />
             <Route path="/programs/recreation/winter/mississauga_central" element={<WinterMississaugaCentralPage />} />
+            <Route path="/programs/recreation/fall/mississauga_west" element={<FallMississaugaWestPage />} />
+            <Route path="/programs/recreation/winter/mississauga_west" element={<WinterMississaugaWestPage />} />
 
             {/* DYNAMIC PROGRAM PAGES */}
             <Route path="/programs/recreation/:location/:program" element={<ProgramPage />} />
