@@ -17,6 +17,18 @@ const programs = [
     date: "July 27 – September 30, 2026",
     path: "/programs/recreation/brampton/summer",
   },
+  {
+    title: "Fall Development Training Program",
+    age: "Ages: 4–13",
+    date: "October 5 – January 27",
+    path: "/programs/recreation/fall/brampton/index.html",
+  },
+  {
+    title: "Winter Development Training Program",
+    age: "Ages: 4–13",
+    date: "February 1 – May 5",
+    path: "/programs/recreation/winter/brampton/index.html",
+  },
 ];
 
 const trainingCards = [

@@ -56,6 +56,16 @@ function SummerBramptonPage() {
   return null;
 }
 
+function FallBramptonPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/brampton/fall/index.html'); }, []);
+  return null;
+}
+
+function WinterBramptonPage() {
+  useEffect(() => { window.location.replace('/programs/recreation/brampton/winter/index.html'); }, []);
+  return null;
+}
+
 function GirlsSoccerBramptonPage() {
   useEffect(() => { window.location.replace('/programs/girls-soccer-brampton-central/index.html'); }, []);
   return null;
@@ -201,6 +211,8 @@ function App() {
             <Route path="/programs/girls-soccer-brampton-central" element={<GirlsSoccerBramptonPage />} />
             {/* SUMMER BRAMPTON LANDING PAGE */}
             <Route path="/programs/recreation/brampton/summer" element={<SummerBramptonPage />} />
+            <Route path="/programs/recreation/brampton/fall" element={<FallBramptonPage />} />
+            <Route path="/programs/recreation/brampton/winter" element={<WinterBramptonPage />} />
             <Route path="/programs/recreation/brampton-west/summer" element={<SummerBramptonWestPage />} />
             <Route path="/programs/recreation/brampton-west/winter" element={<WinterBramptonWestPage />} />
             <Route path="/programs/recreation/spring/mississauga_central" element={<SpringMississaugaCentralPage />} />
