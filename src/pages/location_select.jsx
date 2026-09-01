@@ -36,7 +36,7 @@ const locations = [
     directionsUrl: "https://share.google/UmfOXeVrZ45FQfoBR",
   },
   {
-    city: "Brampton",
+    city: "Brampton Central",
     slug: "brampton",
     mapSrc: "https://maps.google.com/maps?q=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3&z=17&output=embed",
     directionsUrl: "https://www.google.com/maps/search/?api=1&query=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3",
@@ -46,6 +46,12 @@ const locations = [
     slug: "brampton-west",
     mapSrc: "https://maps.google.com/maps?q=10750+Chinguacousy+Rd,+Brampton,+ON+L7A+2Z7&z=17&output=embed",
     directionsUrl: "https://share.google/aVWhIMZ2cx39XlKXQ",
+  },
+  {
+    city: "Brampton North",
+    slug: "brampton-north",
+    mapSrc: "https://maps.google.com/maps?q=25+Mountainberry+Rd,+Brampton,+ON+L6R+1J3&z=17&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=25+Mountainberry+Rd+Brampton+ON+L6R+1J3",
   },
 ];
 

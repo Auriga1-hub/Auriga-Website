@@ -6,25 +6,25 @@ import "../css/program_page.css";
 
 const programs = [
   {
-    title: "Spring Development Training Program",
+    title: "Spring Training Program",
     age: "Ages: 4–13",
     date: "May 18 – July 24, 2026",
     path: "/programs/recreation/brampton/spring",
   },
   {
-    title: "Summer Development Training Program",
+    title: "Summer Training Program",
     age: "Ages: 4–13",
     date: "July 27 – September 30, 2026",
     path: "/programs/recreation/brampton/summer",
   },
   {
-    title: "Fall Development Training Program",
+    title: "Fall Training Program",
     age: "Ages: 4–13",
     date: "October 5 – January 27",
     path: "/programs/recreation/fall/brampton/index.html",
   },
   {
-    title: "Winter Development Training Program",
+    title: "Winter Training Program",
     age: "Ages: 4–13",
     date: "February 1 – May 5",
     path: "/programs/recreation/winter/brampton/index.html",
@@ -67,7 +67,7 @@ function Brampton() {
       <div className="bram-hero">
         <div className="bram-hero-overlay" />
         <div className="bram-hero-container">
-          <h1 className="bram-hero-title">Brampton Training Program</h1>
+          <h1 className="bram-hero-title">Brampton Central Training Program</h1>
           <p className="bram-hero-text">
             Professional youth football training in Brampton focused on
             skill development, teamwork, and confidence on the field.
@@ -82,7 +82,7 @@ function Brampton() {
 
           <div className="bram-section-heading">
             <span className="bram-label">Available Programs</span>
-            <h2 className="bram-section-title">Brampton Programs</h2>
+            <h2 className="bram-section-title">Brampton Central Programs</h2>
           </div>
 
           <div className="bram-program-grid">

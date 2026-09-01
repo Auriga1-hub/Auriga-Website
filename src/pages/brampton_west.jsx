@@ -6,19 +6,19 @@ import "../css/program_page.css";
 
 const programs = [
   {
-    title: "Summer Development Training Program",
+    title: "Summer Training Program",
     age: "Ages: 4–13",
     date: "July 5 - Sept 6, 2026",
     path: "/programs/recreation/brampton-west/summer",
   },
   {
-    title: "Fall Development Training Program",
+    title: "Fall Training Program",
     age: "Ages: 4–13",
     date: "October 6 - January 12",
     path: "/programs/recreation/brampton-west/fall/",
   },
   {
-    title: "Winter Development Training Program",
+    title: "Winter Training Program",
     age: "Ages: 4–13",
     date: "Jan 19 to Apr 28",
     path: "/programs/recreation/brampton-west/winter",

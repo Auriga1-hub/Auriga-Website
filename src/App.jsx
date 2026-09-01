@@ -34,6 +34,7 @@ const MississaugaWest = lazy(() => import("./pages/mississauga_west"));
 const Etobicoke = lazy(() => import("./pages/etobicoke"));
 const Brampton = lazy(() => import("./pages/brampton"));
 const BramptonWest = lazy(() => import("./pages/brampton_west"));
+const BramptonNorth = lazy(() => import("./pages/brampton_north"));
 
 /* PROGRAM PAGE */
 const ProgramPage = lazy(() => import("./pages/program_page"));
@@ -207,6 +208,7 @@ function App() {
             <Route path="/programs/recreation/etobicoke" element={<Etobicoke />} />
             <Route path="/programs/recreation/brampton" element={<Brampton />} />
             <Route path="/programs/recreation/brampton-west" element={<BramptonWest />} />
+            <Route path="/programs/recreation/brampton-north" element={<BramptonNorth />} />
 
             {/* SPRING BRAMPTON LANDING PAGE */}
             <Route path="/spring-landing" element={<SpringBramptonLegacyPage />} />

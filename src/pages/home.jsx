@@ -66,7 +66,7 @@ const locations = [
     directionsUrl: "https://share.google/UmfOXeVrZ45FQfoBR",
   },
   {
-    title: "Brampton",
+    title: "Brampton Central",
     mapSrc: "https://maps.google.com/maps?q=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3&z=17&output=embed",
     directionsUrl: "https://www.google.com/maps/search/?api=1&query=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3",
   },

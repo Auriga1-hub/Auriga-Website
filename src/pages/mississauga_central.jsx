@@ -6,25 +6,25 @@ import "../css/program_page.css";
 
 const programs = [
   {
-    title: "Spring Development Training Program",
+    title: "Spring Training Program",
     age: "Ages: 4–13",
     date: "May 18 – July 24, 2026",
     path: "/programs/recreation/spring/mississauga_central",
   },
   {
-    title: "Summer Development Training Program",
+    title: "Summer Training Program",
     age: "Ages: 4–13",
     date: "July 28 – September 29, 2026",
     path: "/programs/recreation/summer/mississauga_central",
   },
   {
-    title: "Fall Development Training Program",
+    title: "Fall Training Program",
     age: "Ages: 4–13",
     date: "Fall 2026",
     path: "/programs/recreation/fall/mississauga_central",
   },
   {
-    title: "Winter Development Training Program",
+    title: "Winter Training Program",
     age: "Ages: 4–13",
     date: "Winter 2026–27",
     path: "/programs/recreation/winter/mississauga_central",
