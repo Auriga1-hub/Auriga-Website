@@ -1,5 +1,5 @@
 (function initAurigaAnalytics(window, document) {
-  var measurementId = "G-3SC8P695HJ";
+  var measurementId = "G-5RWTSZXLHC";
   var scrollMilestones = [25, 50, 75, 90];
   var trackedScrollMilestones = {};
 
@@ -218,13 +218,6 @@
       form_program: form.getAttribute("data-analytics-program"),
       page_path: getCurrentPath(),
     });
-  }
-
-  if (!document.querySelector('script[src*="googletagmanager.com/gtag/js?id=' + measurementId + '"]')) {
-    var script = document.createElement("script");
-    script.async = true;
-    script.src = "https://www.googletagmanager.com/gtag/js?id=" + measurementId;
-    document.head.appendChild(script);
   }
 
   window.gtag("js", new Date());
