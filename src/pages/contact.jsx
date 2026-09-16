@@ -10,7 +10,7 @@ import StructuredData, { localBusinessSchema, buildBreadcrumbSchema } from "../c
 const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 
 function Contact() {
-  const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", heard_about: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -80,6 +80,7 @@ function Contact() {
       from_name: formData.name,
       from_email: formData.email,
       phone: formData.phone,
+      heard_about: formData.heard_about,
       message: formData.message,
       subject: "General Website Inquiry",
       "g-recaptcha-response": turnstileResponse,
@@ -267,6 +268,24 @@ function Contact() {
                       onBlur={() => setFocused(null)}
                       placeholder="your@email.com"
                     />
+                  </div>
+
+                  <div className={`contact-field ${focused === "heard_about" || formData.heard_about ? "active" : ""}`}>
+                    <label>Where did you hear about us?</label>
+                    <select
+                      name="heard_about"
+                      value={formData.heard_about}
+                      onChange={handleChange}
+                      onFocus={() => setFocused("heard_about")}
+                      onBlur={() => setFocused(null)}
+                    >
+                      <option value="">Select an option</option>
+                      <option value="Google Search">Google Search</option>
+                      <option value="Instagram / Facebook">Instagram / Facebook</option>
+                      <option value="Friend / Family Referral">Friend / Family Referral</option>
+                      <option value="Website / Social Media">Website / Social Media</option>
+                      <option value="Other">Other</option>
+                    </select>
                   </div>
 
                   <div className={`contact-field ${focused === "message" || formData.message ? "active" : ""}`}>

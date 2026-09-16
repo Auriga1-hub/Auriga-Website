@@ -312,7 +312,8 @@ RIGHT — FORM
 }
 
 .contact-field input,
-.contact-field textarea {
+.contact-field textarea,
+.contact-field select {
   font-family: 'Nunito', sans-serif;
   font-size: 15px;
   color: white;
@@ -326,15 +327,37 @@ RIGHT — FORM
   width: 100%;
 }
 
+.contact-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #cbd5e1 50%),
+    linear-gradient(135deg, #cbd5e1 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 42px;
+  cursor: pointer;
+}
+
+.contact-field option {
+  background: #0b1f33;
+  color: white;
+}
+
 .contact-field input::placeholder,
 .contact-field textarea::placeholder {
   color: #3d5166;
 }
 
 .contact-field input:focus,
-.contact-field textarea:focus {
+.contact-field textarea:focus,
+.contact-field select:focus {
   border-color: rgba(16, 185, 129, 0.5);
-  background: rgba(16, 185, 129, 0.04);
+  background-color: rgba(16, 185, 129, 0.04);
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.08);
 }
 

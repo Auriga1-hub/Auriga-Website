@@ -693,6 +693,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <span class="mt-2 block text-xs text-[#8fb0c9]">Only Tuesdays and Thursdays are available.</span>
                         </label>
 
+                        <label class="text-sm font-semibold text-auriga-slateText">Where did you hear about us?
+                            <select name="heardAbout" class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white focus:border-auriga-blue focus:outline-none">
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="Google Search">Google Search</option>
+                                <option value="Instagram / Facebook">Instagram / Facebook</option>
+                                <option value="Friend / Family Referral">Friend / Family Referral</option>
+                                <option value="Website / Social Media">Website / Social Media</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </label>
+
                         <label class="text-sm font-semibold text-auriga-slateText sm:col-span-2">Message (optional)
                             <textarea name="message" rows="4" class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Tell us anything helpful about your child's training goals"></textarea>
                         </label>
@@ -884,6 +895,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 }
 
                 const formData = new FormData(waitlistForm);
+                const heardAbout = formData.get('heardAbout') || 'Not provided';
                 const payload = {
                     sheet_name: 'development academy',
                     target_sheet: 'development academy',
@@ -901,7 +913,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     current_level: formData.get('level') || '',
                     preferred_date: formData.get('tryoutDate') || '',
                     preferred_time: 'N/A',
-                    heard_about: 'Development Academy Landing Page',
+                    heard_about: heardAbout,
                     subject: 'Development Academy Waitlist - Mississauga & Brampton',
                     inquiry_type: 'Development Academy Waitlist',
                     message: formData.get('message') || '',
@@ -920,7 +932,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             years_played: payload.years_played || 'N/A',
                             preferred_date: formData.get('tryoutDate') || 'N/A',
                             preferred_time: 'N/A',
-                            heard_about: 'Development Academy Landing Page',
+                            heard_about: heardAbout,
                             message: payload.message,
                             subject: 'Development Academy Waitlist - Mississauga & Brampton',
                         };
