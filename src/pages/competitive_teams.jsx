@@ -100,6 +100,10 @@ function CompetitiveTeams() {
               We currently operate the following development teams. These teams train consistently
               and participate in friendly matches, tournaments, and league opportunities.
             </p>
+            <div className="ct-team-gallery">
+              <img src="/images/development-academy-team-1.jpeg" alt="Auriga competitive team posing in front of a goal" />
+              <img src="/images/development-academy-team-2.jpeg" alt="Auriga competitive players posing in front of a goal" />
+            </div>
             <div className="ct-team-grid">
               {teams.map((team, i) => (
                 <div className="ct-team-card" key={i}>

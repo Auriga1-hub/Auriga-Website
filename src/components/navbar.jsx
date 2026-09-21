@@ -66,6 +66,9 @@ function Navbar() {
                   <NavLink to="/about" onClick={closeMenu}>About Us</NavLink>
                 </li>
                 <li>
+                  <NavLink to="/our-team" onClick={closeMenu}>Our Team</NavLink>
+                </li>
+                <li>
                   <NavLink to="/careers" onClick={closeMenu}>Careers</NavLink>
                 </li>
                 <li>
