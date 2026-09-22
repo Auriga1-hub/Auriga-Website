@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { navItems, navCTAs } from "../data/navConfig";
 import "../css/navbar.css";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isProgramsActive = location.pathname.startsWith("/programs/recreation/");
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
@@ -39,141 +39,60 @@ function Navbar() {
 
           <ul className="site-menu">
 
-            {/* HOME */}
-            <li>
-              <NavLink
-                to="/"
-                onClick={() => {
-                  closeMenu();
-                  scrollToTop();
-                }}
-                className={({ isActive }) =>
-                  isActive ? "menu-link active" : "menu-link"
-                }
-              >
-                Home
-              </NavLink>
-            </li>
+            {navItems.map((item) => {
+              if (item.type === "link") {
+                return (
+                  <li key={item.path}>
+                    <NavLink
+                      to={item.path}
+                      onClick={() => {
+                        closeMenu();
+                        scrollToTop();
+                      }}
+                      className={({ isActive }) =>
+                        isActive ? "menu-link active" : "menu-link"
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                );
+              }
 
-            {/* OUR CLUB */}
-            <li className="has-children">
-              <span className="menu-link nav-label">
-                Our Club
-                <span className="dropdown-arrow">▾</span>
-              </span>
-              <ul className="dropdown">
-                <li>
-                  <NavLink to="/about" onClick={closeMenu}>About Us</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/our-team" onClick={closeMenu}>Our Team</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/careers" onClick={closeMenu}>Careers</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/resources/player-development" onClick={closeMenu}>Player Development</NavLink>
-                </li>
-              </ul>
-            </li>
+              const isDropdownActive =
+                item.activePrefix && location.pathname.startsWith(item.activePrefix);
 
-            {/* PROGRAMS */}
-            <li className="has-children">
-              <span className={`menu-link nav-label${isProgramsActive ? " active" : ""}`}>
-                Programs
-                <span className="dropdown-arrow">▾</span>
-              </span>
-              <ul className="dropdown">
-                <li>
-                  <NavLink to="/programs/location_select?program=recreation" onClick={closeMenu}>
-                    Fundamentals
-                  </NavLink>
+              return (
+                <li className="has-children" key={item.label}>
+                  <span className={`menu-link nav-label${isDropdownActive ? " active" : ""}`}>
+                    {item.label}
+                    <span className="dropdown-arrow">▾</span>
+                  </span>
+                  <ul className="dropdown">
+                    {item.items.map((sub) => (
+                      <li key={sub.path}>
+                        <NavLink to={sub.path} onClick={closeMenu}>{sub.label}</NavLink>
+                      </li>
+                    ))}
+                  </ul>
                 </li>
-                <li>
-                  <NavLink to="/programs/girls-soccer-brampton-central" onClick={closeMenu}>
-                    Girls Soccer Program
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/programs/development" onClick={closeMenu}>
-                    Development
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/programs/competitive-teams" onClick={closeMenu}>
-                    Competitive Teams
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/programs/personal-training" onClick={closeMenu}>
-                    Personal Training
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
+              );
+            })}
 
-            {/* CAMPS */}
-            <li className="has-children">
-              <span className="menu-link nav-label">
-                Camps
-                <span className="dropdown-arrow">▾</span>
-              </span>
-              <ul className="dropdown">
-                <li>
-                  <NavLink to="/programs/camps" onClick={closeMenu}>Summer Camp</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/programs/winter-camp" onClick={closeMenu}>Winter Camp</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/programs/march-break-camp" onClick={closeMenu}>March Break Camp</NavLink>
-                </li>
-              </ul>
-            </li>
-
-            {/* RESOURCES */}
-            <li className="has-children">
-              <span className="menu-link nav-label">
-                Resources
-                <span className="dropdown-arrow">▾</span>
-              </span>
-              <ul className="dropdown">
-                <li>
-                  <NavLink to="/faq" onClick={closeMenu}>FAQ</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/policies" onClick={closeMenu}>Policies</NavLink>
-                </li>
-              </ul>
-            </li>
-
-            {/* FREE ASSESSMENT BUTTON — primary CTA */}
-            <li className="free-trial-button">
-              <NavLink
-                to="/programs/location_select?program=trial"
-                onClick={closeMenu}
-                data-analytics-event="cta_click"
-                data-analytics-placement="navbar"
-                data-analytics-destination="/programs/location_select?program=trial"
-                data-analytics-label="free_trial"
-              >
-                Free Assessment
-              </NavLink>
-            </li>
-
-            {/* CONTACT BUTTON — ghost/outline */}
-            <li className="cta-button">
-              <NavLink
-                to="/contact"
-                onClick={closeMenu}
-                data-analytics-event="cta_click"
-                data-analytics-placement="navbar"
-                data-analytics-destination="/contact"
-                data-analytics-label="contact"
-              >
-                Contact
-              </NavLink>
-            </li>
+            {navCTAs.map((cta) => (
+              <li className={cta.className} key={cta.path}>
+                <NavLink
+                  to={cta.path}
+                  onClick={closeMenu}
+                  data-analytics-event={cta.analytics.event}
+                  data-analytics-placement={cta.analytics.placement}
+                  data-analytics-destination={cta.path}
+                  data-analytics-label={cta.analytics.label}
+                >
+                  {cta.label}
+                </NavLink>
+              </li>
+            ))}
 
           </ul>
 

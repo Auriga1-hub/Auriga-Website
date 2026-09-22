@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/sync-static-headers.mjs",
     "build": "vite build",
+    "sync-header": "node scripts/sync-static-headers.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
