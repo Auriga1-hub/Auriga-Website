@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import TestimonialBar from "../components/TestimonialBar";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { buildBreadcrumbSchema, buildCourseSchema } from "../components/StructuredData";
 import "../css/development.css";
+
+const carouselImages = [
+  { src: "/images/development-academy-carousel-1.webp", alt: "Auriga Development Academy players posing in front of a goal" },
+  { src: "/images/development-academy-carousel-2.webp", alt: "Auriga Development Academy team posing in front of a goal" },
+];
 
 const skills = [
   { icon: "⚽", label: "Ball control and dribbling" },
@@ -50,6 +56,16 @@ const coachingCerts = [
 ];
 
 function Development() {
+  const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % carouselImages.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <SEOHead
@@ -79,6 +95,34 @@ function Development() {
       </div>
 
       <TestimonialBar />
+
+      {/* PHOTO CAROUSEL */}
+      <section className="dev-carousel-section">
+        <div className="dev-container">
+          <div className="dev-carousel">
+            {carouselImages.map((image, i) => (
+              <img
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                loading={i === 0 ? "eager" : "lazy"}
+                className={`dev-carousel-image${i === activeImage ? " is-active" : ""}`}
+              />
+            ))}
+            <div className="dev-carousel-dots">
+              {carouselImages.map((image, i) => (
+                <button
+                  key={image.src}
+                  type="button"
+                  className={`dev-carousel-dot${i === activeImage ? " is-active" : ""}`}
+                  aria-label={`Show slide ${i + 1}`}
+                  onClick={() => setActiveImage(i)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
 
       {/* INTRO */}

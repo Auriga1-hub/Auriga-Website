@@ -57,23 +57,28 @@ const galleryImages = [
 const locations = [
   {
     title: "Mississauga Central",
-    mapSrc: "https://maps.google.com/maps?q=4765+Huron+Heights+Dr,+Mississauga,+ON+L4Z+4G9&z=17&output=embed",
-    directionsUrl: "https://share.google/JJJdxpHYQGxSsKIvk",
+    mapSrc: "https://maps.google.com/maps?q=3100+Hurontario+St,+Mississauga,+ON+L5B+1N7&z=17&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/4PkBMQWbqqwHjgFx9",
   },
   {
     title: "Mississauga West",
-    mapSrc: "https://maps.google.com/maps?q=F.B.+McFarren+Memorial+Park,+5255+McFarren+Blvd,+Mississauga,+ON+L5M+5E9&z=17&output=embed",
-    directionsUrl: "https://share.google/UmfOXeVrZ45FQfoBR",
+    mapSrc: "https://maps.google.com/maps?q=6234+Osprey+Blvd,+Mississauga,+ON+L5N+5V5&z=17&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/6F9UU9wiekYx7xm48",
   },
   {
     title: "Brampton Central",
-    mapSrc: "https://maps.google.com/maps?q=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3&z=17&output=embed",
-    directionsUrl: "https://www.google.com/maps/search/?api=1&query=100+Hilldale+Crescent,+Brampton,+ON+L6S+2N3",
+    mapSrc: "https://maps.google.com/maps?q=510+Balmoral+Dr,+Brampton,+ON+L6T+1W4&z=17&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/cc3GtAQCg5SfaDbK9",
   },
   {
     title: "Brampton West",
-    mapSrc: "https://maps.google.com/maps?q=10750+Chinguacousy+Rd,+Brampton,+ON+L7A+2Z7&z=17&output=embed",
-    directionsUrl: "https://share.google/aVWhIMZ2cx39XlKXQ",
+    mapSrc: "https://maps.google.com/maps?q=10750+Chinguacousy+Rd,+Brampton,+ON&z=17&output=embed",
+    directionsUrl: "https://maps.app.goo.gl/uh9zVph9vWsaoxBTA",
+  },
+  {
+    title: "Brampton North",
+    mapSrc: "https://maps.google.com/maps?q=25+Mountainberry+Rd,+Brampton,+ON+L6R+1J3&z=17&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=25+Mountainberry+Rd+Brampton+ON+L6R+1J3",
   },
 ];
 
@@ -448,23 +453,6 @@ function Home() {
         </div>
       </section>
 
-      {/* TRAINING GALLERY */}
-      <section className="gallery-section">
-        <div className="gallery-heading">
-          <h2 className="gallery-title">Training Gallery</h2>
-        </div>
-
-        <div className="gallery-slider">
-          <div className="gallery-track">
-            {galleryImages.map((src, index) => (
-              <div className="gallery-item" key={index}>
-                <img src={src} alt={`Training ${(index % 3) + 1}`} loading="lazy" width="300" height="200" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* LOCATIONS */}
       <section className="locations-section">
         <div className="locations-container">
@@ -515,6 +503,23 @@ function Home() {
             ))}
           </div>
 
+        </div>
+      </section>
+
+      {/* TRAINING GALLERY */}
+      <section className="gallery-section">
+        <div className="gallery-heading">
+          <h2 className="gallery-title">Training Gallery</h2>
+        </div>
+
+        <div className="gallery-slider">
+          <div className="gallery-track">
+            {galleryImages.map((src, index) => (
+              <div className="gallery-item" key={index}>
+                <img src={src} alt={`Training ${(index % 3) + 1}`} loading="lazy" width="300" height="200" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

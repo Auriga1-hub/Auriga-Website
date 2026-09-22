@@ -46,6 +46,24 @@ const HERO_SLIDES = [
       },
     ],
   },
+  {
+    image: "/images/hero-development-academy-2.jpeg",
+    title: (
+      <>
+        Train With Purpose.<br />
+        Develop With Intention.
+      </>
+    ),
+    text: "A structured development environment for players ready to sharpen their technical skills, improve their decision-making, and take their game to the next level.",
+    buttons: [
+      {
+        to: "/programs/development",
+        label: "Explore Development Program",
+        variant: "primary",
+        analyticsLabel: "explore_development_program",
+      },
+    ],
+  },
 ];
 
 function Hero() {
