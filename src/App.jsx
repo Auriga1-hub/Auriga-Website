@@ -26,6 +26,7 @@ const TrialEtobicoke = lazy(() => import("./pages/free_trial_etobicoke"));
 const TrialBrampton = lazy(() => import("./pages/free_trial_brampton"));
 const TrialBramptonWest = lazy(() => import("./pages/free_trial_brampton_west"));
 const TrialBramptonNorth = lazy(() => import("./pages/free_trial_brampton_north"));
+const TrialBramptonGirls = lazy(() => import("./pages/free_trial_brampton_girls"));
 
 /* LOCATION SELECTOR */
 const LocationSelect = lazy(() => import("./pages/location_select"));
@@ -202,6 +203,7 @@ function App() {
             <Route path="/programs/trial/brampton" element={<TrialBrampton />} />
             <Route path="/programs/trial/brampton-west" element={<TrialBramptonWest />} />
             <Route path="/programs/trial/brampton-north" element={<TrialBramptonNorth />} />
+            <Route path="/programs/trial/brampton-girls-program" element={<TrialBramptonGirls />} />
 
             {/* LOCATION SELECTOR */}
             <Route path="/programs/location_select" element={<LocationSelect />} />

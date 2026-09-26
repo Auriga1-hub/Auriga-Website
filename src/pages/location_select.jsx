@@ -53,6 +53,13 @@ const locations = [
     mapSrc: "https://maps.google.com/maps?q=25+Mountainberry+Rd,+Brampton,+ON+L6R+1J3&z=17&output=embed",
     directionsUrl: "https://www.google.com/maps/search/?api=1&query=25+Mountainberry+Rd+Brampton+ON+L6R+1J3",
   },
+  {
+    city: "Brampton Girls Program",
+    slug: "brampton-girls-program",
+    mapSrc: "https://maps.google.com/maps?q=950+North+Park+Dr,+Brampton,+ON+L6S+3L5&z=17&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=950+North+Park+Dr+Brampton+ON+L6S+3L5",
+    programs: ["trial"],
+  },
 ];
 
 function LocationSelect() {
@@ -100,7 +107,7 @@ function LocationSelect() {
           </div>
 
           <div className="locations-grid">
-            {locations.map((loc) => (
+            {locations.filter((loc) => !loc.programs || loc.programs.includes(program)).map((loc) => (
               <div
                 key={loc.slug}
                 className="location-card"
