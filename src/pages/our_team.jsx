@@ -24,6 +24,35 @@ function OurTeam() {
         </div>
       </div>
 
+      {/* COACHES GRID */}
+      <section className="coaches-section">
+        <div className="coaches-container">
+          <h2 className="coaches-heading">Meet Our Coaches</h2>
+          <div className="coaches-grid">
+            {[
+              { name: "Safwan", role: "President", image: "/images/Safwan - President.webp" },
+              { name: "Syed", role: "Director", image: "/images/Syed - Director.webp" },
+              { name: "Peter", role: "2017-18 Development Coach", image: "/images/Peter - 2017-18 Development Coach.webp" },
+              { name: "Ebenezer Appiah", role: "2014-15 Development Coach", image: "/images/Ebenezer Appiah - 2014-15 Development Coach.webp" },
+              { name: "Zion", role: "Grassroots Coach", image: "/images/Zion - Grassroots Coach.webp" },
+              { name: "Adriana", role: "Grassroots Coach", image: "/images/Adriana - Grassroots Coach.webp" },
+              { name: "Majd", role: "Grassroots Coach", image: "/images/Majd - Grassroots Coach.webp" },
+              { name: "Sukhdeep", role: "Grassroots Coach", image: "/images/Sukhdeep - Grassroots Coach.webp" },
+              { name: "Melwyn", role: "Grassroots Coach", image: "/images/Melwyn - Grassroots Coach.webp" },
+            ].map((coach) => (
+              <div className="coach-card" key={coach.name}>
+                <img className="coach-photo" src={coach.image} alt={`${coach.name}, ${coach.role}`} />
+                <div className="coach-info-box">
+                  <h3>{coach.name}</h3>
+                  <span className="coach-role">{coach.role}</span>
+                  <p>Coach biography coming soon.</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* TEAM CONTENT */}
       <section className="about-page-section">
         <div className="about-page-container">
