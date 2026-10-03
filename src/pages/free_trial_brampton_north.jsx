@@ -187,7 +187,7 @@ function TrialBramptonNorth() {
                   </p>
                   <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "12px 20px", borderRadius: "10px", marginTop: "16px", display: "inline-block" }}>
                     <span style={{ color: "#10b981", fontWeight: "800", display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
-                      Runs strictly on Sundays
+                      Runs strictly on Fridays
                     </span>
                   </div>
                 </div>
@@ -241,12 +241,12 @@ function TrialBramptonNorth() {
                     <h3 className="trial-fieldset-title">Booking Details</h3>
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Preferred Date (Sunday Only) <span className="req">*</span></label>
+                        <label>Preferred Date (Friday Only) <span className="req">*</span></label>
                         <DatePicker
                           selected={selectedDate}
                           onChange={(date) => setSelectedDate(date)}
-                          filterDate={(date) => date.getDay() === 0}
-                          placeholderText="Select Sunday"
+                          filterDate={(date) => date.getDay() === 5}
+                          placeholderText="Select Friday"
                           dateFormat="yyyy-MM-dd"
                           required
                           className="date-picker-input"
@@ -256,8 +256,8 @@ function TrialBramptonNorth() {
                         <label>Preferred Time <span className="req">*</span></label>
                         <select name="preferred_time" required>
                           <option value="">Select Time</option>
-                          <option>U4-U8, 5:15-6:15 PM</option>
-                          <option>U9-U13, 6:15-7:15 PM</option>
+                          <option>U4-U8, 6:15-7:05 PM</option>
+                          <option>U9-U13, 7:05-8:00 PM</option>
                         </select>
                       </div>
                     </div>

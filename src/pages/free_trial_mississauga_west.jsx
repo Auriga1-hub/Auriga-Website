@@ -192,7 +192,7 @@ function TrialMississaugaWest() {
                   </p>
                   <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "12px 20px", borderRadius: "10px", marginTop: "16px", display: "inline-block" }}>
                     <span style={{ color: "#10b981", fontWeight: "800", display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
-                      🗓️ Runs strictly on Sundays only
+                      🗓️ Runs strictly on Tuesdays and Fridays only
                     </span>
                   </div>
                 </div>
@@ -247,14 +247,32 @@ function TrialMississaugaWest() {
                   {/* BOOKING */}
                   <div className="trial-fieldset">
                     <h3 className="trial-fieldset-title">Booking Details</h3>
+                    <div className="trial-notice">
+                      <a
+                        href="https://maps.app.goo.gl/6F9UU9wiekYx7xm48"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#10b981", display: "block", fontWeight: 700, textDecoration: "underline" }}
+                      >
+                        Tuesday: St. Edith Stein CES, 6234 Osprey Blvd, Mississauga, ON L5N 5V5
+                      </a>
+                      <a
+                        href="https://www.google.com/maps/dir/?api=1&destination=3345+Escada+Dr+Mississauga+ON+L5M+7V5"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#10b981", display: "block", fontWeight: 700, textDecoration: "underline" }}
+                      >
+                        Friday: St. Bernard of Clairvaux CES, 3345 Escada Dr, Mississauga, ON L5M 7V5
+                      </a>
+                    </div>
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Preferred Date (Sundays Only) <span className="req">*</span></label>
+                        <label>Preferred Date (Tuesdays & Fridays Only) <span className="req">*</span></label>
                         <DatePicker
                           selected={selectedDate}
                           onChange={(date) => setSelectedDate(date)}
-                          filterDate={(date) => date.getDay() === 0}
-                          placeholderText="Select a Sunday"
+                          filterDate={(date) => date.getDay() === 2 || date.getDay() === 5}
+                          placeholderText="Select Tuesday or Friday"
                           dateFormat="yyyy-MM-dd"
                           required
                           className="date-picker-input"
@@ -264,8 +282,8 @@ function TrialMississaugaWest() {
                         <label>Preferred Time <span className="req">*</span></label>
                         <select name="preferred_time" required>
                           <option value="">Select Time</option>
-                          <option>Ages 4-8, 5:15PM</option>
-                          <option>Ages 9-13, 6:15PM</option>
+                          <option>Ages 4-8, 6:15-7:05 PM</option>
+                          <option>Ages 9-13, 7:05-8:00 PM</option>
                         </select>
                       </div>
                     </div>

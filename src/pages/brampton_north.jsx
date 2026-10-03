@@ -74,16 +74,13 @@ const seasonalPrograms = [
   {
     season: "Fall",
     status: "Registration Open",
-    dates: "Oct 6 – Jan 15 (26 Sessions)",
-    days: "Tuesdays & Fridays",
+    dates: "Oct 6 – Jan 15 (13 Sessions)",
+    days: "Fridays",
     ageGroups: [
       { label: "U4–U8", time: "6:15 – 7:05 PM" },
       { label: "U9–U13", time: "7:05 – 8:00 PM" },
     ],
-    twoDayPrice: "$515 + HST",
     oneDayPrice: "$310 + HST",
-    oneDayNote: "1 Day/Week: Choose Tuesday or Friday",
-    confirmNote: "After completing registration, please email or text us to confirm your preferred training day.",
     deposit: {
       amount: "$30 Deposit to secure your spot",
       note: "Payment plans available during the time of registration.",
@@ -91,22 +88,18 @@ const seasonalPrograms = [
     },
     registerLinks: {
       oneDay: "https://aurigafc.playbookapi.com/programs/camp_registration/?class_package%5B%5D=76279",
-      twoDay: "https://aurigafc.playbookapi.com/programs/camp_registration/?class_package%5B%5D=76278",
     },
   },
   {
     season: "Winter",
     status: "Registration Open",
-    dates: "Jan 19 – Apr 30 (26 Sessions)",
-    days: "Tuesdays & Fridays",
+    dates: "Jan 19 – Apr 30 (13 Sessions)",
+    days: "Fridays",
     ageGroups: [
       { label: "U4–U8", time: "6:15 – 7:05 PM" },
       { label: "U9–U13", time: "7:05 – 8:00 PM" },
     ],
-    twoDayPrice: "$515 + HST",
     oneDayPrice: "$310 + HST",
-    oneDayNote: "1 Day/Week: Choose Tuesday or Friday",
-    confirmNote: "After completing registration, please email or text us to confirm your preferred training day.",
     deposit: {
       amount: "$30 Deposit to secure your spot",
       note: "Payment plans available during the time of registration.",
@@ -114,7 +107,6 @@ const seasonalPrograms = [
     },
     registerLinks: {
       oneDay: "https://aurigafc.playbookapi.com/programs/camp_registration/?class_package%5B%5D=76328",
-      twoDay: "https://aurigafc.playbookapi.com/programs/camp_registration/?class_package%5B%5D=76329",
     },
   },
 ];
@@ -364,16 +356,14 @@ function BramptonNorth() {
                   <div className="bn-season-row" key={ag.label}><strong>{ag.label}:</strong> {ag.time}</div>
                 ))}
 
-                {prog.twoDayPrice ? (
+                {prog.oneDayPrice ? (
                   <div className="bn-season-pricing">
-                    <div className="bn-season-price"><span>2 Days/Week</span><strong>{prog.twoDayPrice}</strong></div>
-                    <div className="bn-season-price"><span>1 Day/Week</span><strong>{prog.oneDayPrice}</strong></div>
+                    {prog.twoDayPrice && <div className="bn-season-price"><span>2 Days/Week</span><strong>{prog.twoDayPrice}</strong></div>}
+                    <div className="bn-season-price"><span>Price</span><strong>{prog.oneDayPrice}</strong></div>
                   </div>
                 ) : (
                   <p className="bn-season-note">Dates, training days/times, and pricing will be published when {prog.season.toLowerCase()} registration opens.</p>
                 )}
-                {prog.oneDayNote && <p className="bn-season-note bn-season-note-highlight">{prog.oneDayNote}</p>}
-                {prog.confirmNote && <p className="bn-season-note bn-season-note-highlight">{prog.confirmNote}</p>}
 
                 {prog.deposit && (
                   <div className="bn-deposit-box">
@@ -389,8 +379,7 @@ function BramptonNorth() {
 
                 {prog.registerLinks ? (
                   <div className="bn-register-group">
-                    <a href={prog.registerLinks.twoDay} target="_blank" rel="noopener noreferrer" className="bn-register-btn">Register 2 Day/Week</a>
-                    <a href={prog.registerLinks.oneDay} target="_blank" rel="noopener noreferrer" className="bn-register-btn">Register 1 Day/Week</a>
+                    <a href={prog.registerLinks.oneDay} target="_blank" rel="noopener noreferrer" className="bn-register-btn">Register Now</a>
                   </div>
                 ) : prog.dates ? (
                   <Link to="/contact" className="bn-season-register">Register Now</Link>

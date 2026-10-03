@@ -25,8 +25,8 @@ const locations = [
     city: "Mississauga Central",
     slug: "mississauga_central",
     mapSrc: "https://maps.google.com/maps?q=3100+Hurontario+St,+Mississauga,+ON+L5B+1N7&z=17&output=embed",
-    trialMapSrc: "https://maps.google.com/maps?q=4765+Huron+Heights+Dr,+Mississauga,+ON+L4Z+4G9&z=17&output=embed",
-    trialDirectionsUrl: "https://share.google/JJJdxpHYQGxSsKIvk",
+    trialMapSrc: "https://maps.google.com/maps?q=3100+Hurontario+St,+Mississauga,+ON+L5B+1N7&z=17&output=embed",
+    trialDirectionsUrl: "https://maps.app.goo.gl/4PkBMQWbqqwHjgFx9",
     directionsUrl: "https://maps.app.goo.gl/4PkBMQWbqqwHjgFx9",
   },
   {
