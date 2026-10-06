@@ -123,6 +123,7 @@ function TrialBramptonGirls() {
           heardAbout: templateParams.heard_about,
         });
         setSubmitted(true);
+        window.history.pushState(null, "", window.location.pathname.replace(/\/(thank-you\/?)?$/, "") + "/thank-you");
       } else {
         trackFormError({
           formName: "free_trial",

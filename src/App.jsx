@@ -204,6 +204,13 @@ function App() {
             <Route path="/programs/trial/brampton-west" element={<TrialBramptonWest />} />
             <Route path="/programs/trial/brampton-north" element={<TrialBramptonNorth />} />
             <Route path="/programs/trial/brampton-girls-program" element={<TrialBramptonGirls />} />
+            <Route path="/programs/trial/mississauga_central/thank-you" element={<TrialMississaugaCentral />} />
+            <Route path="/programs/trial/mississauga_west/thank-you" element={<TrialMississaugaWest />} />
+            <Route path="/programs/trial/etobicoke/thank-you" element={<TrialEtobicoke />} />
+            <Route path="/programs/trial/brampton/thank-you" element={<TrialBrampton />} />
+            <Route path="/programs/trial/brampton-west/thank-you" element={<TrialBramptonWest />} />
+            <Route path="/programs/trial/brampton-north/thank-you" element={<TrialBramptonNorth />} />
+            <Route path="/programs/trial/brampton-girls-program/thank-you" element={<TrialBramptonGirls />} />
 
             {/* LOCATION SELECTOR */}
             <Route path="/programs/location_select" element={<LocationSelect />} />
