@@ -66,6 +66,9 @@ function Footer() {
             <li className="footer-nav-child">
               <Link to="/careers">Careers</Link>
             </li>
+            <li className="footer-nav-child">
+              <Link to="/shop">Shop</Link>
+            </li>
 
             <li>
               <Link

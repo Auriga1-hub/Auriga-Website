@@ -12,6 +12,7 @@ const About = lazy(() => import("./pages/about"));
 const OurTeam = lazy(() => import("./pages/our_team"));
 const Contact = lazy(() => import("./pages/contact"));
 const Careers = lazy(() => import("./pages/careers"));
+const Shop = lazy(() => import("./pages/shop"));
 
 /* PROGRAM LANDING PAGES */
 const Camps = lazy(() => import("./pages/camps"));
@@ -187,6 +188,7 @@ function App() {
             <Route path="/our-team" element={<OurTeam />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/shop" element={<Shop />} />
 
             <Route path="/programs/development" element={<DevelopmentAcademyPage />} />
             <Route path="/programs/personal-training" element={<PersonalTraining />} />

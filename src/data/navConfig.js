@@ -52,6 +52,11 @@ export const navItems = [
       { label: "Policies", path: "/policies" },
     ],
   },
+  {
+    type: "link",
+    label: "Shop",
+    path: "/shop",
+  },
 ];
 
 export const navCTAs = [
