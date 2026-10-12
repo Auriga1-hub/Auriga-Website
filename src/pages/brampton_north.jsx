@@ -73,7 +73,8 @@ const seasonalPrograms = [
   { season: "Summer", status: "Coming Soon" },
   {
     season: "Fall",
-    status: "Registration Open",
+    status: "Registration Unavailable",
+    registrationUnavailable: true,
     dates: "Oct 6 – Jan 15 (13 Sessions)",
     days: "Fridays",
     ageGroups: [
@@ -85,9 +86,6 @@ const seasonalPrograms = [
       amount: "$30 Deposit to secure your spot",
       note: "Payment plans available during the time of registration.",
       perks: ["Uniform set included"],
-    },
-    registerLinks: {
-      oneDay: "https://aurigafc.playbookapi.com/programs/camp_registration/?class_package%5B%5D=76279",
     },
   },
   {
@@ -377,7 +375,12 @@ function BramptonNorth() {
                   </div>
                 )}
 
-                {prog.registerLinks ? (
+                {prog.registrationUnavailable ? (
+                  <>
+                    <p className="bn-season-note">Registration is currently unavailable. If interested, please contact us.</p>
+                    <Link to="/contact" className="bn-season-register">Contact Us</Link>
+                  </>
+                ) : prog.registerLinks ? (
                   <div className="bn-register-group">
                     <a href={prog.registerLinks.oneDay} target="_blank" rel="noopener noreferrer" className="bn-register-btn">Register Now</a>
                   </div>

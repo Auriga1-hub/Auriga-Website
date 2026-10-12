@@ -37,7 +37,7 @@ function OurTeam() {
               { name: "Zion", role: "Grassroots Coach", image: "/images/Zion - Grassroots Coach.webp" },
               { name: "Adriana", role: "Grassroots Coach", image: "/images/Adriana - Grassroots Coach.webp" },
               { name: "Majd", role: "Grassroots Coach", image: "/images/Majd - Grassroots Coach.webp" },
-              { name: "Sukhdeep", role: "Grassroots Coach", image: "/images/Sukhdeep - Grassroots Coach.webp" },
+              { name: "Sukhdeep", role: "Grassroots Coach", image: "/images/WhatsApp Image 2026-10-05 at 12.25.49.webp" },
               { name: "Melwyn", role: "Grassroots Coach", image: "/images/Melwyn - Grassroots Coach.webp" },
             ].map((coach) => (
               <div className="coach-card" key={coach.name}>
