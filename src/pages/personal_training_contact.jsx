@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import emailjs from "@emailjs/browser";
-import { EMAILJS_CONFIG } from "../utils/emailConfig";
-import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import { submitWebsiteForm } from "../utils/submitForm";
 import { trackFormError, trackLeadGenerated } from "../utils/analytics";
 import SEOHead from "../components/SEOHead";
 import "../css/contact.css";
@@ -11,6 +9,7 @@ const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 function PersonalTrainingContact() {
   const [ptFormData, setPtFormData] = useState({ ptName: "", ptPhone: "", ptEmail: "", ptAge: "", ptMessage: "" });
   const [ptSubmitted, setPtSubmitted] = useState(false);
+  const [submissionNotice, setSubmissionNotice] = useState("");
   const [ptLoading, setPtLoading] = useState(false);
   const [ptError, setPtError] = useState("");
   const [ptFocused, setPtFocused] = useState(null);
@@ -87,15 +86,7 @@ function PersonalTrainingContact() {
     };
 
     try {
-      // Sync to Google Sheets
-      await syncToGoogleSheets(templateParams);
-
-      const result = await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID_CONTACT,
-        templateParams,
-        EMAILJS_CONFIG.PUBLIC_KEY
-      );
+      const result = await submitWebsiteForm("personal_training", templateParams, turnstileResponse);
 
       if (result.status === 200) {
         trackLeadGenerated({
@@ -104,6 +95,7 @@ function PersonalTrainingContact() {
           location: "general",
           program: "personal_training",
         });
+        setSubmissionNotice(result.user_message || "");
         setPtSubmitted(true);
       } else {
         trackFormError({
@@ -123,7 +115,7 @@ function PersonalTrainingContact() {
         errorType: "request_error",
         errorMessage: error?.text || error?.message,
       });
-      setPtError("Failed to send message. Please check your connection and try again.");
+      setPtError(error?.message || "Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(ptWidgetIdRef.current);
     } finally {
       setPtLoading(false);
@@ -157,8 +149,8 @@ function PersonalTrainingContact() {
               {ptSubmitted ? (
                 <div className="contact-success">
                   <div className="contact-success-icon">✓</div>
-                  <h3>Inquiry Sent!</h3>
-                  <p>Thanks for your interest in personal training. We'll be in touch soon.</p>
+                  <h3>{submissionNotice ? "Request Received" : "Inquiry Sent!"}</h3>
+                  <p>{submissionNotice || "Thanks for your interest in personal training. We'll be in touch soon."}</p>
                 </div>
               ) : (
                 <form

@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "../css/contact.css";
-import emailjs from "@emailjs/browser";
-import { EMAILJS_CONFIG } from "../utils/emailConfig";
-import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import { submitWebsiteForm } from "../utils/submitForm";
 import { trackFormError, trackLeadGenerated } from "../utils/analytics";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { localBusinessSchema, buildBreadcrumbSchema } from "../components/StructuredData";
@@ -12,6 +10,7 @@ const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 function Contact() {
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", heard_about: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [submissionNotice, setSubmissionNotice] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [focused, setFocused] = useState(null);
@@ -87,15 +86,7 @@ function Contact() {
     };
 
     try {
-      // Sync to Google Sheets
-      await syncToGoogleSheets(templateParams);
-
-      const result = await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID_CONTACT,
-        templateParams,
-        EMAILJS_CONFIG.PUBLIC_KEY
-      );
+      const result = await submitWebsiteForm("contact", templateParams, turnstileResponse);
 
       if (result.status === 200) {
         trackLeadGenerated({
@@ -104,6 +95,7 @@ function Contact() {
           location: "general",
           program: "general_inquiry",
         });
+        setSubmissionNotice(result.user_message || "");
         setSubmitted(true);
       } else {
         trackFormError({
@@ -123,7 +115,7 @@ function Contact() {
         errorType: "request_error",
         errorMessage: error?.text || error?.message,
       });
-      setError("Failed to send message. Please check your connection and try again.");
+      setError(error?.message || "Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(widgetIdRef.current);
     } finally {
       setLoading(false);
@@ -213,8 +205,8 @@ function Contact() {
               {submitted ? (
                 <div className="contact-success">
                   <div className="contact-success-icon">✓</div>
-                  <h3>Message Sent!</h3>
-                  <p>Thanks for reaching out. We'll get back to you shortly.</p>
+                  <h3>{submissionNotice ? "Request Received" : "Message Sent!"}</h3>
+                  <p>{submissionNotice || "Thanks for reaching out. We'll get back to you shortly."}</p>
                 </div>
               ) : (
                 <form

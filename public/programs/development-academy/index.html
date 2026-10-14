@@ -29,7 +29,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="apple-touch-icon" href="/favicon.webp" />
     <title>Auriga Football Club | Development Academy</title>
     <meta name="description" content="Development Academy for serious players ages 7-12. Advanced technical and tactical training with limited July intake.">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="/form-submit.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -712,7 +713,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         </label>
 
                         <div class="sm:col-span-2">
-                            <button type="submit" class="inline-flex w-full items-center justify-center rounded-[8px] bg-[#2f63df] px-8 py-3 font-heading text-base font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8]">book your tryout session</button>
+                            <div class="cf-turnstile" data-sitekey="0x4AAAAAACuIL-SoeDNpEWX7" data-theme="dark"></div>
+                        </div>
+
+                        <p id="waitlist-error" role="alert" class="hidden sm:col-span-2 rounded-lg border border-[#ef4444]/40 bg-[#ef4444]/10 px-4 py-3 text-sm font-semibold text-[#fca5a5]"></p>
+
+                        <div class="sm:col-span-2">
+                            <button id="waitlist-submit" type="submit" class="inline-flex w-full items-center justify-center rounded-[8px] bg-[#2f63df] px-8 py-3 font-heading text-base font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8]">book your tryout session</button>
                         </div>
                     </form>
 
@@ -839,18 +846,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             setInterval(next, 2500);
         }
 
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycby2EbHYyYH05wvLAoIeh0xBe4-N2rC88K3Vd_f9kP4ay3a9Zx5GUdRLQFDm6pvRESCcAw/exec';
-        const EMAILJS_SERVICE_ID = 'service_xxnuqut';
-        const EMAILJS_TEMPLATE_ID = 'template_2mzjxjm';
-        const EMAILJS_PUBLIC_KEY = 'y8xwoIn2scGe39LyZ';
-
-        if (window.emailjs) {
-            window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-        }
-
         const waitlistForm = document.getElementById('waitlist-form');
         const waitlistConfirmation = document.getElementById('waitlist-confirmation');
-        if (waitlistForm && waitlistConfirmation) {
+        const waitlistError = document.getElementById('waitlist-error');
+        const waitlistSubmit = document.getElementById('waitlist-submit');
+        if (waitlistForm && waitlistConfirmation && waitlistError && waitlistSubmit) {
             const tryoutDateInput = waitlistForm.querySelector('input[name="tryoutDate"]');
             const isAllowedTryoutDate = (value) => {
                 if (!value) return false;
@@ -884,6 +884,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
             waitlistForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
+                waitlistError.textContent = '';
+                waitlistError.classList.add('hidden');
 
                 const selectedTryoutDate = tryoutDateInput ? tryoutDateInput.value : '';
                 if (!isAllowedTryoutDate(selectedTryoutDate)) {
@@ -898,72 +900,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 }
 
                 const formData = new FormData(waitlistForm);
-                const heardAbout = formData.get('heardAbout') || 'Not provided';
-                const payload = {
-                    sheet_name: 'development academy',
-                    target_sheet: 'development academy',
+                const fields = {
                     parent_name: formData.get('parentName') || '',
-                    from_name: formData.get('parentName') || '',
-                    name: formData.get('parentName') || '',
                     phone: formData.get('phone') || '',
                     email: formData.get('email') || '',
-                    from_email: formData.get('email') || '',
                     player_name: formData.get('childName') || '',
-                    child_name: formData.get('childName') || '',
-                    child_age: formData.get('childAge') || '',
-                    dob: formData.get('childAge') ? `Age ${formData.get('childAge')}` : '',
-                    years_played: formData.get('level') || '',
                     current_level: formData.get('level') || '',
                     preferred_date: formData.get('tryoutDate') || '',
-                    preferred_time: 'N/A',
-                    heard_about: heardAbout,
-                    subject: 'Development Academy Waitlist - Mississauga & Brampton',
-                    inquiry_type: 'Development Academy Waitlist',
+                    player_age: formData.get('childAge') || '',
+                    heard_about: formData.get('heardAbout') || '',
                     message: formData.get('message') || '',
-                    timestamp: new Date().toISOString(),
                 };
-
-                try {
-                    if (window.emailjs) {
-                        const emailParams = {
-                            location: 'Mississauga and Brampton',
-                            parent_name: payload.parent_name,
-                            phone: payload.phone,
-                            email: payload.email,
-                            player_name: payload.player_name,
-                            dob: payload.child_age ? `Age ${payload.child_age}` : 'N/A',
-                            years_played: payload.years_played || 'N/A',
-                            preferred_date: formData.get('tryoutDate') || 'N/A',
-                            preferred_time: 'N/A',
-                            heard_about: heardAbout,
-                            message: payload.message,
-                            subject: 'Development Academy Waitlist - Mississauga & Brampton',
-                        };
-
-                        await window.emailjs.send(
-                            EMAILJS_SERVICE_ID,
-                            EMAILJS_TEMPLATE_ID,
-                            emailParams,
-                            { publicKey: EMAILJS_PUBLIC_KEY }
-                        );
-                    }
-
-                    const encoded = new URLSearchParams();
-                    Object.keys(payload).forEach((key) => encoded.append(key, payload[key]));
-
-                    await fetch(GOOGLE_SHEETS_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        body: encoded,
-                    });
-                } catch (error) {
-                    console.error('Google Sheets waitlist sync failed:', error);
+                const turnstileToken = window.turnstile?.getResponse();
+                if (!turnstileToken) {
+                    waitlistError.textContent = 'Please complete the captcha verification.';
+                    waitlistError.classList.remove('hidden');
+                    return;
                 }
 
-                waitlistConfirmation.classList.remove('hidden');
-                waitlistForm.reset();
-                if (tryoutDateInput) {
-                    tryoutDateInput.setCustomValidity('');
+                waitlistSubmit.disabled = true;
+                waitlistSubmit.textContent = 'Submitting...';
+                try {
+                    const result = await window.aurigaSubmitForm('development_tryout', fields, turnstileToken);
+
+                    waitlistSubmit.textContent = 'Submission received';
+                    if (result.partial_failure) {
+                        waitlistConfirmation.textContent = result.user_message;
+                    }
+                    waitlistConfirmation.classList.remove('hidden');
+                    waitlistForm.reset();
+                    if (tryoutDateInput) tryoutDateInput.setCustomValidity('');
+                    window.turnstile?.reset();
+                } catch (error) {
+                    waitlistError.textContent = error.message || 'We could not submit your request right now. Please try again shortly.';
+                    waitlistError.classList.remove('hidden');
+                    window.turnstile?.reset();
+                    waitlistSubmit.disabled = false;
+                    waitlistSubmit.textContent = 'book your tryout session';
                 }
             });
         }

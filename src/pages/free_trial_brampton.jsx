@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import emailjs from "@emailjs/browser";
-import { EMAILJS_CONFIG } from "../utils/emailConfig";
-import { syncToGoogleSheets } from "../utils/googleSheetsSync";
+import { submitWebsiteForm } from "../utils/submitForm";
 import { trackFormError, trackLeadGenerated } from "../utils/analytics";
 import SEOHead from "../components/SEOHead";
 import DatePicker from "react-datepicker";
@@ -12,6 +10,7 @@ const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
 
 function TrialBrampton() {
   const [submitted, setSubmitted] = useState(false);
+  const [submissionNotice, setSubmissionNotice] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
@@ -118,15 +117,7 @@ function TrialBrampton() {
     };
 
     try {
-      // Sync to Google Sheets
-      await syncToGoogleSheets(templateParams);
-
-      const result = await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID_TRIAL,
-        templateParams,
-        EMAILJS_CONFIG.PUBLIC_KEY
-      );
+      const result = await submitWebsiteForm("assessment", templateParams, turnstileResponse);
 
       if (result.status === 200) {
         trackLeadGenerated({
@@ -137,6 +128,7 @@ function TrialBrampton() {
           preferredTime: templateParams.preferred_time,
           heardAbout: templateParams.heard_about,
         });
+        setSubmissionNotice(result.user_message || "");
         setSubmitted(true);
         window.history.pushState(null, "", window.location.pathname.replace(/\/(thank-you\/?)?$/, "") + "/thank-you");
       } else {
@@ -157,7 +149,7 @@ function TrialBrampton() {
         errorType: "request_error",
         errorMessage: error?.text || error?.message,
       });
-      setError("Failed to send message. Please check your connection and try again.");
+      setError(error?.message || "Failed to send message. Please check your connection and try again.");
       window.turnstile?.reset(widgetIdRef.current);
     } finally {
       setLoading(false);
@@ -195,7 +187,7 @@ function TrialBrampton() {
               <div className="trial-success">
                 <div className="trial-success-icon">✓</div>
                 <h2>Registration Received!</h2>
-                <p>Thank you for registering. We'll be in touch shortly to confirm your trial session.</p>
+                <p>{submissionNotice || "Thank you for registering. We'll be in touch shortly to confirm your trial session."}</p>
               </div>
             ) : (
               <>
