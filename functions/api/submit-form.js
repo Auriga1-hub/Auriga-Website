@@ -443,10 +443,18 @@ export async function onRequest(context) {
     return jsonResponse(503, { ok: false, error: "service_unavailable", submission_id: submission.submission_id });
   }
 
-  const requestHostname = new URL(request.url).hostname.toLowerCase();
-  const expectedHostname = String(env.TURNSTILE_EXPECTED_HOSTNAME || PRODUCTION_HOSTNAME).toLowerCase();
+  const requestHostname = new URL(request.url).hostname.trim().toLowerCase();
+  const expectedHostnameBinding = String(env.TURNSTILE_EXPECTED_HOSTNAME || "").trim();
+  const expectedHostnameConfigured = expectedHostnameBinding.length > 0;
+  const expectedHostname = (expectedHostnameBinding || PRODUCTION_HOSTNAME).trim().toLowerCase();
   if (requestHostname !== expectedHostname) {
-    logEvent("form.hostname_configuration_error", { submission_id: submission.submission_id, request_hostname: requestHostname });
+    logEvent("form.hostname_configuration_error", {
+      submission_id: submission.submission_id,
+      request_hostname: requestHostname,
+      expected_hostname: expectedHostname,
+      expected_hostname_configured: expectedHostnameConfigured,
+      hostname_match: false,
+    });
     return jsonResponse(503, { ok: false, error: "service_unavailable", submission_id: submission.submission_id });
   }
 

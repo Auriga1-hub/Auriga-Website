@@ -22,8 +22,8 @@ const baseFields = {
   message: "Please contact me.",
 };
 
-const makeContext = ({ body, method = "POST", env = {}, origin = "https://aurigafootballclub.com" } = {}) => ({
-  request: new Request("https://aurigafootballclub.com/api/submit-form", {
+const makeContext = ({ body, method = "POST", env = {}, requestUrl = "https://aurigafootballclub.com/api/submit-form", origin = new URL(requestUrl).origin } = {}) => ({
+  request: new Request(requestUrl, {
     method,
     headers: {
       ...(origin ? { Origin: origin } : {}),
@@ -157,6 +157,85 @@ test("fails safely when either required secret is missing", async () => {
       assert.equal((await response.json()).error, "service_unavailable");
     }
   } finally {
+    restore();
+  }
+});
+
+test("accepts an exact Preview request hostname match", async () => {
+  const previewHostname = "preview.auriga-website.pages.dev";
+  const restore = installFetch(async (input) => {
+    if (String(input).includes("siteverify")) return Response.json({ success: true, hostname: previewHostname });
+    return successfulProviderFetch(input);
+  });
+  try {
+    const response = await onRequest(makeContext({
+      requestUrl: `https://${previewHostname}/api/submit-form`,
+      body: { form_type: "contact", fields: { name: "Test Parent", phone: "+14165550142", email: "test@example.com", message: "Synthetic check" }, turnstile_token: "test-token" },
+      env: { TURNSTILE_EXPECTED_HOSTNAME: previewHostname },
+    }));
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).deliveries.ghl, "accepted");
+  } finally {
+    restore();
+  }
+});
+
+test("uses the existing production fallback for missing or empty expected-hostname bindings", async () => {
+  const restore = installFetch(successfulProviderFetch);
+  try {
+    for (const envValue of [undefined, ""]) {
+      const response = await onRequest(makeContext({
+        body: { form_type: "contact", fields: { name: "Test Parent", phone: "+14165550142", email: "test@example.com", message: "Synthetic check" }, turnstile_token: "test-token" },
+        env: { TURNSTILE_EXPECTED_HOSTNAME: envValue },
+      }));
+      assert.equal(response.status, 200);
+      assert.equal((await response.json()).deliveries.ghl, "accepted");
+    }
+  } finally {
+    restore();
+  }
+});
+
+test("trims and lowercases a whitespace-padded expected-hostname binding", async () => {
+  const previewHostname = "preview.auriga-website.pages.dev";
+  const restore = installFetch(async (input) => {
+    if (String(input).includes("siteverify")) return Response.json({ success: true, hostname: previewHostname });
+    return successfulProviderFetch(input);
+  });
+  try {
+    const response = await onRequest(makeContext({
+      requestUrl: `https://${previewHostname}/api/submit-form`,
+      body: { form_type: "contact", fields: { name: "Test Parent", phone: "+14165550142", email: "test@example.com", message: "Synthetic check" }, turnstile_token: "test-token" },
+      env: { TURNSTILE_EXPECTED_HOSTNAME: `  ${previewHostname.toUpperCase()}  ` },
+    }));
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).deliveries.ghl, "accepted");
+  } finally {
+    restore();
+  }
+});
+
+test("rejects a genuine hostname mismatch and logs only hostname diagnostics", async () => {
+  const events = [];
+  const originalLog = console.log;
+  console.log = (...args) => events.push(args.join(" "));
+  const restore = installFetch(async () => { throw new Error("providers must not run"); });
+  try {
+    const response = await onRequest(makeContext({
+      requestUrl: "https://other.auriga-website.pages.dev/api/submit-form",
+      body: { form_type: "contact", fields: { name: "Test Parent", phone: "+14165550142", email: "test@example.com", message: "Synthetic check" }, turnstile_token: "test-token" },
+      env: { TURNSTILE_EXPECTED_HOSTNAME: "preview.auriga-website.pages.dev" },
+    }));
+    assert.equal(response.status, 503);
+    assert.equal((await response.json()).error, "service_unavailable");
+    const event = JSON.parse(events.find((entry) => entry.includes("form.hostname_configuration_error")));
+    assert.equal(event.request_hostname, "other.auriga-website.pages.dev");
+    assert.equal(event.expected_hostname, "preview.auriga-website.pages.dev");
+    assert.equal(event.expected_hostname_configured, true);
+    assert.equal(event.hostname_match, false);
+    assert.equal(JSON.stringify(event).includes("test@example.com"), false);
+  } finally {
+    console.log = originalLog;
     restore();
   }
 });
