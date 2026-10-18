@@ -46,13 +46,21 @@ Cloudflare Pages discovers Functions from the repository-root `functions/` direc
 
 ### Cloudflare configuration
 
-Configure these values under the Pages project's **Settings > Variables and Secrets** for both Preview and Production:
+Configure these values under the Pages project's **Settings > Variables and Secrets** for Preview and Production (the hostname variable below differs between them):
 
 - `TURNSTILE_SECRET_KEY` — encrypted secret from the Turnstile widget.
 - `GHL_WEBHOOK_URL` — encrypted GoHighLevel Inbound Webhook URL. Never put it in frontend source, build variables prefixed with `VITE_`, or browser logs.
-- `TURNSTILE_EXPECTED_HOSTNAME` — non-secret exact hostname for that environment. Production defaults to `aurigafootballclub.com`; configure the exact preview hostname for the staging deployment.
+- `TURNSTILE_EXPECTED_HOSTNAME` — non-secret hostname rule for that environment. Set it explicitly to `*.auriga-website.pages.dev` in Preview only, and leave it unset in Production so the fallback stays exactly `aurigafootballclub.com`. An exact hostname is also accepted (see below).
 
-Allow the production and staging hostnames in the Turnstile widget configuration. The endpoint rejects submissions if its request hostname is not the configured hostname or if Siteverify reports a different hostname. It does not return secret values in responses or logs. Missing required secrets fail closed and produce a structured configuration event.
+Allow the production and Preview hostnames in the Turnstile widget configuration. The endpoint requires the request hostname to satisfy the configured rule, and requires Siteverify's returned hostname to equal the request hostname exactly. It does not return secret values in responses or logs. Missing required secrets, and any invalid hostname rule, fail closed with HTTP 503 and a structured event.
+
+#### Hostname rule
+
+The rule is either an exact hostname or `*.auriga-website.pages.dev`, which matches exactly one DNS label in front of `auriga-website.pages.dev` (a per-deployment hash host or a branch alias). It does not match the bare `auriga-website.pages.dev`, deeper subdomains, or lookalike hosts. Any other value containing `*`, a scheme, a port or a path is invalid and rejected. The wildcard is never implied: Cloudflare Pages Functions have no documented runtime Preview/Production signal (`CF_PAGES*` are build-time variables), so Production stays strict only because its variable is unset. Never set the wildcard in Production.
+
+#### Turnstile widget hostnames
+
+The Function rule does not configure Turnstile. The widget only works on hostnames listed in its Hostname Management; wildcard characters are not supported there, but adding a hostname authorizes it and all of its subdomains. Adding `auriga-website.pages.dev` should therefore cover every Preview hash host and branch alias, but that is documented behavior, not something verified for this widget: confirm it by loading a Preview page and checking that the widget renders (Turnstile error `110200` means the domain is not authorized). The site hardcodes a single sitekey, so Preview and Production share one widget; authorizing `auriga-website.pages.dev` there also authorizes Preview hosts for that widget.
 
 ### Submission contract
 
@@ -102,6 +110,6 @@ Structured JSON log events include `form.invalid`, `form.configuration_error`, `
 
 Run the mocked endpoint/helper tests with `npm test`, then run `npm run lint` and `npm run build`. Tests use synthetic data and mock Siteverify, GHL, EmailJS, and Apps Script; they do not prove that a real GHL workflow accepts or processes the configured payload.
 
-For staging, deploy a branch/Preview deployment from the Cloudflare Pages dashboard with the repository root, `npm run build`, and `dist` output. Configure Preview secrets and its exact `TURNSTILE_EXPECTED_HOSTNAME`; ensure the Turnstile widget allows that hostname. Submit test data through every form, confirm `ghl: accepted` in the returned response/logs, inspect the received JSON in GHL, and confirm the intended workflow, EmailJS notification, and spreadsheet tab/columns.
+For staging, deploy a branch/Preview deployment from the Cloudflare Pages dashboard with the repository root, `npm run build`, and `dist` output. Configure the Preview secrets, then set the **Preview-only** `TURNSTILE_EXPECTED_HOSTNAME` once to `*.auriga-website.pages.dev` (only after this code has been reviewed and deployed to Preview; an older revision would compare the literal wildcard and return 503). Alternatively, with no wildcard, set it to the stable branch alias `staging-ghl-form-integration.auriga-website.pages.dev` and test only through that alias URL: the alias keeps pointing at the branch's latest deployment, so the value never changes, but hash URLs will be rejected. Either way, ensure the Turnstile widget allows the hostname (see above). Submit test data through every form, confirm `ghl: accepted` in the returned response/logs, inspect the received JSON in GHL, and confirm the intended workflow, EmailJS notification, and spreadsheet tab/columns.
 
 For production, first configure the Production values above and confirm the Turnstile widget allows `aurigafootballclub.com`. After staging verification and explicit approval, merge or promote the tested revision through the Cloudflare Pages dashboard. Confirm the production build output is `dist`, then smoke-test one test-data submission per form type and verify the Function logs and GHL workflow. This repository change does not deploy automatically.

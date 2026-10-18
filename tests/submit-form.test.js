@@ -240,6 +240,163 @@ test("rejects a genuine hostname mismatch and logs only hostname diagnostics", a
   }
 });
 
+const PREVIEW_WILDCARD = "*.auriga-website.pages.dev";
+const contactBody = { form_type: "contact", fields: { name: "Test Parent", phone: "+14165550142", email: "test@example.com", message: "Synthetic check" }, turnstile_token: "test-token" };
+
+const captureHostnameEvent = async (run) => {
+  const lines = [];
+  const originalLog = console.log;
+  console.log = (...args) => lines.push(args.join(" "));
+  try {
+    const response = await run();
+    const line = lines.find((entry) => entry.includes("form.hostname_configuration_error"));
+    return { response, event: line ? JSON.parse(line) : undefined };
+  } finally {
+    console.log = originalLog;
+  }
+};
+
+const forbidProviders = () => installFetch(async () => { throw new Error("providers must not run"); });
+
+test("wildcard rule accepts single-label Preview hash and branch-alias hosts", async () => {
+  for (const host of ["55a00e01.auriga-website.pages.dev", "staging-ghl-form-integration.auriga-website.pages.dev"]) {
+    const restore = installFetch(async (input) => {
+      if (String(input).includes("siteverify")) return Response.json({ success: true, hostname: host });
+      return successfulProviderFetch(input);
+    });
+    try {
+      const response = await onRequest(makeContext({
+        requestUrl: `https://${host}/api/submit-form`,
+        body: contactBody,
+        env: { TURNSTILE_EXPECTED_HOSTNAME: PREVIEW_WILDCARD },
+      }));
+      assert.equal(response.status, 200, host);
+      assert.equal((await response.json()).deliveries.ghl, "accepted");
+    } finally {
+      restore();
+    }
+  }
+});
+
+test("normalizes a whitespace-padded, mixed-case wildcard rule and accepts a Preview host", async () => {
+  const host = "55a00e01.auriga-website.pages.dev";
+  const restore = installFetch(async (input) => {
+    if (String(input).includes("siteverify")) return Response.json({ success: true, hostname: host });
+    return successfulProviderFetch(input);
+  });
+  try {
+    const response = await onRequest(makeContext({
+      requestUrl: `https://${host}/api/submit-form`,
+      body: contactBody,
+      env: { TURNSTILE_EXPECTED_HOSTNAME: "  *.Auriga-Website.PAGES.dev  " },
+    }));
+    assert.equal(response.status, 200);
+  } finally {
+    restore();
+  }
+});
+
+test("wildcard rule rejects the bare project host, deeper subdomains, and lookalike hosts", async () => {
+  const rejected = [
+    "auriga-website.pages.dev",
+    "a.b.auriga-website.pages.dev",
+    "evil-auriga-website.pages.dev",
+    "55a00e01.auriga-website.pages.dev.evil.example",
+    "55a00e01.other-project.pages.dev",
+    "aurigafootballclub.com",
+  ];
+  for (const host of rejected) {
+    const restore = forbidProviders();
+    try {
+      const { response, event } = await captureHostnameEvent(() => onRequest(makeContext({
+        requestUrl: `https://${host}/api/submit-form`,
+        body: contactBody,
+        env: { TURNSTILE_EXPECTED_HOSTNAME: PREVIEW_WILDCARD },
+      })));
+      assert.equal(response.status, 503, host);
+      assert.equal((await response.json()).error, "service_unavailable");
+      assert.equal(event.hostname_rule, "wildcard");
+      assert.equal(event.hostname_match, false);
+      assert.equal(event.request_hostname, host);
+    } finally {
+      restore();
+    }
+  }
+});
+
+test("invalid wildcard or hostname rules fail closed even on a Preview host", async () => {
+  const invalidRules = ["*", "*.com", "*.pages.dev", "*.other-project.pages.dev", "preview.*.pages.dev", "*.*.auriga-website.pages.dev", "*.auriga-website.pages.dev.evil.example", "https://55a00e01.auriga-website.pages.dev", "55a00e01.auriga-website.pages.dev:443"];
+  for (const rule of invalidRules) {
+    const restore = forbidProviders();
+    try {
+      const { response, event } = await captureHostnameEvent(() => onRequest(makeContext({
+        requestUrl: "https://55a00e01.auriga-website.pages.dev/api/submit-form",
+        body: contactBody,
+        env: { TURNSTILE_EXPECTED_HOSTNAME: rule },
+      })));
+      assert.equal(response.status, 503, rule);
+      assert.equal(event.hostname_rule, "invalid");
+      assert.equal(event.hostname_match, false);
+    } finally {
+      restore();
+    }
+  }
+});
+
+test("unset or empty binding never implies the wildcard and rejects Preview hosts", async () => {
+  for (const envValue of [undefined, "", "   "]) {
+    const restore = forbidProviders();
+    try {
+      const { response, event } = await captureHostnameEvent(() => onRequest(makeContext({
+        requestUrl: "https://55a00e01.auriga-website.pages.dev/api/submit-form",
+        body: contactBody,
+        env: { TURNSTILE_EXPECTED_HOSTNAME: envValue },
+      })));
+      assert.equal(response.status, 503);
+      assert.equal(event.expected_hostname, "aurigafootballclub.com");
+      assert.equal(event.expected_hostname_configured, false);
+      assert.equal(event.hostname_rule, "exact");
+    } finally {
+      restore();
+    }
+  }
+});
+
+test("Siteverify hostname must equal the request host even when both satisfy the wildcard", async () => {
+  const restore = installFetch(async (input) => {
+    if (String(input).includes("siteverify")) return Response.json({ success: true, hostname: "11111111.auriga-website.pages.dev" });
+    throw new Error("providers must not run");
+  });
+  try {
+    const response = await onRequest(makeContext({
+      requestUrl: "https://55a00e01.auriga-website.pages.dev/api/submit-form",
+      body: contactBody,
+      env: { TURNSTILE_EXPECTED_HOSTNAME: PREVIEW_WILDCARD },
+    }));
+    assert.equal(response.status, 403);
+    assert.equal((await response.json()).error, "verification_failed");
+  } finally {
+    restore();
+  }
+});
+
+test("missing required configuration still returns 503 on a wildcard Preview host", async () => {
+  for (const env of [{ TURNSTILE_SECRET_KEY: "" }, { GHL_WEBHOOK_URL: "" }]) {
+    const restore = forbidProviders();
+    try {
+      const response = await onRequest(makeContext({
+        requestUrl: "https://55a00e01.auriga-website.pages.dev/api/submit-form",
+        body: contactBody,
+        env: { TURNSTILE_EXPECTED_HOSTNAME: PREVIEW_WILDCARD, ...env },
+      }));
+      assert.equal(response.status, 503);
+      assert.equal((await response.json()).error, "service_unavailable");
+    } finally {
+      restore();
+    }
+  }
+});
+
 test("rejects invalid Turnstile tokens and incorrect hostnames", async () => {
   const restore = installFetch(async (url) => {
     if (String(url).includes("siteverify")) return Response.json({ success: true, hostname: "wrong.example" });

@@ -260,6 +260,24 @@ const withTimeout = async (url, options, timeoutMs = REQUEST_TIMEOUT_MS, consume
   }
 };
 
+const PREVIEW_WILDCARD_RULE = "*.auriga-website.pages.dev";
+const DNS_LABEL = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+const EXACT_HOSTNAME = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)*$/;
+
+// Only the pinned project wildcard is honored; any other rule containing "*" is invalid and fails closed.
+const parseHostnameRule = (value) => {
+  const rule = String(value).trim().toLowerCase();
+  if (rule === PREVIEW_WILDCARD_RULE) return { kind: "wildcard", rule, base: rule.slice(2) };
+  if (EXACT_HOSTNAME.test(rule)) return { kind: "exact", rule };
+  return { kind: "invalid", rule };
+};
+
+const hostnameMatchesRule = (hostname, { kind, rule, base }) => {
+  if (kind === "exact") return hostname === rule;
+  if (kind !== "wildcard") return false;
+  return hostname.endsWith(`.${base}`) && DNS_LABEL.test(hostname.slice(0, -(base.length + 1)));
+};
+
 const verifyTurnstile = async ({ token, secret, expectedHostname, remoteIp }) => {
   if (!token || typeof token !== "string" || token.length > 2048) return { ok: false, reason: "invalid" };
   const form = new URLSearchParams({ secret, response: token });
@@ -446,13 +464,15 @@ export async function onRequest(context) {
   const requestHostname = new URL(request.url).hostname.trim().toLowerCase();
   const expectedHostnameBinding = String(env.TURNSTILE_EXPECTED_HOSTNAME || "").trim();
   const expectedHostnameConfigured = expectedHostnameBinding.length > 0;
-  const expectedHostname = (expectedHostnameBinding || PRODUCTION_HOSTNAME).trim().toLowerCase();
-  if (requestHostname !== expectedHostname) {
+  // An unset binding must resolve to the exact production host; the wildcard is never implied.
+  const hostnameRule = parseHostnameRule(expectedHostnameBinding || PRODUCTION_HOSTNAME);
+  if (!hostnameMatchesRule(requestHostname, hostnameRule)) {
     logEvent("form.hostname_configuration_error", {
       submission_id: submission.submission_id,
       request_hostname: requestHostname,
-      expected_hostname: expectedHostname,
+      expected_hostname: hostnameRule.rule.slice(0, 100),
       expected_hostname_configured: expectedHostnameConfigured,
+      hostname_rule: hostnameRule.kind,
       hostname_match: false,
     });
     return jsonResponse(503, { ok: false, error: "service_unavailable", submission_id: submission.submission_id });
@@ -461,7 +481,7 @@ export async function onRequest(context) {
   const turnstile = await verifyTurnstile({
     token: body.turnstile_token,
     secret: env.TURNSTILE_SECRET_KEY,
-    expectedHostname,
+    expectedHostname: requestHostname,
     remoteIp: request.headers.get("cf-connecting-ip"),
   });
   if (!turnstile.ok) {
