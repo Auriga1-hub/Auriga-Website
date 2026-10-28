@@ -1,0 +1,366 @@
+/**
+ * ============================================================================
+ * LEGACY BACKUP — DO NOT USE IN PRODUCTION ROUTES
+ * ============================================================================
+ * This file is an exact, recoverable copy of the original custom-coded
+ * Brampton West Free Assessment form, preserved before the GoHighLevel
+ * (GHL) form migration on 2026-10-21.
+ *
+ * Original file (now replaced with a GHL embed):
+ *   src/pages/free_trial_brampton_west.jsx
+ *
+ * Route it served:
+ *   /programs/trial/brampton-west  (+ /thank-you)
+ *
+ * This component is intentionally NOT imported anywhere. It exists only so
+ * the original form (fields, validation, Turnstile, EmailJS/backend
+ * submission, analytics events, success/thank-you flow) can be restored
+ * quickly without reconstructing code by hand.
+ *
+ * Restore instructions: see docs/ghl-migration/brampton-west-free-assessment.md
+ *
+ * NOTE: Import paths below were adjusted one level up (../ -> ../../) because
+ * this file lives in src/pages/legacy/ instead of src/pages/.
+ * ============================================================================
+ */
+import { useState, useEffect, useRef } from "react";
+import { submitWebsiteForm } from "../../utils/submitForm";
+import { trackFormError, trackLeadGenerated } from "../../utils/analytics";
+import SEOHead from "../../components/SEOHead";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "../../css/trial.css";
+
+const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
+
+function TrialBramptonWestLegacy() {
+  const [submitted, setSubmitted] = useState(false);
+  const [submissionNotice, setSubmissionNotice] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const turnstileRef = useRef(null);
+  const widgetIdRef = useRef(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    let interval;
+
+    const renderWidget = () => {
+      if (turnstileRef.current && window.turnstile && widgetIdRef.current === null) {
+        try {
+          widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+            sitekey: TURNSTILE_SITE_KEY,
+            theme: "dark",
+          });
+        } catch (e) {
+          console.error("Turnstile render error", e);
+        }
+      }
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      interval = setInterval(() => {
+        if (window.turnstile && isMounted) {
+          renderWidget();
+          clearInterval(interval);
+        }
+      }, 200);
+    }
+
+    return () => {
+      isMounted = false;
+      if (interval) clearInterval(interval);
+      if (widgetIdRef.current !== null && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, [submitted]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    if (!selectedDate) {
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "brampton_west",
+        errorType: "missing_date",
+        errorMessage: "preferred_date_required",
+      });
+      setError("Please select a preferred date.");
+      setLoading(false);
+      return;
+    }
+
+    const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
+    if (!turnstileResponse) {
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "brampton_west",
+        errorType: "captcha_missing",
+        errorMessage: "turnstile_not_completed",
+      });
+      setError("Please complete the captcha verification.");
+      setLoading(false);
+      return;
+    }
+
+    const form = e.target;
+
+    const templateParams = {
+      location: "Brampton West",
+      parent_name: form.parent_name.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      player_name: form.player_name.value,
+      dob: form.dob.value,
+      years_played: form.years_played.value,
+      preferred_date: selectedDate.toISOString().split("T")[0],
+      preferred_time: form.preferred_time.value,
+      heard_about: form.heard_about.value,
+      message: form.message.value,
+      subject: "Free Assessment Registration - Brampton West",
+      "g-recaptcha-response": turnstileResponse,
+    };
+
+    try {
+      const result = await submitWebsiteForm("assessment", templateParams, turnstileResponse);
+
+      if (result.status === 200) {
+        trackLeadGenerated({
+          formName: "free_trial",
+          leadType: "free_trial",
+          location: templateParams.location,
+          program: "trial",
+          preferredTime: templateParams.preferred_time,
+          heardAbout: templateParams.heard_about,
+        });
+        setSubmissionNotice(result.user_message || "");
+        setSubmitted(true);
+        window.history.pushState(null, "", window.location.pathname.replace(/\/(thank-you\/?)?$/, "") + "/thank-you");
+      } else {
+        trackFormError({
+          formName: "free_trial",
+          formLocation: "brampton_west",
+          errorType: "submission_failed",
+          errorMessage: "non_200_response",
+        });
+        setError("Something went wrong. Please try again.");
+        window.turnstile?.reset(widgetIdRef.current);
+      }
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      trackFormError({
+        formName: "free_trial",
+        formLocation: "brampton_west",
+        errorType: "request_error",
+        errorMessage: error?.text || error?.message,
+      });
+      setError(error?.message || "Failed to send message. Please check your connection and try again.");
+      window.turnstile?.reset(widgetIdRef.current);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <SEOHead
+        title="Free Soccer Trial Brampton West | Book Now | Auriga FC"
+        description="Book a free soccer trial session in Brampton West. Experience Auriga FC's professional youth coaching for ages 4–13. Limited spots — register today!"
+        keywords="free soccer trial brampton west, try soccer free brampton west, kids soccer trial brampton west, free youth soccer session brampton west"
+      />
+
+      {/* HERO */}
+      <div className="trial-hero">
+        <div className="trial-hero-overlay" />
+        <div className="trial-hero-container">
+          <h1 className="trial-hero-title">Brampton West Free Assessment</h1>
+          <p className="trial-hero-text">
+            Book a free assessment session for your child and experience Auriga
+            Football Club training firsthand.
+          </p>
+        </div>
+      </div>
+
+      {/* FORM SECTION */}
+      <section className="trial-section">
+        <div className="trial-container">
+
+          {/* OUTER HOVERABLE CARD */}
+          <div className="trial-card">
+
+            {submitted ? (
+              <div className="trial-success">
+                <div className="trial-success-icon">✓</div>
+                <h2>Registration Received!</h2>
+                <p>{submissionNotice || "Thank you for registering. We'll be in touch shortly to confirm your trial session."}</p>
+              </div>
+            ) : (
+              <>
+                <div className="trial-form-header">
+                  <span className="trial-label">Brampton West Location</span>
+                  <h2 className="trial-form-title">Free Assessment Registration</h2>
+                  <p className="trial-notice">
+                    Free assessment availability at our Brampton West location is currently limited.
+                    Please contact us directly if no dates are available.
+                  </p>
+                  <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "12px 20px", borderRadius: "10px", marginTop: "16px", display: "inline-block" }}>
+                    <span style={{ color: "#10b981", fontWeight: "800", display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
+                      🗓️ Runs strictly on Tuesdays and Wednesdays only
+                    </span>
+                  </div>
+                </div>
+
+                {error && <div className="form-error">{error}</div>}
+
+                <form
+                  className="trial-form"
+                  onSubmit={handleSubmit}
+                  data-analytics-form="free_trial"
+                  data-analytics-location="brampton_west"
+                  data-analytics-program="trial"
+                >
+
+                  {/* PARENT INFO */}
+                  <div className="trial-fieldset">
+                    <h3 className="trial-fieldset-title">Parent / Guardian</h3>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Full Name <span className="req">*</span></label>
+                        <input type="text" name="parent_name" placeholder="Jane Smith" required />
+                      </div>
+                      <div className="form-group">
+                        <label>Phone <span className="req">*</span></label>
+                        <input type="tel" name="phone" placeholder="647-000-0000" required />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label>Email Address <span className="req">*</span></label>
+                      <input type="email" name="email" placeholder="jane@example.com" required />
+                    </div>
+                  </div>
+
+                  {/* PLAYER INFO */}
+                  <div className="trial-fieldset">
+                    <h3 className="trial-fieldset-title">Player Information</h3>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Player Name <span className="req">*</span></label>
+                        <input type="text" name="player_name" placeholder="Player's full name" required />
+                      </div>
+                      <div className="form-group">
+                        <label>Date of Birth <span className="req">*</span></label>
+                        <input type="date" name="dob" required />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label>Years Played in a Club</label>
+                      <input type="text" name="years_played" placeholder="e.g. 2 years, or None" />
+                    </div>
+                  </div>
+
+                  {/* BOOKING */}
+                  <div className="trial-fieldset">
+                    <h3 className="trial-fieldset-title">Booking Details</h3>
+                    <div className="trial-notice">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=25+Kanata+Rd+Brampton+ON+L7A+3R2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#10b981", display: "block", fontWeight: 700, textDecoration: "underline" }}
+                      >
+                        Tuesday: St Lucy CES, 25 Kanata Rd, Brampton, ON L7A 3R2
+                      </a>
+                      <a
+                        href="https://maps.app.goo.gl/uh9zVph9vWsaoxBTA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#10b981", display: "block", fontWeight: 700, textDecoration: "underline" }}
+                      >
+                        Wednesday: Fletcher's Meadow SS, 10750 Chinguacousy Rd, Brampton, ON
+                      </a>
+                    </div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Preferred Date (Tuesdays & Wednesdays Only) <span className="req">*</span></label>
+                        <DatePicker
+                          selected={selectedDate}
+                          onChange={(date) => setSelectedDate(date)}
+                          filterDate={(date) => date.getDay() === 2 || date.getDay() === 3}
+                          placeholderText="Select Tuesday or Wednesday"
+                          dateFormat="yyyy-MM-dd"
+                          required
+                          className="date-picker-input"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Preferred Time <span className="req">*</span></label>
+                        <select key={selectedDate?.getDay() ?? "none"} name="preferred_time" required>
+                          <option value="">Select Time</option>
+                          {!selectedDate ? (
+                            <>
+                              <optgroup label="Tuesday">
+                                <option>U4-U8, 6:15-7:05 PM</option>
+                                <option>U9-U13, 7:05-8:00 PM</option>
+                              </optgroup>
+                              <optgroup label="Wednesday">
+                                <option>U4-U8, 6:00-7:00 PM</option>
+                                <option>U9-U13, 7:00-8:00 PM</option>
+                              </optgroup>
+                            </>
+                          ) : selectedDate.getDay() === 2 ? (
+                            <>
+                              <option>U4-U8, 6:15-7:05 PM</option>
+                              <option>U9-U13, 7:05-8:00 PM</option>
+                            </>
+                          ) : selectedDate.getDay() === 3 ? (
+                            <>
+                              <option>U4-U8, 6:00-7:00 PM</option>
+                              <option>U9-U13, 7:00-8:00 PM</option>
+                            </>
+                          ) : null}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label>How did you hear about us?</label>
+                      <select name="heard_about">
+                        <option value="">Select an option</option>
+                        <option>Facebook / Instagram</option>
+                        <option>Word of Mouth / Friends</option>
+                        <option>Google / Bing Search</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label>Message</label>
+                      <textarea name="message" rows="4" placeholder="Any additional information or questions..." />
+                    </div>
+                  </div>
+
+                  <div ref={turnstileRef} style={{ marginBottom: "1rem" }}></div>
+
+                  <button type="submit" className="trial-submit" disabled={loading}>
+                    {loading ? "Submitting..." : "Submit Registration"}
+                  </button>
+
+                </form>
+              </>
+            )}
+
+          </div>{/* end trial-card */}
+
+        </div>
+      </section>
+
+    </>
+  );
+}
+
+export default TrialBramptonWestLegacy;

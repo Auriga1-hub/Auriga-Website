@@ -417,6 +417,18 @@ SUCCESS STATE
 
 
 /* =================================
+   GHL EMBEDDED FORM (Mississauga Central trial)
+   ================================= */
+
+.ghl-embed-wrapper {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+/* =================================
    RESPONSIVE
    ================================= */
 

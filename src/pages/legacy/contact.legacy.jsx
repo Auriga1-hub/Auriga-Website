@@ -1,0 +1,340 @@
+/**
+ * ============================================================================
+ * LEGACY BACKUP — DO NOT USE IN PRODUCTION ROUTES
+ * ============================================================================
+ * This file is an exact, recoverable copy of the original custom-coded
+ * General Inquiry (contact page) form, preserved before the GoHighLevel
+ * (GHL) form migration on 2026-10-22.
+ *
+ * Original file (now replaced with a GHL embed):
+ *   src/pages/contact.jsx
+ *
+ * Route it served:
+ *   /contact
+ *
+ * This component is intentionally NOT imported anywhere. It exists only so
+ * the original form (fields, validation, Turnstile, EmailJS/backend
+ * submission, analytics events, success state) can be restored quickly
+ * without reconstructing code by hand.
+ *
+ * Restore instructions: see docs/ghl-migration/general-inquiry-contact.md
+ *
+ * NOTE: Import paths below were adjusted one level up (../ -> ../../) because
+ * this file lives in src/pages/legacy/ instead of src/pages/.
+ * ============================================================================
+ */
+import { useState, useRef, useEffect } from "react";
+import "../../css/contact.css";
+import { submitWebsiteForm } from "../../utils/submitForm";
+import { trackFormError, trackLeadGenerated } from "../../utils/analytics";
+import SEOHead from "../../components/SEOHead";
+import StructuredData, { localBusinessSchema, buildBreadcrumbSchema } from "../../components/StructuredData";
+
+const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
+
+function ContactLegacy() {
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", heard_about: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [submissionNotice, setSubmissionNotice] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [focused, setFocused] = useState(null);
+  const turnstileRef = useRef(null);
+  const widgetIdRef = useRef(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    let interval;
+
+    const renderWidget = () => {
+      if (turnstileRef.current && window.turnstile && widgetIdRef.current === null) {
+        try {
+          widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+            sitekey: TURNSTILE_SITE_KEY,
+            theme: "dark",
+          });
+        } catch (e) {
+          console.error("Turnstile render error", e);
+        }
+      }
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      interval = setInterval(() => {
+        if (window.turnstile && isMounted) {
+          renderWidget();
+          clearInterval(interval);
+        }
+      }, 200);
+    }
+
+    return () => {
+      isMounted = false;
+      if (interval) clearInterval(interval);
+      if (widgetIdRef.current !== null && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, [submitted]);
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
+    if (!turnstileResponse) {
+      trackFormError({
+        formName: "contact",
+        formLocation: "contact_page",
+        errorType: "captcha_missing",
+        errorMessage: "turnstile_not_completed",
+      });
+      setError("Please complete the captcha verification.");
+      setLoading(false);
+      return;
+    }
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      heard_about: formData.heard_about,
+      message: formData.message,
+      subject: "General Website Inquiry",
+      "g-recaptcha-response": turnstileResponse,
+    };
+
+    try {
+      const result = await submitWebsiteForm("contact", templateParams, turnstileResponse);
+
+      if (result.status === 200) {
+        trackLeadGenerated({
+          formName: "contact",
+          leadType: "contact_inquiry",
+          location: "general",
+          program: "general_inquiry",
+        });
+        setSubmissionNotice(result.user_message || "");
+        setSubmitted(true);
+      } else {
+        trackFormError({
+          formName: "contact",
+          formLocation: "contact_page",
+          errorType: "submission_failed",
+          errorMessage: "non_200_response",
+        });
+        setError("Something went wrong. Please try again.");
+        window.turnstile?.reset(widgetIdRef.current);
+      }
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      trackFormError({
+        formName: "contact",
+        formLocation: "contact_page",
+        errorType: "request_error",
+        errorMessage: error?.text || error?.message,
+      });
+      setError(error?.message || "Failed to send message. Please check your connection and try again.");
+      window.turnstile?.reset(widgetIdRef.current);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <SEOHead
+        title="Contact Auriga FC | Youth Soccer Registration Mississauga & Brampton"
+        description="Contact Auriga Football Club for youth soccer registration, program inquiries, or free assessment bookings. Call 647-978-6798 or email info@aurigafootballclub.com. Located in Mississauga, ON."
+        keywords="contact auriga fc, soccer registration mississauga, youth soccer inquiries, register kids soccer brampton, soccer club contact"
+      />
+      <StructuredData data={[localBusinessSchema, buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])]} />
+
+      {/* HERO */}
+      <div className="contact-hero">
+        <div className="contact-hero-overlay" />
+        <div className="contact-hero-container">
+          <h2 className="contact-hero-subtitle">Get In Touch</h2>
+          <h1 className="contact-hero-title">Contact Us</h1>
+          <p className="contact-hero-text">
+            Have a question about our programs? We'd love to hear from you.
+          </p>
+        </div>
+      </div>
+
+      {/* MAIN CONTENT — Message Us */}
+      <section className="contact-section">
+        <div className="contact-container">
+          <div className="contact-grid">
+
+            {/* LEFT — INFO */}
+            <div className="contact-info">
+
+              <div className="contact-info-header">
+                <span className="contact-label">Auriga Football Club</span>
+                <h2 className="contact-info-title">Youth Soccer Training in Mississauga &amp; Brampton</h2>
+                <p className="contact-info-text">
+                  Auriga FC provides structured youth soccer training programs for ages 4–13.
+                  Our certified coaches focus on technical skill development, small-group training,
+                  and long-term player progression.
+                </p>
+              </div>
+
+              <div className="contact-details">
+
+                <div className="contact-detail-item">
+                  <div className="contact-detail-icon">📞</div>
+                  <div className="contact-detail-body">
+                    <span className="contact-detail-label">Phone</span>
+                    <a href="tel:6479786798" className="contact-detail-value" data-analytics-placement="contact_page">647-978-6798</a>
+                  </div>
+                </div>
+
+                <div className="contact-detail-item">
+                  <div className="contact-detail-icon">✉️</div>
+                  <div className="contact-detail-body">
+                    <span className="contact-detail-label">Email</span>
+                    <a href="mailto:info@aurigafootballclub.com" className="contact-detail-value" data-analytics-placement="contact_page">info@aurigafootballclub.com</a>
+                  </div>
+                </div>
+
+                <div className="contact-detail-item">
+                  <div className="contact-detail-icon">📍</div>
+                  <div className="contact-detail-body">
+                    <span className="contact-detail-label">Location</span>
+                    <span className="contact-detail-value">4765 Huron Heights Dr,<br />Mississauga, ON L4Z 4G9</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="contact-socials">
+                <a href="https://www.facebook.com/people/Auriga-Football-Club/100091466900502/" target="_blank" rel="noreferrer" className="contact-social-btn" data-analytics-placement="contact_page">
+                  Facebook
+                </a>
+                <a href="https://www.instagram.com/aurigafc" target="_blank" rel="noreferrer" className="contact-social-btn" data-analytics-placement="contact_page">
+                  Instagram
+                </a>
+              </div>
+
+            </div>
+
+            {/* RIGHT — FORM */}
+            <div className="contact-form-wrapper">
+              {submitted ? (
+                <div className="contact-success">
+                  <div className="contact-success-icon">✓</div>
+                  <h3>{submissionNotice ? "Request Received" : "Message Sent!"}</h3>
+                  <p>{submissionNotice || "Thanks for reaching out. We'll get back to you shortly."}</p>
+                </div>
+              ) : (
+                <form
+                  className="contact-form"
+                  onSubmit={handleSubmit}
+                  data-analytics-form="contact"
+                  data-analytics-location="contact_page"
+                  data-analytics-program="general_inquiry"
+                >
+
+                  {error && <div className="form-error">{error}</div>}
+
+                  <div className="contact-form-row">
+                    <div className={`contact-field ${focused === "name" || formData.name ? "active" : ""}`}>
+                      <label>Name *</label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        onFocus={() => setFocused("name")}
+                        onBlur={() => setFocused(null)}
+                        placeholder="Your full name"
+                      />
+                    </div>
+                    <div className={`contact-field ${focused === "phone" || formData.phone ? "active" : ""}`}>
+                      <label>Phone *</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                        onFocus={() => setFocused("phone")}
+                        onBlur={() => setFocused(null)}
+                        placeholder="Your phone number"
+                      />
+                    </div>
+                  </div>
+
+                  <div className={`contact-field ${focused === "email" || formData.email ? "active" : ""}`}>
+                    <label>Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      onFocus={() => setFocused("email")}
+                      onBlur={() => setFocused(null)}
+                      placeholder="your@email.com"
+                    />
+                  </div>
+
+                  <div className={`contact-field ${focused === "heard_about" || formData.heard_about ? "active" : ""}`}>
+                    <label>Where did you hear about us?</label>
+                    <select
+                      name="heard_about"
+                      value={formData.heard_about}
+                      onChange={handleChange}
+                      onFocus={() => setFocused("heard_about")}
+                      onBlur={() => setFocused(null)}
+                    >
+                      <option value="">Select an option</option>
+                      <option value="Google Search">Google Search</option>
+                      <option value="Instagram / Facebook">Instagram / Facebook</option>
+                      <option value="Friend / Family Referral">Friend / Family Referral</option>
+                      <option value="Website / Social Media">Website / Social Media</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div className={`contact-field ${focused === "message" || formData.message ? "active" : ""}`}>
+                    <label>Message *</label>
+                    <textarea
+                      name="message"
+                      rows={5}
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      onFocus={() => setFocused("message")}
+                      onBlur={() => setFocused(null)}
+                      placeholder="Tell us about your child, age group, or any questions..."
+                    />
+                  </div>
+
+                  <div ref={turnstileRef} style={{ marginBottom: "1rem" }}></div>
+
+                  <button type="submit" className="contact-submit-btn" disabled={loading}>
+                    {loading ? "Sending..." : "Send Message"}
+                  </button>
+
+                </form>
+              )}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </>
+  );
+}
+
+export default ContactLegacy;

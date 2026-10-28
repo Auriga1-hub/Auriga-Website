@@ -661,69 +661,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <p class="mt-3 rounded-lg border border-[#ef4444]/40 bg-[#ef4444]/10 px-4 py-3 text-center font-heading text-sm font-bold uppercase tracking-[0.05em] text-[#fca5a5] md:text-left">This is not a beginner program.</p>
                     <p class="mt-4 text-center text-base text-auriga-slateText md:text-left">Limited spots available for tryouts. Submit your details to be considered for trials.</p>
 
-                    <form id="waitlist-form" class="mt-8 grid gap-5 sm:grid-cols-2">
-                        <label class="text-sm font-semibold text-auriga-slateText">Parent Name
-                            <input type="text" name="parentName" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Enter parent name">
-                        </label>
+                    <!-- GHL EMBEDDED FORM — "Development Group Tryout Form" (form ID: LPIOMFrAWQoTVB5bJwad)
+                         Migrated 2026-10-22 from the custom waitlist form (Turnstile + form-submit.js backend).
+                         Original preserved at: legacy/programs/development-academy/index.html
+                         Restore instructions: docs/ghl-migration/development-academy-waitlist.md
+                         Adjustment vs supplied code: initial iframe height set to the supplied data-height
+                         (915px) instead of height:100% — the parent has no fixed height, so 100% would
+                         collapse to 150px before GHL's form_embed.js auto-resizes it. All other attributes verbatim. -->
+                    <div style="width:100%;background:#ffffff;border-radius:8px;overflow:hidden;margin-top:2rem;">
+                        <iframe
+                            src="https://api.leadconnectorhq.com/widget/form/LPIOMFrAWQoTVB5bJwad"
+                            style="width:100%;height:915px;border:none;border-radius:8px"
+                            id="inline-LPIOMFrAWQoTVB5bJwad"
+                            data-layout="{'id':'INLINE'}"
+                            data-trigger-type="alwaysShow"
+                            data-trigger-value=""
+                            data-activation-type="alwaysActivated"
+                            data-activation-value=""
+                            data-deactivation-type="neverDeactivate"
+                            data-deactivation-value=""
+                            data-form-name="Development Group Tryout Form"
+                            data-height="915"
+                            data-layout-iframe-id="inline-LPIOMFrAWQoTVB5bJwad"
+                            data-form-id="LPIOMFrAWQoTVB5bJwad"
+                            data-cookie-consent="true"
+                            data-cookie-consent-provider="auto"
+                            title="Development Group Tryout Form"
 
-                        <label class="text-sm font-semibold text-auriga-slateText">Email
-                            <input type="email" name="email" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Enter email address">
-                        </label>
-
-                        <label class="text-sm font-semibold text-auriga-slateText">Phone Number
-                            <input type="tel" name="phone" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Enter phone number">
-                        </label>
-
-                        <label class="text-sm font-semibold text-auriga-slateText">Child's Name
-                            <input type="text" name="childName" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Enter child's name">
-                        </label>
-
-                        <label class="text-sm font-semibold text-auriga-slateText">Child's Age
-                            <input type="number" name="childAge" min="7" max="12" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="7-12">
-                        </label>
-
-                        <label class="text-sm font-semibold text-auriga-slateText">Child's Current Level
-                            <select name="level" required class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white focus:border-auriga-blue focus:outline-none">
-                                <option value="" disabled selected>Select current level</option>
-                                <option value="Beginner">Beginner</option>
-                                <option value="Recreational">Recreational</option>
-                                <option value="Intermediate">Intermediate</option>
-                                <option value="Advanced / Club">Advanced / Club</option>
-                            </select>
-                        </label>
-
-                        <label class="text-sm font-semibold text-auriga-slateText">Tryout Date
-                            <input type="text" name="tryoutDate" required placeholder="Select tryout date" class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none">
-                            <span class="mt-2 block text-xs text-[#8fb0c9]">Only Tuesdays and Thursdays are available.</span>
-                        </label>
-
-                        <label class="text-sm font-semibold text-auriga-slateText">Where did you hear about us?
-                            <select name="heardAbout" class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white focus:border-auriga-blue focus:outline-none">
-                                <option value="" disabled selected>Select an option</option>
-                                <option value="Google Search">Google Search</option>
-                                <option value="Instagram / Facebook">Instagram / Facebook</option>
-                                <option value="Friend / Family Referral">Friend / Family Referral</option>
-                                <option value="Website / Social Media">Website / Social Media</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </label>
-
-                        <label class="text-sm font-semibold text-auriga-slateText sm:col-span-2">Message (optional)
-                            <textarea name="message" rows="4" class="mt-2 w-full rounded-lg border border-white/15 bg-[#0c2537] px-4 py-3 text-white placeholder:text-[#5f7992] focus:border-auriga-blue focus:outline-none" placeholder="Tell us anything helpful about your child's training goals"></textarea>
-                        </label>
-
-                        <div class="sm:col-span-2">
-                            <div class="cf-turnstile" data-sitekey="0x4AAAAAACuIL-SoeDNpEWX7" data-theme="dark"></div>
-                        </div>
-
-                        <p id="waitlist-error" role="alert" class="hidden sm:col-span-2 rounded-lg border border-[#ef4444]/40 bg-[#ef4444]/10 px-4 py-3 text-sm font-semibold text-[#fca5a5]"></p>
-
-                        <div class="sm:col-span-2">
-                            <button id="waitlist-submit" type="submit" class="inline-flex w-full items-center justify-center rounded-[8px] bg-[#2f63df] px-8 py-3 font-heading text-base font-bold uppercase tracking-[0.08em] text-white transition-colors duration-200 hover:bg-[#2756c8]">book your tryout session</button>
-                        </div>
-                    </form>
-
-                    <p id="waitlist-confirmation" class="mt-6 hidden rounded-lg border border-auriga-emerald/40 bg-auriga-emerald/15 px-4 py-3 text-sm font-semibold text-[#a7f3d0]">Thank you! We'll review your submission and contact you with trial details.</p>
+                                >
+                        </iframe>
+                    </div>
+                    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
                 </article>
             </div>
         </section>
@@ -844,101 +812,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             });
 
             setInterval(next, 2500);
-        }
-
-        const waitlistForm = document.getElementById('waitlist-form');
-        const waitlistConfirmation = document.getElementById('waitlist-confirmation');
-        const waitlistError = document.getElementById('waitlist-error');
-        const waitlistSubmit = document.getElementById('waitlist-submit');
-        if (waitlistForm && waitlistConfirmation && waitlistError && waitlistSubmit) {
-            const tryoutDateInput = waitlistForm.querySelector('input[name="tryoutDate"]');
-            const isAllowedTryoutDate = (value) => {
-                if (!value) return false;
-                const day = new Date(`${value}T00:00:00`).getDay();
-                return day === 2 || day === 4;
-            };
-
-            if (tryoutDateInput && window.flatpickr) {
-                window.flatpickr(tryoutDateInput, {
-                    dateFormat: 'Y-m-d',
-                    minDate: 'today',
-                    disableMobile: true,
-                    disable: [
-                        (date) => {
-                            const day = date.getDay();
-                            return day !== 2 && day !== 4;
-                        },
-                    ],
-                });
-            }
-
-            if (tryoutDateInput) {
-                tryoutDateInput.addEventListener('input', () => {
-                    if (isAllowedTryoutDate(tryoutDateInput.value)) {
-                        tryoutDateInput.setCustomValidity('');
-                    } else {
-                        tryoutDateInput.setCustomValidity('Please choose a Tuesday or Thursday.');
-                    }
-                });
-            }
-
-            waitlistForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                waitlistError.textContent = '';
-                waitlistError.classList.add('hidden');
-
-                const selectedTryoutDate = tryoutDateInput ? tryoutDateInput.value : '';
-                if (!isAllowedTryoutDate(selectedTryoutDate)) {
-                    if (tryoutDateInput) {
-                        tryoutDateInput.setCustomValidity('Please choose a Tuesday or Thursday.');
-                        tryoutDateInput.reportValidity();
-                    }
-                    return;
-                }
-                if (tryoutDateInput) {
-                    tryoutDateInput.setCustomValidity('');
-                }
-
-                const formData = new FormData(waitlistForm);
-                const fields = {
-                    parent_name: formData.get('parentName') || '',
-                    phone: formData.get('phone') || '',
-                    email: formData.get('email') || '',
-                    player_name: formData.get('childName') || '',
-                    current_level: formData.get('level') || '',
-                    preferred_date: formData.get('tryoutDate') || '',
-                    player_age: formData.get('childAge') || '',
-                    heard_about: formData.get('heardAbout') || '',
-                    message: formData.get('message') || '',
-                };
-                const turnstileToken = window.turnstile?.getResponse();
-                if (!turnstileToken) {
-                    waitlistError.textContent = 'Please complete the captcha verification.';
-                    waitlistError.classList.remove('hidden');
-                    return;
-                }
-
-                waitlistSubmit.disabled = true;
-                waitlistSubmit.textContent = 'Submitting...';
-                try {
-                    const result = await window.aurigaSubmitForm('development_tryout', fields, turnstileToken);
-
-                    waitlistSubmit.textContent = 'Submission received';
-                    if (result.partial_failure) {
-                        waitlistConfirmation.textContent = result.user_message;
-                    }
-                    waitlistConfirmation.classList.remove('hidden');
-                    waitlistForm.reset();
-                    if (tryoutDateInput) tryoutDateInput.setCustomValidity('');
-                    window.turnstile?.reset();
-                } catch (error) {
-                    waitlistError.textContent = error.message || 'We could not submit your request right now. Please try again shortly.';
-                    waitlistError.classList.remove('hidden');
-                    window.turnstile?.reset();
-                    waitlistSubmit.disabled = false;
-                    waitlistSubmit.textContent = 'book your tryout session';
-                }
-            });
         }
     </script>
 <script src="https://astra.wati.io/widget/astra.js" id="4b9c4b98-6ae3-4a24-b41c-b6f31dd61909" data-mode="widget" data-from="instruction" defer></script>

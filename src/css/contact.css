@@ -273,6 +273,14 @@ RIGHT — FORM
   flex: 1;
 }
 
+/* GHL embedded form (General Inquiry) — sits inside .contact-form-wrapper */
+.ghl-embed-wrapper {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 /* textarea grows to fill remaining space */
 .contact-form .contact-field:last-of-type {
   flex: 1;

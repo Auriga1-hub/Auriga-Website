@@ -1,126 +1,48 @@
-import { useState, useRef, useEffect } from "react";
+/**
+ * General Inquiry (Contact page) — GoHighLevel embedded form.
+ *
+ * Migrated 2026-10-22 from the previous custom-coded form (Turnstile +
+ * EmailJS / Google Sheets backend) to a native GHL inline form embed.
+ *
+ * GHL form details (provided by site owner — do not change):
+ *   Form name : General Inquiry Form
+ *   Form ID   : tzLHeZU1w3WChB1IAw2L
+ *   Embed URL : https://api.leadconnectorhq.com/widget/form/tzLHeZU1w3WChB1IAw2L
+ *
+ * The original implementation is preserved for rollback at:
+ *   src/pages/legacy/contact.legacy.jsx
+ * Restore instructions:
+ *   docs/ghl-migration/general-inquiry-contact.md
+ *
+ * Technical adjustments made to the supplied embed code for React:
+ *   1. HTML attributes converted to JSX equivalents (style object).
+ *   2. The GHL loader script (form_embed.js) is injected once via useEffect
+ *      instead of a JSX <script> tag, which would not execute reliably in an
+ *      SPA. The script auto-resizes the iframe via postMessage.
+ *   3. Initial iframe height set to the supplied data-height (885px) instead
+ *      of height:100%, because the parent card has no fixed height and 100%
+ *      would collapse to the 150px default before the GHL script resizes it.
+ *      All other embed attributes are copied verbatim from the supplied code.
+ */
+import { useEffect } from "react";
 import "../css/contact.css";
-import { submitWebsiteForm } from "../utils/submitForm";
-import { trackFormError, trackLeadGenerated } from "../utils/analytics";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { localBusinessSchema, buildBreadcrumbSchema } from "../components/StructuredData";
 
-const TURNSTILE_SITE_KEY = "0x4AAAAAACuIL-SoeDNpEWX7";
+const GHL_FORM_ID = "tzLHeZU1w3WChB1IAw2L";
+const GHL_EMBED_SCRIPT_SRC = "https://link.msgsndr.com/js/form_embed.js";
 
 function Contact() {
-  const [formData, setFormData] = useState({ name: "", phone: "", email: "", heard_about: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [submissionNotice, setSubmissionNotice] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [focused, setFocused] = useState(null);
-  const turnstileRef = useRef(null);
-  const widgetIdRef = useRef(null);
-
   useEffect(() => {
-    let isMounted = true;
-    let interval;
-
-    const renderWidget = () => {
-      if (turnstileRef.current && window.turnstile && widgetIdRef.current === null) {
-        try {
-          widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-            sitekey: TURNSTILE_SITE_KEY,
-            theme: "dark",
-          });
-        } catch (e) {
-          console.error("Turnstile render error", e);
-        }
-      }
-    };
-
-    if (window.turnstile) {
-      renderWidget();
-    } else {
-      interval = setInterval(() => {
-        if (window.turnstile && isMounted) {
-          renderWidget();
-          clearInterval(interval);
-        }
-      }, 200);
+    // Load the GHL form embed script once (shared loader, safe to keep loaded
+    // when navigating away — it only acts on GHL form iframes).
+    if (!document.querySelector(`script[src="${GHL_EMBED_SCRIPT_SRC}"]`)) {
+      const script = document.createElement("script");
+      script.src = GHL_EMBED_SCRIPT_SRC;
+      script.async = true;
+      document.body.appendChild(script);
     }
-
-    return () => {
-      isMounted = false;
-      if (interval) clearInterval(interval);
-      if (widgetIdRef.current !== null && window.turnstile) {
-        window.turnstile.remove(widgetIdRef.current);
-        widgetIdRef.current = null;
-      }
-    };
-  }, [submitted]);
-
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    const turnstileResponse = window.turnstile?.getResponse(widgetIdRef.current);
-    if (!turnstileResponse) {
-      trackFormError({
-        formName: "contact",
-        formLocation: "contact_page",
-        errorType: "captcha_missing",
-        errorMessage: "turnstile_not_completed",
-      });
-      setError("Please complete the captcha verification.");
-      setLoading(false);
-      return;
-    }
-
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      phone: formData.phone,
-      heard_about: formData.heard_about,
-      message: formData.message,
-      subject: "General Website Inquiry",
-      "g-recaptcha-response": turnstileResponse,
-    };
-
-    try {
-      const result = await submitWebsiteForm("contact", templateParams, turnstileResponse);
-
-      if (result.status === 200) {
-        trackLeadGenerated({
-          formName: "contact",
-          leadType: "contact_inquiry",
-          location: "general",
-          program: "general_inquiry",
-        });
-        setSubmissionNotice(result.user_message || "");
-        setSubmitted(true);
-      } else {
-        trackFormError({
-          formName: "contact",
-          formLocation: "contact_page",
-          errorType: "submission_failed",
-          errorMessage: "non_200_response",
-        });
-        setError("Something went wrong. Please try again.");
-        window.turnstile?.reset(widgetIdRef.current);
-      }
-    } catch (error) {
-      console.error("EmailJS Error:", error);
-      trackFormError({
-        formName: "contact",
-        formLocation: "contact_page",
-        errorType: "request_error",
-        errorMessage: error?.text || error?.message,
-      });
-      setError(error?.message || "Failed to send message. Please check your connection and try again.");
-      window.turnstile?.reset(widgetIdRef.current);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, []);
 
   return (
     <>
@@ -200,108 +122,30 @@ function Contact() {
 
             </div>
 
-            {/* RIGHT — FORM */}
+            {/* RIGHT — GHL EMBEDDED FORM */}
             <div className="contact-form-wrapper">
-              {submitted ? (
-                <div className="contact-success">
-                  <div className="contact-success-icon">✓</div>
-                  <h3>{submissionNotice ? "Request Received" : "Message Sent!"}</h3>
-                  <p>{submissionNotice || "Thanks for reaching out. We'll get back to you shortly."}</p>
-                </div>
-              ) : (
-                <form
-                  className="contact-form"
-                  onSubmit={handleSubmit}
-                  data-analytics-form="contact"
-                  data-analytics-location="contact_page"
-                  data-analytics-program="general_inquiry"
-                >
-
-                  {error && <div className="form-error">{error}</div>}
-
-                  <div className="contact-form-row">
-                    <div className={`contact-field ${focused === "name" || formData.name ? "active" : ""}`}>
-                      <label>Name *</label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        onFocus={() => setFocused("name")}
-                        onBlur={() => setFocused(null)}
-                        placeholder="Your full name"
-                      />
-                    </div>
-                    <div className={`contact-field ${focused === "phone" || formData.phone ? "active" : ""}`}>
-                      <label>Phone *</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        required
-                        value={formData.phone}
-                        onChange={handleChange}
-                        onFocus={() => setFocused("phone")}
-                        onBlur={() => setFocused(null)}
-                        placeholder="Your phone number"
-                      />
-                    </div>
-                  </div>
-
-                  <div className={`contact-field ${focused === "email" || formData.email ? "active" : ""}`}>
-                    <label>Email *</label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      onFocus={() => setFocused("email")}
-                      onBlur={() => setFocused(null)}
-                      placeholder="your@email.com"
-                    />
-                  </div>
-
-                  <div className={`contact-field ${focused === "heard_about" || formData.heard_about ? "active" : ""}`}>
-                    <label>Where did you hear about us?</label>
-                    <select
-                      name="heard_about"
-                      value={formData.heard_about}
-                      onChange={handleChange}
-                      onFocus={() => setFocused("heard_about")}
-                      onBlur={() => setFocused(null)}
-                    >
-                      <option value="">Select an option</option>
-                      <option value="Google Search">Google Search</option>
-                      <option value="Instagram / Facebook">Instagram / Facebook</option>
-                      <option value="Friend / Family Referral">Friend / Family Referral</option>
-                      <option value="Website / Social Media">Website / Social Media</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-
-                  <div className={`contact-field ${focused === "message" || formData.message ? "active" : ""}`}>
-                    <label>Message *</label>
-                    <textarea
-                      name="message"
-                      rows={5}
-                      required
-                      value={formData.message}
-                      onChange={handleChange}
-                      onFocus={() => setFocused("message")}
-                      onBlur={() => setFocused(null)}
-                      placeholder="Tell us about your child, age group, or any questions..."
-                    />
-                  </div>
-
-                  <div ref={turnstileRef} style={{ marginBottom: "1rem" }}></div>
-
-                  <button type="submit" className="contact-submit-btn" disabled={loading}>
-                    {loading ? "Sending..." : "Send Message"}
-                  </button>
-
-                </form>
-              )}
+              {/* "General Inquiry Form" (GHL form ID: tzLHeZU1w3WChB1IAw2L) */}
+              <div className="ghl-embed-wrapper" style={{ width: "100%" }}>
+                <iframe
+                  src={`https://api.leadconnectorhq.com/widget/form/${GHL_FORM_ID}`}
+                  style={{ width: "100%", height: "885px", border: "none", borderRadius: "8px" }}
+                  id={`inline-${GHL_FORM_ID}`}
+                  data-layout="{'id':'INLINE'}"
+                  data-trigger-type="alwaysShow"
+                  data-trigger-value=""
+                  data-activation-type="alwaysActivated"
+                  data-activation-value=""
+                  data-deactivation-type="neverDeactivate"
+                  data-deactivation-value=""
+                  data-form-name="General Inquiry Form"
+                  data-height="885"
+                  data-layout-iframe-id={`inline-${GHL_FORM_ID}`}
+                  data-form-id={GHL_FORM_ID}
+                  data-cookie-consent="true"
+                  data-cookie-consent-provider="auto"
+                  title="General Inquiry Form"
+                ></iframe>
+              </div>
             </div>
 
           </div>
