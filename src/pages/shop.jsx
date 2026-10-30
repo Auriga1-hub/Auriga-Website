@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import StructuredData, { buildBreadcrumbSchema } from "../components/StructuredData";
@@ -8,23 +8,17 @@ const categories = ["All", "Equipment", "Apparel", "Accessories", "Fan Gear"];
 
 const products = [
   {
-    id: "match-ball",
+    id: "club-ball",
     category: "Equipment",
     badge: "Official Gear",
-    title: "Auriga FC Official Match Ball",
+    title: "Auriga FC Official Soccer Ball",
     price: "$30",
     description: "Hand-stitched thermo-bonded soccer ball built for optimal touch, precision flight, and all-weather durability.",
-    image: "/images/Ball-.webp",
-    status: "Available at Sessions",
-  },
-  {
-    id: "training-ball",
-    category: "Equipment",
-    badge: "Academy Edition",
-    title: "Auriga FC Academy Training Ball",
-    price: "$30",
-    description: "High-durability training ball engineered for daily drills, footwork development, and scrimmage sessions.",
-    image: "/images/Ball-2.webp",
+    images: [
+      "/images/Ball-.webp",
+      "/images/Ball-2.webp",
+      "/images/Ball-3.webp",
+    ],
     status: "Available at Sessions",
   },
   {
@@ -34,47 +28,27 @@ const products = [
     title: "Auriga FC Pro Shin Guards",
     price: "$20",
     description: "Anatomically contoured low-profile protective shell with EVA foam backing for superior impact absorption.",
-    image: "/images/Shin 1.webp",
+    images: ["/images/Shin 1.webp", "/images/Shin 2.webp"],
     status: "Available at Sessions",
   },
   {
-    id: "snapback-cap",
+    id: "club-cap",
     category: "Apparel",
     badge: "Fan Gear",
-    title: "Auriga FC Structured Snapback",
+    title: "Auriga FC Club Cap",
     price: "$15",
     description: "Classic structured crown with embroidered Auriga FC crest and breathable eyelets for players and supporters.",
-    image: "/images/CAP-.webp",
+    images: ["/images/CAP-.webp", "/images/CAP-2.webp"],
     status: "In Stock",
   },
   {
-    id: "performance-cap",
-    category: "Apparel",
-    badge: "Fan Gear",
-    title: "Auriga FC Curved Peak Cap",
-    price: "$15",
-    description: "Lightweight moisture-wicking club cap perfect for sun protection during outdoor training and sideline support.",
-    image: "/images/CAP-2.webp",
-    status: "In Stock",
-  },
-  {
-    id: "insulated-bottle",
+    id: "club-water-bottle",
     category: "Accessories",
     badge: "Club Accessory",
-    title: "Insulated Sports Water Bottle",
+    title: "Auriga FC Sports Water Bottle",
     price: "$20",
     description: "Double-wall stainless steel insulated bottle keeps drinks ice-cold throughout intense practices and matches.",
-    image: "/images/Bottle-.webp",
-    status: "In Stock",
-  },
-  {
-    id: "quick-grip-bottle",
-    category: "Accessories",
-    badge: "Hydration",
-    title: "Auriga FC Quick-Grip Bottle",
-    price: "$20",
-    description: "Ergonomic hydration bottle featuring easy-squeeze flow valve for quick sideline refreshment during drills.",
-    image: "/images/Bottle 3.webp",
+    images: ["/images/Bottle-.webp", "/images/Bottle 3.webp"],
     status: "In Stock",
   },
   {
@@ -84,7 +58,7 @@ const products = [
     title: "Auriga FC Soccer Dad Tee",
     price: "$23",
     description: "Premium ringspun cotton supporter tee celebrating our soccer parents cheering proudly from the sidelines.",
-    image: "/images/DAD-1.webp",
+    images: ["/images/DAD-1.webp", "/images/DAD-2.webp"],
     status: "In Stock",
   },
   {
@@ -94,10 +68,74 @@ const products = [
     title: "Auriga FC Soccer Mom Tee",
     price: "$23",
     description: "Soft, comfortable supporter shirt designed for proud Auriga FC moms supporting their young athletes.",
-    image: "/images/MOM-.webp",
+    images: ["/images/MOM-.webp"],
     status: "In Stock",
   },
 ];
+
+function ProductImageCarousel({ product }) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const imageCount = product.images.length;
+
+  useEffect(() => {
+    product.images.forEach((src) => {
+      const preload = new Image();
+      preload.src = src;
+    });
+  }, [product.images]);
+
+  const showImage = (index) => {
+    setActiveImageIndex((index + imageCount) % imageCount);
+  };
+
+  return (
+    <div className={`shop-card-img-wrap ${imageCount > 1 ? "has-carousel" : ""}`}>
+      <span className="shop-card-badge">{product.badge}</span>
+      <img
+        id={`shop-product-image-${product.id}`}
+        src={product.images[activeImageIndex]}
+        alt={`${product.title} - image ${activeImageIndex + 1} of ${imageCount}`}
+        className="shop-card-img"
+        loading="lazy"
+      />
+      {imageCount > 1 && (
+        <div className="shop-carousel-controls" aria-label={`${product.title} images`}>
+          <button
+            type="button"
+            className="shop-carousel-arrow"
+            aria-label={`Previous image for ${product.title}`}
+            aria-controls={`shop-product-image-${product.id}`}
+            onClick={() => showImage(activeImageIndex - 1)}
+          >
+            <span aria-hidden="true">&lsaquo;</span>
+          </button>
+          <div className="shop-carousel-pagination">
+            {product.images.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                className={`shop-carousel-dot ${activeImageIndex === index ? "active" : ""}`}
+                aria-label={`Show image ${index + 1} of ${imageCount} for ${product.title}`}
+                aria-current={activeImageIndex === index ? "true" : undefined}
+                aria-controls={`shop-product-image-${product.id}`}
+                onClick={() => showImage(index)}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            className="shop-carousel-arrow"
+            aria-label={`Next image for ${product.title}`}
+            aria-controls={`shop-product-image-${product.id}`}
+            onClick={() => showImage(activeImageIndex + 1)}
+          >
+            <span aria-hidden="true">&rsaquo;</span>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Shop() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -155,15 +193,7 @@ function Shop() {
           <div className="shop-grid">
             {filteredProducts.map((product) => (
               <article className="shop-card" key={product.id}>
-                <div className="shop-card-img-wrap">
-                  <span className="shop-card-badge">{product.badge}</span>
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="shop-card-img"
-                    loading="lazy"
-                  />
-                </div>
+                <ProductImageCarousel product={product} />
                 <div className="shop-card-body">
                   <div className="shop-card-meta">
                     <span className="shop-card-category">{product.category}</span>
